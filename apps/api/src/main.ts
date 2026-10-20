@@ -54,6 +54,12 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
+  // Health check for Railway / load balancers
+  const httpAdapter = app.getHttpAdapter();
+  httpAdapter.get('/health', (_req: unknown, res: { json: (b: unknown) => void }) => {
+    res.json({ status: 'ok', ts: new Date().toISOString() });
+  });
+
   const port = process.env.PORT || 3001;
   await app.listen(port);
   console.log(`PitchFire API running on http://localhost:${port}`);

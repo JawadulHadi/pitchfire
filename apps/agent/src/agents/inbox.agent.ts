@@ -4,6 +4,7 @@ import type { Database } from '@pitchfire/shared';
 import { createLogger } from '../lib/logger.js';
 import { MODELS, logTokens } from '../lib/models.js';
 import { publishSchedule } from '../lib/agent-bus.js';
+import { getValidGoogleToken } from '../lib/google-tokens.js';
 
 const log = createLogger('InboxAgent');
 const client = new Anthropic();
@@ -79,6 +80,12 @@ Query: "from:careers OR from:recruiting OR from:noreply label:INBOX after:${sinc
 For each thread, get the subject and classify as: interview_invite | rejection | offer | followup | other.
 Return JSON: { "results": [{ "thread_id": string, "subject": string, "classification": string, "company": string }] }`;
 
+  const gmailToken = await getValidGoogleToken(input.user_id);
+  if (!gmailToken) {
+    log.warn('No Gmail OAuth token — user needs to connect Google', { user_id: input.user_id });
+    return { emails_checked: 0, classified: [] };
+  }
+
   const messages: Anthropic.MessageParam[] = [{ role: 'user', content: userPrompt }];
   const classified: InboxOutput['classified'] = [];
   let emailsChecked = 0;
@@ -129,9 +136,9 @@ Return JSON: { "results": [{ "thread_id": string, "subject": string, "classifica
 
       let result: string;
       if (block.name === 'gmail_search_threads') {
-        result = await execGmailSearch(block.input as { query: string; max_results?: number });
+        result = await execGmailSearch(block.input as { query: string; max_results?: number }, gmailToken);
       } else if (block.name === 'gmail_get_thread') {
-        result = await execGmailGetThread(block.input as { thread_id: string });
+        result = await execGmailGetThread(block.input as { thread_id: string }, gmailToken);
       } else {
         result = JSON.stringify({ error: 'unknown tool' });
       }
@@ -145,32 +152,23 @@ Return JSON: { "results": [{ "thread_id": string, "subject": string, "classifica
   return { emails_checked: emailsChecked, classified };
 }
 
-async function execGmailSearch(input: { query: string; max_results?: number }): Promise<string> {
-  if (!process.env.GMAIL_ACCESS_TOKEN) {
-    log.debug('Gmail not configured — stub search', { query: input.query });
-    return JSON.stringify({ threads: [], message: 'Gmail OAuth not configured' });
-  }
-
+async function execGmailSearch(input: { query: string; max_results?: number }, token: string): Promise<string> {
   const params = new URLSearchParams({
     q: input.query,
     maxResults: String(input.max_results ?? 20),
   });
   const res = await fetch(
     `https://gmail.googleapis.com/gmail/v1/users/me/threads?${params}`,
-    { headers: { Authorization: `Bearer ${process.env.GMAIL_ACCESS_TOKEN}` } },
+    { headers: { Authorization: `Bearer ${token}` } },
   );
   const data = await res.json();
   return JSON.stringify({ threads: data.threads ?? [] });
 }
 
-async function execGmailGetThread(input: { thread_id: string }): Promise<string> {
-  if (!process.env.GMAIL_ACCESS_TOKEN) {
-    return JSON.stringify({ subject: 'Gmail not configured', snippet: '' });
-  }
-
+async function execGmailGetThread(input: { thread_id: string }, token: string): Promise<string> {
   const res = await fetch(
     `https://gmail.googleapis.com/gmail/v1/users/me/threads/${input.thread_id}?format=metadata&metadataHeaders=Subject`,
-    { headers: { Authorization: `Bearer ${process.env.GMAIL_ACCESS_TOKEN}` } },
+    { headers: { Authorization: `Bearer ${token}` } },
   );
   const data = await res.json();
   const msg = data.messages?.[data.messages.length - 1];
