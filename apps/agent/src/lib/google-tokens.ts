@@ -1,8 +1,19 @@
-import { createClient } from '@supabase/supabase-js';
-import type { Database } from '@pitchfire/shared';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-function db() {
-  return createClient<Database>(
+type GoogleTokenRow = {
+  user_id: string;
+  access_token: string | null;
+  refresh_token: string | null;
+  expiry_date: number | null;
+  scope: string | null;
+  updated_at: string | null;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyClient = SupabaseClient<any>;
+
+function db(): AnyClient {
+  return createClient(
     process.env.SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   );
@@ -18,7 +29,7 @@ export async function getValidGoogleToken(userId: string): Promise<string | null
     .from('user_google_tokens')
     .select('access_token, refresh_token, expiry_date')
     .eq('user_id', userId)
-    .single();
+    .single() as { data: Pick<GoogleTokenRow, 'access_token' | 'refresh_token' | 'expiry_date'> | null; error: unknown };
 
   if (!row?.access_token) return null;
 
@@ -31,7 +42,7 @@ export async function getValidGoogleToken(userId: string): Promise<string | null
 }
 
 async function refreshToken(
-  supabase: ReturnType<typeof createClient<Database>>,
+  supabase: AnyClient,
   userId: string,
   refreshToken: string,
 ): Promise<string | null> {
