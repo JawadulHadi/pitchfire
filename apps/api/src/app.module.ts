@@ -10,10 +10,12 @@ import { AnalyticsModule } from './modules/analytics/analytics.module.js';
 import { NotificationsModule } from './modules/notifications/notifications.module.js';
 import { BillingModule } from './modules/billing/billing.module.js';
 import { TenantsModule } from './modules/tenants/tenants.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    AuthModule,
     ResumeModule,
     JobsModule,
     AgentsModule,

@@ -1,6 +1,7 @@
 import 'dotenv/config';
-import { Worker, type Job } from 'bullmq';
+import { Worker, Queue, type Job } from 'bullmq';
 import { Redis as IORedis } from 'ioredis';
+import { createClient } from '@supabase/supabase-js';
 import type { AgentJob } from '@pitchfire/shared';
 import { runScoutAgent } from './agents/scout.agent.js';
 import { runScorerAgent } from './agents/scorer.agent.js';
@@ -102,9 +103,46 @@ makeWorker(
   4,
 );
 
+// ---------------------------------------------------------------------------
+// 15-min inbox polling cron — enqueues inbox jobs for all active users
+// ---------------------------------------------------------------------------
+const commsQueue = new Queue<AgentJob>('comms-queue', { connection });
+
+async function scheduleInboxCron(): Promise<void> {
+  const db = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+  );
+
+  // Fetch all users who have Google tokens (i.e. connected Gmail)
+  const { data: rows } = await db.from('user_google_tokens').select('user_id');
+  for (const row of rows ?? []) {
+    await commsQueue.add(
+      'inbox',
+      { type: 'inbox', user_id: row.user_id },
+      {
+        attempts: 2,
+        backoff: { type: 'exponential', delay: 5000 },
+        removeOnComplete: { count: 50 },
+        jobId: `inbox-cron-${row.user_id}`, // deduplicate: one pending per user
+      },
+    );
+  }
+  log.info('Inbox cron: enqueued', { users: rows?.length ?? 0 });
+}
+
+// Fire once at startup, then every 15 min
+scheduleInboxCron().catch((err) => log.error('Inbox cron startup failed', { error: (err as Error).message }));
+const inboxCronHandle = setInterval(
+  () => scheduleInboxCron().catch((err) => log.error('Inbox cron failed', { error: (err as Error).message })),
+  15 * 60 * 1000,
+);
+
 process.on('SIGTERM', async () => {
   log.info('SIGTERM received — draining workers');
+  clearInterval(inboxCronHandle);
   await Promise.all(workers.map((w) => w.close()));
+  await commsQueue.close();
   await closeAgentBus();
   connection.disconnect();
   log.info('Workers shut down cleanly');

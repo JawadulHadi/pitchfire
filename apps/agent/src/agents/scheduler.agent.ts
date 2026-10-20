@@ -4,6 +4,7 @@ import type { Database, Json } from '@pitchfire/shared';
 import { createLogger } from '../lib/logger.js';
 import { MODELS, callWithRetry, logTokens } from '../lib/models.js';
 import { publishCoach } from '../lib/agent-bus.js';
+import { getValidGoogleToken } from '../lib/google-tokens.js';
 
 const log = createLogger('SchedulerAgent');
 const client = new Anthropic();
@@ -64,7 +65,9 @@ export async function runSchedulerAgent(input: SchedulerInput): Promise<Schedule
 
   const job = (app.job_listings as unknown) as { title: string; company: string; jd_text: string; url: string } | null;
 
-  const emailContent = await fetchEmailThread(input.email_thread_id);
+  const calendarToken = await getValidGoogleToken(app.user_id);
+
+  const emailContent = await fetchEmailThread(input.email_thread_id, app.user_id);
   const details = await extractInterviewDetails(emailContent, job?.company ?? '');
 
   if (details.confidence < 0.8) {
@@ -81,7 +84,7 @@ export async function runSchedulerAgent(input: SchedulerInput): Promise<Schedule
   }
 
   const prepNotes = await generatePrepNotes(job, details);
-  const eventId = await createCalendarEvent(job, details, prepNotes);
+  const eventId = await createCalendarEvent(job, details, prepNotes, calendarToken);
   const sessionType = inferSessionType(emailContent);
 
   const { data: session } = await db
@@ -225,9 +228,10 @@ async function createCalendarEvent(
   job: { title: string; company: string } | null,
   details: InterviewDetails,
   prepNotes: string,
+  token: string | null,
 ): Promise<string | null> {
-  if (!process.env.GOOGLE_CALENDAR_ACCESS_TOKEN) {
-    log.debug('Google Calendar not configured — skipping event creation');
+  if (!token) {
+    log.debug('No Google Calendar token — skipping event creation');
     return null;
   }
 
@@ -272,6 +276,7 @@ Description: Interview prep notes attached.`,
             location?: string;
             description?: string;
           },
+          token,
         );
         toolResults.push({ type: 'tool_result', tool_use_id: block.id, content: JSON.stringify({ event_id: eventId }) });
         if (eventId) return eventId;
@@ -289,12 +294,13 @@ async function execCalendarCreate(input: {
   end_datetime: string;
   location?: string;
   description?: string;
-}): Promise<string | null> {
+}, token: string | null): Promise<string | null> {
+  if (!token) return null;
   try {
     const res = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${process.env.GOOGLE_CALENDAR_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -313,13 +319,14 @@ async function execCalendarCreate(input: {
   }
 }
 
-async function fetchEmailThread(threadId: string): Promise<string> {
-  if (!process.env.GMAIL_ACCESS_TOKEN) return `Thread ID: ${threadId}`;
+async function fetchEmailThread(threadId: string, userId: string): Promise<string> {
+  const token = await getValidGoogleToken(userId);
+  if (!token) return `Thread ID: ${threadId}`;
 
   try {
     const res = await fetch(
       `https://gmail.googleapis.com/gmail/v1/users/me/threads/${threadId}?format=full`,
-      { headers: { Authorization: `Bearer ${process.env.GMAIL_ACCESS_TOKEN}` } },
+      { headers: { Authorization: `Bearer ${token}` } },
     );
     const data = await res.json() as { messages?: Array<{ payload?: { body?: { data?: string } } }> };
     const msg = data.messages?.[data.messages.length - 1];
