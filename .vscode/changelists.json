@@ -1,0 +1,15 @@
+{
+  "changelists": [
+    {
+      "name": "Default",
+      "files": [
+        ".claude/settings.json",
+        ".vscode/changelists.json",
+        "package.json",
+        "package-lock.json",
+        "LICENSE"
+      ]
+    }
+  ],
+  "active": "Default"
+}

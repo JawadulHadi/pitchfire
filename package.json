@@ -1,25 +1,30 @@
 {
-  "name": "pitchfire",
-  "private": true,
-  "version": "0.1.0",
-  "description": "Autonomous AI-powered job search orchestrator",
-  "scripts": {
-    "dev": "turbo run dev --parallel",
-    "build": "turbo run build",
-    "test": "turbo run test",
-    "lint": "turbo run lint",
-    "typecheck": "turbo run typecheck",
-    "db:push": "supabase db push",
-    "db:reset": "supabase db reset"
+  "dependencies": {
+    "next": "16.4.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
+  "description": "Autonomous AI-powered job search orchestrator",
   "devDependencies": {
+    "@types/node": "^22.10.0",
     "turbo": "^2.3.3",
-    "typescript": "^5.7.2",
-    "@types/node": "^22.10.0"
+    "typescript": "^5.7.2"
   },
   "engines": {
     "node": ">=22",
     "pnpm": ">=10"
   },
-  "packageManager": "pnpm@10.28.0"
+  "name": "pitchfire",
+  "packageManager": "pnpm@10.28.0",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck"
+  },
+  "version": "0.1.0"
 }
