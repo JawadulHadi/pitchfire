@@ -1,12 +1,8 @@
 {
-  "dependencies": {
-    "next": "16.4.2",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
-  },
   "description": "Autonomous AI-powered job search orchestrator",
   "devDependencies": {
     "@types/node": "^22.10.0",
+    "supabase": "^2.22.6",
     "turbo": "^2.3.3",
     "typescript": "^5.7.2"
   },
