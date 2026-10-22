@@ -1,18 +1,9 @@
 {
-  "description": "Autonomous AI-powered job search orchestrator",
-  "devDependencies": {
-    "@types/node": "^22.10.0",
-    "supabase": "^2.22.6",
-    "turbo": "^2.3.3",
-    "typescript": "^5.7.2"
-  },
-  "engines": {
-    "node": ">=22",
-    "pnpm": ">=10"
-  },
   "name": "pitchfire",
   "packageManager": "pnpm@10.28.0",
   "private": true,
+  "description": "Autonomous AI-powered job search orchestrator",
+  "version": "0.1.0",
   "scripts": {
     "build": "turbo run build",
     "db:push": "supabase db push",
@@ -22,5 +13,14 @@
     "test": "turbo run test",
     "typecheck": "turbo run typecheck"
   },
-  "version": "0.1.0"
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "supabase": "^2.22.6",
+    "turbo": "^2.11.10",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  }
 }
