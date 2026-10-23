@@ -3,11 +3,11 @@
     {
       "name": "Default",
       "files": [
-        ".claude/settings.json",
-        ".vscode/changelists.json",
-        "package.json",
-        "package-lock.json",
-        "LICENSE"
+        "\"PitchFire Dashboard.html\"",
+        "UI",
+        "\"PitchFire Brand.html\"",
+        "\"PitchFire Dashboard 2.html\"",
+        ".vscode/changelists.json"
       ]
     }
   ],

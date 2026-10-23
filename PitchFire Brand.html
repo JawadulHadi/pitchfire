@@ -1,0 +1,1531 @@
+<!doctype html><html><head><meta charset=utf8><meta
+      name=viewport
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    ><style>
+      :root {
+        color-scheme: light;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font:
+          14px -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: #fff;
+        color: #000;
+      }
+      img {
+        max-width: 100%;
+      }
+      [hidden]:not([hidden="until-found" i]) {
+        display: none !important;
+      }
+    </style></head><body>
+    <title>PitchFire Brand</title>
+    <meta name="claude:viewport-fit-sides" content="cover">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      /* ── Dark-first brand guide for PitchFire ── */
+      :root {
+        /* Palette */
+        --night: #060b18;
+        --slate: #0f172a;
+        --deep: #1e293b;
+        --wall: #334155;
+        --ember: #f97316;
+        --ember-d: #ea580c;
+        --ember-l: #fb923c;
+        --spark: #facc15;
+        --violet: #7c3aed;
+        --violet-l: #a78bfa;
+        --sky: #38bdf8;
+        --ash: #64748b;
+        --mist: #94a3b8;
+        --fog: #cbd5e1;
+        --snow: #f8fafc;
+        --text: #e2e8f0;
+        --text-2: #94a3b8;
+
+        /* Type */
+        --font-display: "Syne", system-ui, sans-serif;
+        --font-body: "DM Sans", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+
+        color-scheme: dark;
+      }
+
+      /* Light mode overrides */
+      @media (prefers-color-scheme: light) {
+        :root:not([data-theme="dark"]) {
+          --night: #f0f4ff;
+          --slate: #e8eeff;
+          --deep: #dde3f0;
+          --wall: #c5d0e4;
+          --ash: #94a3b8;
+          --mist: #64748b;
+          --snow: #0f172a;
+          --text: #1e293b;
+          --text-2: #475569;
+          color-scheme: light;
+        }
+      }
+      :root[data-theme="light"] {
+        --night: #f0f4ff;
+        --slate: #e8eeff;
+        --deep: #dde3f0;
+        --wall: #c5d0e4;
+        --ash: #94a3b8;
+        --mist: #64748b;
+        --snow: #0f172a;
+        --text: #1e293b;
+        --text-2: #475569;
+        color-scheme: light;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--night);
+        color: var(--text);
+        font-family: var(--font-body);
+        font-size: 15px;
+        line-height: 1.65;
+        margin: 0;
+      }
+
+      /* ── Layout ── */
+      .section {
+        padding-block: 80px;
+        padding-left: max(24px, env(safe-area-inset-left, 0px));
+        padding-right: max(24px, env(safe-area-inset-right, 0px));
+      }
+      .section--alt {
+        background: var(--slate);
+      }
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+      }
+
+      /* ── Hero ── */
+      .hero {
+        padding-block: 100px 80px;
+        padding-left: max(24px, env(safe-area-inset-left, 0px));
+        padding-right: max(24px, env(safe-area-inset-right, 0px));
+        background: var(--night);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 60% 60% at 50% 80%,
+          rgba(124, 58, 237, 0.18) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero-inner {
+        max-width: 980px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-family: var(--font-display);
+        font-size: clamp(48px, 8vw, 88px);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -2px;
+        margin: 0;
+      }
+      .hero h1 .w {
+        color: var(--text);
+      }
+      .hero h1 .o {
+        color: var(--ember);
+      }
+      .hero-sub {
+        font-size: 18px;
+        color: var(--text-2);
+        font-weight: 500;
+        max-width: 460px;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        height: 28px;
+        padding: 0 12px;
+        border-radius: 6px;
+        background: var(--deep);
+        border: 1px solid var(--wall);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--mist);
+        white-space: nowrap;
+      }
+      .badge--ember {
+        color: var(--ember-l);
+        border-color: rgba(249, 115, 22, 0.3);
+      }
+      .badge--violet {
+        color: var(--violet-l);
+        border-color: rgba(124, 58, 237, 0.3);
+      }
+      .badge--sky {
+        color: var(--sky);
+        border-color: rgba(56, 189, 248, 0.25);
+      }
+
+      /* ── Section header ── */
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ember);
+        margin-bottom: 10px;
+      }
+      h2 {
+        font-family: var(--font-display);
+        font-size: clamp(26px, 4vw, 38px);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.5px;
+        text-wrap: balance;
+        margin: 0 0 40px;
+      }
+      h3 {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 6px;
+      }
+
+      /* ── Logo grid ── */
+      .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 16px;
+      }
+      .logo-card {
+        border-radius: 14px;
+        border: 1px solid var(--wall);
+        overflow: hidden;
+      }
+      .logo-card__canvas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        min-height: 160px;
+      }
+      .logo-card__canvas--dark {
+        background: var(--slate);
+      }
+      .logo-card__canvas--light {
+        background: var(--fog);
+      }
+      .logo-card__canvas--black {
+        background: #000;
+      }
+      .logo-card__label {
+        background: var(--deep);
+        border-top: 1px solid var(--wall);
+        padding: 10px 16px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-2);
+        letter-spacing: 0.04em;
+      }
+
+      /* ── Color palette ── */
+      .palette-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+      }
+      .swatch {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--wall);
+      }
+      .swatch__color {
+        height: 80px;
+      }
+      .swatch__info {
+        background: var(--deep);
+        padding: 12px;
+      }
+      .swatch__name {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 2px;
+      }
+      .swatch__hex {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-2);
+      }
+
+      /* ── Type scale ── */
+      .type-scale {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .type-row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        align-items: baseline;
+        gap: 24px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--deep);
+      }
+      .type-row:last-child {
+        border-bottom: none;
+      }
+      .type-meta {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-2);
+        line-height: 1.6;
+      }
+
+      /* ── Banner preview ── */
+      .banner-wrap {
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--wall);
+      }
+      .banner-wrap svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /* ── Usage do/don't ── */
+      .usage-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      @media (max-width: 600px) {
+        .usage-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .usage-card {
+        border-radius: 12px;
+        border: 1px solid var(--wall);
+        padding: 20px;
+      }
+      .usage-card--do {
+        border-top: 3px solid #22c55e;
+      }
+      .usage-card--dont {
+        border-top: 3px solid #ef4444;
+      }
+      .usage-tag {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      .usage-tag--do {
+        color: #22c55e;
+      }
+      .usage-tag--dont {
+        color: #ef4444;
+      }
+      .usage-card ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--text-2);
+        font-size: 14px;
+      }
+      .usage-card li {
+        margin-bottom: 6px;
+      }
+      .usage-card li:last-child {
+        margin-bottom: 0;
+      }
+
+      /* ── Downloads row ── */
+      .download-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .dl-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 16px;
+        border-radius: 8px;
+        background: var(--deep);
+        border: 1px solid var(--wall);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: default;
+        transition:
+          background 0.15s,
+          border-color 0.15s;
+      }
+      .dl-btn:hover {
+        background: var(--wall);
+        border-color: var(--ash);
+      }
+      .dl-icon {
+        opacity: 0.7;
+      }
+
+      /* ── Footer ── */
+      .footer {
+        padding-block: 40px;
+        padding-left: max(24px, env(safe-area-inset-left, 0px));
+        padding-right: max(24px, env(safe-area-inset-right, 0px));
+        text-align: center;
+        color: var(--ash);
+        font-size: 13px;
+        border-top: 1px solid var(--deep);
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 640px) {
+        .logo-grid {
+          grid-template-columns: 1fr;
+        }
+        .palette-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .type-row {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+      }
+    </style>
+
+    <!-- ════════════ HERO ════════════ -->
+    <header class="hero">
+      <div class="hero-inner">
+        <!-- Flame icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 48 48"
+          width="96"
+          height="96"
+          aria-hidden="true"
+        >
+          <defs>
+            <lineargradient id="h-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0F172A"/><stop
+                offset="100%"
+                stop-color="#2D1B69"
+              />
+            </lineargradient>
+            <lineargradient id="h-fo" x1="50%" y1="100%" x2="50%" y2="0%">
+              <stop offset="0%" stop-color="#C2410C"/><stop
+                offset="35%"
+                stop-color="#EA580C"
+              />
+              <stop offset="70%" stop-color="#F97316"/><stop
+                offset="100%"
+                stop-color="#FCD34D"
+              />
+            </lineargradient>
+            <lineargradient id="h-fm" x1="50%" y1="100%" x2="50%" y2="0%">
+              <stop offset="0%" stop-color="#EA580C"/><stop
+                offset="60%"
+                stop-color="#F97316"
+              />
+              <stop offset="100%" stop-color="#FACC15"/>
+            </lineargradient>
+            <lineargradient id="h-fc" x1="50%" y1="100%" x2="50%" y2="0%">
+              <stop offset="0%" stop-color="#FACC15"/><stop
+                offset="100%"
+                stop-color="#FEF9C3"
+              />
+            </lineargradient>
+            <radialgradient id="h-glow" cx="50%" cy="95%" r="55%">
+              <stop offset="0%" stop-color="#7C3AED" stop-opacity=".55"/>
+              <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+            </radialgradient>
+            <filter id="h-sg"><fegaussianblur stdDeviation="1.2" result="b"/>
+              <femerge><femergenode in="b"/><femergenode
+                  in="SourceGraphic"
+                /></femerge></filter>
+          </defs>
+          <rect width="48" height="48" rx="11" fill="url(#h-bg)"/>
+          <ellipse cx="24" cy="44" rx="16" ry="7" fill="url(#h-glow)"/>
+          <path
+            d="M24,43 C13,43 6,35 6,26 C6,16 12,8 21,5 Q22.5,3.5 24,3 Q25.5,3.5 27,5 C36,8 42,16 42,26 C42,35 35,43 24,43Z"
+            fill="url(#h-fo)"
+            filter="url(#h-sg)"
+          />
+          <path
+            d="M24,38 C17,37 12,31 12,25 C12,18 17,12 22.5,9.5 Q23.3,9 24,8.5 Q24.7,9 25.5,9.5 C31,12 36,18 36,25 C36,31 31,37 24,38Z"
+            fill="url(#h-fm)"
+            opacity=".75"
+          />
+          <path
+            d="M24,32 C20,31 17,28 17,25 C17,21 20,17.5 23.5,16 L24,15.5 L24.5,16 C28,17.5 31,21 31,25 C31,28 28,31 24,32Z"
+            fill="url(#h-fc)"
+            opacity=".6"
+          />
+          <circle cx="24" cy="4.5" r="1.8" fill="#FEF9C3" opacity=".95"/>
+        </svg>
+
+        <h1><span class="w">Pitch</span><span class="o">Fire</span></h1>
+        <p class="hero-sub">Autonomous AI Job Search Orchestrator — Brand
+          Identity</p>
+        <div class="hero-badges">
+          <span class="badge badge--ember">7 Agents</span>
+          <span class="badge badge--violet">Claude SDK</span>
+          <span class="badge badge--sky">NestJS · Next.js</span>
+          <span class="badge">BullMQ · Supabase</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ════════════ LOGO MARKS ════════════ -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Identity</p>
+        <h2>Logo Marks</h2>
+        <div class="logo-grid">
+
+          <!-- Icon on dark -->
+          <div class="logo-card">
+            <div class="logo-card__canvas logo-card__canvas--dark">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                width="80"
+                height="80"
+                aria-label="PitchFire icon mark"
+              >
+                <defs>
+                  <lineargradient id="a-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#0F172A"/><stop
+                      offset="100%"
+                      stop-color="#2D1B69"
+                    />
+                  </lineargradient>
+                  <lineargradient id="a-fo" x1="50%" y1="100%" x2="50%" y2="0%">
+                    <stop offset="0%" stop-color="#C2410C"/><stop
+                      offset="35%"
+                      stop-color="#EA580C"
+                    />
+                    <stop offset="70%" stop-color="#F97316"/><stop
+                      offset="100%"
+                      stop-color="#FCD34D"
+                    />
+                  </lineargradient>
+                  <lineargradient id="a-fm" x1="50%" y1="100%" x2="50%" y2="0%">
+                    <stop offset="0%" stop-color="#EA580C"/><stop
+                      offset="60%"
+                      stop-color="#F97316"
+                    />
+                    <stop offset="100%" stop-color="#FACC15"/>
+                  </lineargradient>
+                  <lineargradient id="a-fc" x1="50%" y1="100%" x2="50%" y2="0%">
+                    <stop offset="0%" stop-color="#FACC15"/><stop
+                      offset="100%"
+                      stop-color="#FEF9C3"
+                    />
+                  </lineargradient>
+                  <radialgradient id="a-glow" cx="50%" cy="95%" r="55%">
+                    <stop offset="0%" stop-color="#7C3AED" stop-opacity=".55"/>
+                    <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+                  </radialgradient>
+                  <filter id="a-sg"><fegaussianblur
+                      stdDeviation="1.2"
+                      result="b"
+                    />
+                    <femerge><femergenode in="b"/><femergenode
+                        in="SourceGraphic"
+                      /></femerge></filter>
+                </defs>
+                <rect width="48" height="48" rx="11" fill="url(#a-bg)"/>
+                <ellipse cx="24" cy="44" rx="16" ry="7" fill="url(#a-glow)"/>
+                <path
+                  d="M24,43 C13,43 6,35 6,26 C6,16 12,8 21,5 Q22.5,3.5 24,3 Q25.5,3.5 27,5 C36,8 42,16 42,26 C42,35 35,43 24,43Z"
+                  fill="url(#a-fo)"
+                  filter="url(#a-sg)"
+                />
+                <path
+                  d="M24,38 C17,37 12,31 12,25 C12,18 17,12 22.5,9.5 Q23.3,9 24,8.5 Q24.7,9 25.5,9.5 C31,12 36,18 36,25 C36,31 31,37 24,38Z"
+                  fill="url(#a-fm)"
+                  opacity=".75"
+                />
+                <path
+                  d="M24,32 C20,31 17,28 17,25 C17,21 20,17.5 23.5,16 L24,15.5 L24.5,16 C28,17.5 31,21 31,25 C31,28 28,31 24,32Z"
+                  fill="url(#a-fc)"
+                  opacity=".6"
+                />
+                <circle cx="24" cy="4.5" r="1.8" fill="#FEF9C3" opacity=".95"/>
+              </svg>
+            </div>
+            <div class="logo-card__label">Icon mark — dark background</div>
+          </div>
+
+          <!-- Icon on light -->
+          <div class="logo-card">
+            <div class="logo-card__canvas logo-card__canvas--light">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                width="80"
+                height="80"
+                aria-label="PitchFire icon on light"
+              >
+                <defs>
+                  <lineargradient id="b-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#0F172A"/><stop
+                      offset="100%"
+                      stop-color="#2D1B69"
+                    />
+                  </lineargradient>
+                  <lineargradient id="b-fo" x1="50%" y1="100%" x2="50%" y2="0%">
+                    <stop offset="0%" stop-color="#C2410C"/><stop
+                      offset="35%"
+                      stop-color="#EA580C"
+                    />
+                    <stop offset="70%" stop-color="#F97316"/><stop
+                      offset="100%"
+                      stop-color="#FCD34D"
+                    />
+                  </lineargradient>
+                  <lineargradient id="b-fm" x1="50%" y1="100%" x2="50%" y2="0%">
+                    <stop offset="0%" stop-color="#EA580C"/><stop
+                      offset="60%"
+                      stop-color="#F97316"
+                    />
+                    <stop offset="100%" stop-color="#FACC15"/>
+                  </lineargradient>
+                  <lineargradient id="b-fc" x1="50%" y1="100%" x2="50%" y2="0%">
+                    <stop offset="0%" stop-color="#FACC15"/><stop
+                      offset="100%"
+                      stop-color="#FEF9C3"
+                    />
+                  </lineargradient>
+                  <radialgradient id="b-glow" cx="50%" cy="95%" r="55%">
+                    <stop offset="0%" stop-color="#7C3AED" stop-opacity=".35"/>
+                    <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+                  </radialgradient>
+                  <filter id="b-sg"><fegaussianblur
+                      stdDeviation="1.2"
+                      result="b"
+                    />
+                    <femerge><femergenode in="b"/><femergenode
+                        in="SourceGraphic"
+                      /></femerge></filter>
+                </defs>
+                <rect width="48" height="48" rx="11" fill="url(#b-bg)"/>
+                <ellipse cx="24" cy="44" rx="16" ry="7" fill="url(#b-glow)"/>
+                <path
+                  d="M24,43 C13,43 6,35 6,26 C6,16 12,8 21,5 Q22.5,3.5 24,3 Q25.5,3.5 27,5 C36,8 42,16 42,26 C42,35 35,43 24,43Z"
+                  fill="url(#b-fo)"
+                  filter="url(#b-sg)"
+                />
+                <path
+                  d="M24,38 C17,37 12,31 12,25 C12,18 17,12 22.5,9.5 Q23.3,9 24,8.5 Q24.7,9 25.5,9.5 C31,12 36,18 36,25 C36,31 31,37 24,38Z"
+                  fill="url(#b-fm)"
+                  opacity=".75"
+                />
+                <path
+                  d="M24,32 C20,31 17,28 17,25 C17,21 20,17.5 23.5,16 L24,15.5 L24.5,16 C28,17.5 31,21 31,25 C31,28 28,31 24,32Z"
+                  fill="url(#b-fc)"
+                  opacity=".6"
+                />
+                <circle cx="24" cy="4.5" r="1.8" fill="#FEF9C3" opacity=".95"/>
+              </svg>
+            </div>
+            <div class="logo-card__label">Icon mark — light background</div>
+          </div>
+
+          <!-- Monochrome -->
+          <div class="logo-card">
+            <div class="logo-card__canvas logo-card__canvas--black">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                width="80"
+                height="80"
+                aria-label="PitchFire monochrome"
+              >
+                <rect width="48" height="48" rx="11" fill="#111"/>
+                <path
+                  d="M24,43 C13,43 6,35 6,26 C6,16 12,8 21,5 Q22.5,3.5 24,3 Q25.5,3.5 27,5 C36,8 42,16 42,26 C42,35 35,43 24,43Z"
+                  fill="#fff"
+                  opacity=".9"
+                />
+                <path
+                  d="M24,38 C17,37 12,31 12,25 C12,18 17,12 22.5,9.5 Q23.3,9 24,8.5 Q24.7,9 25.5,9.5 C31,12 36,18 36,25 C36,31 31,37 24,38Z"
+                  fill="#111"
+                  opacity=".5"
+                />
+                <path
+                  d="M24,32 C20,31 17,28 17,25 C17,21 20,17.5 23.5,16 L24,15.5 L24.5,16 C28,17.5 31,21 31,25 C31,28 28,31 24,32Z"
+                  fill="#fff"
+                  opacity=".6"
+                />
+              </svg>
+            </div>
+            <div class="logo-card__label">Monochrome — black background</div>
+          </div>
+
+          <!-- Horizontal lockup -->
+          <div class="logo-card" style="grid-column: 1 / -1;">
+            <div
+              class="logo-card__canvas logo-card__canvas--dark"
+              style="justify-content: flex-start; padding: 36px 48px;"
+            >
+              <div style="display:flex;align-items:center;gap:20px;">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 48 48"
+                  width="56"
+                  height="56"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <lineargradient
+                      id="c-bg"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stop-color="#0F172A"/><stop
+                        offset="100%"
+                        stop-color="#2D1B69"
+                      />
+                    </lineargradient>
+                    <lineargradient
+                      id="c-fo"
+                      x1="50%"
+                      y1="100%"
+                      x2="50%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stop-color="#C2410C"/><stop
+                        offset="35%"
+                        stop-color="#EA580C"
+                      />
+                      <stop offset="70%" stop-color="#F97316"/><stop
+                        offset="100%"
+                        stop-color="#FCD34D"
+                      />
+                    </lineargradient>
+                    <lineargradient
+                      id="c-fm"
+                      x1="50%"
+                      y1="100%"
+                      x2="50%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stop-color="#EA580C"/><stop
+                        offset="60%"
+                        stop-color="#F97316"
+                      />
+                      <stop offset="100%" stop-color="#FACC15"/>
+                    </lineargradient>
+                    <lineargradient
+                      id="c-fc"
+                      x1="50%"
+                      y1="100%"
+                      x2="50%"
+                      y2="0%"
+                    >
+                      <stop offset="0%" stop-color="#FACC15"/><stop
+                        offset="100%"
+                        stop-color="#FEF9C3"
+                      />
+                    </lineargradient>
+                    <radialgradient id="c-glow" cx="50%" cy="95%" r="55%">
+                      <stop
+                        offset="0%"
+                        stop-color="#7C3AED"
+                        stop-opacity=".5"
+                      />
+                      <stop
+                        offset="100%"
+                        stop-color="#7C3AED"
+                        stop-opacity="0"
+                      />
+                    </radialgradient>
+                  </defs>
+                  <rect width="48" height="48" rx="11" fill="url(#c-bg)"/>
+                  <ellipse cx="24" cy="44" rx="16" ry="7" fill="url(#c-glow)"/>
+                  <path
+                    d="M24,43 C13,43 6,35 6,26 C6,16 12,8 21,5 Q22.5,3.5 24,3 Q25.5,3.5 27,5 C36,8 42,16 42,26 C42,35 35,43 24,43Z"
+                    fill="url(#c-fo)"
+                  />
+                  <path
+                    d="M24,38 C17,37 12,31 12,25 C12,18 17,12 22.5,9.5 Q23.3,9 24,8.5 Q24.7,9 25.5,9.5 C31,12 36,18 36,25 C36,31 31,37 24,38Z"
+                    fill="url(#c-fm)"
+                    opacity=".75"
+                  />
+                  <path
+                    d="M24,32 C20,31 17,28 17,25 C17,21 20,17.5 23.5,16 L24,15.5 L24.5,16 C28,17.5 31,21 31,25 C31,28 28,31 24,32Z"
+                    fill="url(#c-fc)"
+                    opacity=".6"
+                  />
+                  <circle
+                    cx="24"
+                    cy="4.5"
+                    r="1.8"
+                    fill="#FEF9C3"
+                    opacity=".95"
+                  />
+                </svg>
+                <span
+                  style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;letter-spacing:-1px;line-height:1;"
+                >
+                  <span style="color:#F8FAFC;">Pitch</span><span
+                    style="color:#F97316;"
+                  >Fire</span>
+                </span>
+              </div>
+            </div>
+            <div class="logo-card__label">Horizontal lockup — primary</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ COLORS ════════════ -->
+    <section class="section section--alt">
+      <div class="container">
+        <p class="eyebrow">Palette</p>
+        <h2>Color System</h2>
+        <div class="palette-grid">
+          <div class="swatch">
+            <div class="swatch__color" style="background:#F97316;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Ember</div>
+              <div class="swatch__hex">#F97316</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#EA580C;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Ember Dark</div>
+              <div class="swatch__hex">#EA580C</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#FACC15;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Spark</div>
+              <div class="swatch__hex">#FACC15</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#7C3AED;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Violet</div>
+              <div class="swatch__hex">#7C3AED</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#0F172A;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Slate</div>
+              <div class="swatch__hex">#0F172A</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch__color"
+              style="background:#060B18;border:1px solid #1e3a5f;"
+            ></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Night</div>
+              <div class="swatch__hex">#060B18</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#94A3B8;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Mist</div>
+              <div class="swatch__hex">#94A3B8</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch__color" style="background:#F8FAFC;"></div>
+            <div class="swatch__info">
+              <div class="swatch__name">Snow</div>
+              <div class="swatch__hex">#F8FAFC</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ TYPOGRAPHY ════════════ -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Typography</p>
+        <h2>Type Scale</h2>
+        <div class="type-scale">
+          <div class="type-row">
+            <div class="type-meta">Syne 800<br>88px / –2px</div>
+            <div
+              style="font-family:'Syne',sans-serif;font-size:clamp(40px,6vw,88px);font-weight:800;letter-spacing:-2px;line-height:1;color:var(--text);"
+            >PitchFire</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">Syne 800<br>40px / –1px</div>
+            <div
+              style="font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-1px;line-height:1.1;color:var(--text);"
+            >Autonomous
+              Job Search</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">Syne 700<br>22px / –0.3px</div>
+            <div
+              style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.3px;line-height:1.2;color:var(--text);"
+            >7
+              Agents, 0 Excuses</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">DM Sans 500<br>18px / 0</div>
+            <div
+              style="font-family:'DM Sans',sans-serif;font-size:18px;font-weight:500;line-height:1.65;color:var(--text-2);max-width:600px;"
+            >Upload
+              your resume once. PitchFire discovers matched jobs, tailors every
+              application, submits autonomously, tracks replies, and books your
+              interviews.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">JetBrains Mono<br>13px / 0</div>
+            <div
+              style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--ember);background:var(--deep);padding:12px 16px;border-radius:8px;border:1px solid var(--wall);"
+            >
+              score ≥ 0.72 → TailorAgent → ApplierAgent
+            </div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">DM Sans 700<br>11px / +12%</div>
+            <div
+              style="font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ember);"
+            >Eyebrow
+              Label</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ BANNER PREVIEW ════════════ -->
+    <section class="section section--alt">
+      <div class="container">
+        <p class="eyebrow">GitHub</p>
+        <h2>Repo Banner</h2>
+        <div class="banner-wrap">
+          <!-- Inline the banner SVG preview at a smaller scale -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1280 640"
+            style="width:100%;height:auto;display:block;"
+            aria-label="PitchFire GitHub banner"
+          >
+            <defs>
+              <lineargradient id="bb-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#060B18"/><stop
+                  offset="55%"
+                  stop-color="#0F172A"
+                />
+                <stop offset="100%" stop-color="#1E1040"/>
+              </lineargradient>
+              <lineargradient id="bb-fo" x1="50%" y1="100%" x2="50%" y2="0%">
+                <stop offset="0%" stop-color="#C2410C"/><stop
+                  offset="35%"
+                  stop-color="#EA580C"
+                />
+                <stop offset="70%" stop-color="#F97316"/><stop
+                  offset="100%"
+                  stop-color="#FCD34D"
+                />
+              </lineargradient>
+              <lineargradient id="bb-fm" x1="50%" y1="100%" x2="50%" y2="0%">
+                <stop offset="0%" stop-color="#EA580C"/><stop
+                  offset="60%"
+                  stop-color="#F97316"
+                />
+                <stop offset="100%" stop-color="#FACC15"/>
+              </lineargradient>
+              <lineargradient id="bb-fc" x1="50%" y1="100%" x2="50%" y2="0%">
+                <stop offset="0%" stop-color="#FACC15"/><stop
+                  offset="100%"
+                  stop-color="#FEF9C3"
+                />
+              </lineargradient>
+              <radialgradient id="bb-vg" cx="50%" cy="80%" r="50%">
+                <stop offset="0%" stop-color="#7C3AED" stop-opacity=".6"/>
+                <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+              </radialgradient>
+              <radialgradient id="bb-al" cx="30%" cy="60%" r="45%">
+                <stop offset="0%" stop-color="#EA580C" stop-opacity=".12"/>
+                <stop offset="100%" stop-color="#EA580C" stop-opacity="0"/>
+              </radialgradient>
+              <radialgradient id="bb-ar" cx="80%" cy="40%" r="50%">
+                <stop offset="0%" stop-color="#7C3AED" stop-opacity=".08"/>
+                <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+              </radialgradient>
+              <filter id="bb-fg"><fegaussianblur stdDeviation="8" result="b"/>
+                <femerge><femergenode in="b"/><femergenode
+                    in="SourceGraphic"
+                  /></femerge></filter>
+              <filter id="bb-tg"><fegaussianblur stdDeviation="3" result="b"/>
+                <femerge><femergenode in="b"/><femergenode
+                    in="SourceGraphic"
+                  /></femerge></filter>
+              <clippath id="bb-clip"><rect
+                  width="1280"
+                  height="640"
+                /></clippath>
+              <pattern
+                id="bb-dots"
+                x="0"
+                y="0"
+                width="40"
+                height="40"
+                patternUnits="userSpaceOnUse"
+              >
+                <circle cx="20" cy="20" r="1" fill="#1E3A5F" opacity=".5"/>
+              </pattern>
+            </defs>
+            <g clip-path="url(#bb-clip)">
+              <rect width="1280" height="640" fill="url(#bb-bg)"/>
+              <rect width="1280" height="640" fill="url(#bb-dots)"/>
+              <ellipse cx="380" cy="400" rx="400" ry="300" fill="url(#bb-al)"/>
+              <ellipse
+                cx="1050"
+                cy="250"
+                rx="380"
+                ry="280"
+                fill="url(#bb-ar)"
+              />
+              <!-- Flame icon -->
+              <g transform="translate(70,120)">
+                <rect
+                  width="260"
+                  height="260"
+                  rx="52"
+                  fill="#0F172A"
+                  opacity=".8"
+                />
+                <rect
+                  width="260"
+                  height="260"
+                  rx="52"
+                  fill="none"
+                  stroke="#1E3A5F"
+                  stroke-width="1"
+                />
+                <ellipse cx="130" cy="230" rx="80" ry="36" fill="url(#bb-vg)"/>
+                <path
+                  d="M130,237 C74,237 32,190 32,142 C32,86 65,43 113,26 Q121.5,18 130,15 Q138.5,18 147,26 C195,43 228,86 228,142 C228,190 186,237 130,237Z"
+                  fill="url(#bb-fo)"
+                  filter="url(#bb-fg)"
+                />
+                <path
+                  d="M130,218 C90,216 64,182 64,150 C64,110 88,74 120,56 Q125,52 130,50 Q135,52 140,56 C172,74 196,110 196,150 C196,182 170,216 130,218Z"
+                  fill="url(#bb-fm)"
+                  opacity=".8"
+                />
+                <path
+                  d="M130,186 C111,184 97,168 97,152 C97,130 111,112 128,104 L130,102 L132,104 C149,112 163,130 163,152 C163,168 149,184 130,186Z"
+                  fill="url(#bb-fc)"
+                  opacity=".65"
+                />
+                <circle cx="130" cy="18" r="9" fill="#FEF9C3" opacity=".95"/>
+                <circle cx="130" cy="18" r="5" fill="#FFF" opacity=".8"/>
+              </g>
+              <text
+                x="390"
+                y="284"
+                font-family="'Syne','Inter','Helvetica Neue',sans-serif"
+                font-size="120"
+                font-weight="800"
+                letter-spacing="-4"
+                fill="#F8FAFC"
+              >Pitch</text>
+              <text
+                x="740"
+                y="284"
+                font-family="'Syne','Inter','Helvetica Neue',sans-serif"
+                font-size="120"
+                font-weight="800"
+                letter-spacing="-4"
+                fill="#F97316"
+                filter="url(#bb-tg)"
+              >Fire</text>
+              <text
+                x="391"
+                y="338"
+                font-family="'DM Sans','Inter',system-ui,sans-serif"
+                font-size="22"
+                font-weight="500"
+                fill="#94A3B8"
+                letter-spacing=".2"
+              >Autonomous AI Job Search Orchestrator</text>
+              <line
+                x1="391"
+                y1="370"
+                x2="880"
+                y2="370"
+                stroke="#1E3A5F"
+                stroke-width="1"
+              />
+              <g transform="translate(391,400)">
+                <rect width="108" height="32" rx="6" fill="#1E293B"/><rect
+                  width="108"
+                  height="32"
+                  rx="6"
+                  fill="none"
+                  stroke="#334155"
+                  stroke-width="1"
+                />
+                <text
+                  x="54"
+                  y="21"
+                  text-anchor="middle"
+                  font-family="'DM Sans',sans-serif"
+                  font-size="12"
+                  font-weight="600"
+                  fill="#A78BFA"
+                >7 Agents</text>
+                <g transform="translate(120,0)"><rect
+                    width="88"
+                    height="32"
+                    rx="6"
+                    fill="#1E293B"
+                  /><rect
+                    width="88"
+                    height="32"
+                    rx="6"
+                    fill="none"
+                    stroke="#334155"
+                    stroke-width="1"
+                  /><text
+                    x="44"
+                    y="21"
+                    text-anchor="middle"
+                    font-family="'DM Sans',sans-serif"
+                    font-size="12"
+                    font-weight="600"
+                    fill="#F97316"
+                  >NestJS</text></g>
+                <g transform="translate(220,0)"><rect
+                    width="110"
+                    height="32"
+                    rx="6"
+                    fill="#1E293B"
+                  /><rect
+                    width="110"
+                    height="32"
+                    rx="6"
+                    fill="none"
+                    stroke="#334155"
+                    stroke-width="1"
+                  /><text
+                    x="55"
+                    y="21"
+                    text-anchor="middle"
+                    font-family="'DM Sans',sans-serif"
+                    font-size="12"
+                    font-weight="600"
+                    fill="#38BDF8"
+                  >Claude SDK</text></g>
+                <g transform="translate(342,0)"><rect
+                    width="90"
+                    height="32"
+                    rx="6"
+                    fill="#1E293B"
+                  /><rect
+                    width="90"
+                    height="32"
+                    rx="6"
+                    fill="none"
+                    stroke="#334155"
+                    stroke-width="1"
+                  /><text
+                    x="45"
+                    y="21"
+                    text-anchor="middle"
+                    font-family="'DM Sans',sans-serif"
+                    font-size="12"
+                    font-weight="600"
+                    fill="#34D399"
+                  >BullMQ</text></g>
+                <g transform="translate(444,0)"><rect
+                    width="100"
+                    height="32"
+                    rx="6"
+                    fill="#1E293B"
+                  /><rect
+                    width="100"
+                    height="32"
+                    rx="6"
+                    fill="none"
+                    stroke="#334155"
+                    stroke-width="1"
+                  /><text
+                    x="50"
+                    y="21"
+                    text-anchor="middle"
+                    font-family="'DM Sans',sans-serif"
+                    font-size="12"
+                    font-weight="600"
+                    fill="#2DD4BF"
+                  >Supabase</text></g>
+              </g>
+              <!-- Agent flow -->
+              <g transform="translate(920,100)" opacity=".5">
+                <rect
+                  x="100"
+                  y="20"
+                  width="130"
+                  height="38"
+                  rx="8"
+                  fill="#1E293B"
+                  stroke="#334155"
+                  stroke-width="1"
+                />
+                <text
+                  x="165"
+                  y="44"
+                  text-anchor="middle"
+                  font-family="'DM Sans',sans-serif"
+                  font-size="13"
+                  font-weight="600"
+                  fill="#94A3B8"
+                >ScoutAgent</text>
+                <line
+                  x1="165"
+                  y1="60"
+                  x2="165"
+                  y2="95"
+                  stroke="#334155"
+                  stroke-width="1.5"
+                  stroke-dasharray="4,3"
+                />
+                <polygon points="160,92 165,103 170,92" fill="#334155"/>
+                <rect
+                  x="100"
+                  y="105"
+                  width="130"
+                  height="38"
+                  rx="8"
+                  fill="#1E293B"
+                  stroke="#334155"
+                  stroke-width="1"
+                />
+                <text
+                  x="165"
+                  y="129"
+                  text-anchor="middle"
+                  font-family="'DM Sans',sans-serif"
+                  font-size="13"
+                  font-weight="600"
+                  fill="#94A3B8"
+                >ScorerAgent</text>
+                <line
+                  x1="165"
+                  y1="145"
+                  x2="165"
+                  y2="180"
+                  stroke="#334155"
+                  stroke-width="1.5"
+                  stroke-dasharray="4,3"
+                />
+                <polygon points="160,177 165,188 170,177" fill="#334155"/>
+                <rect
+                  x="100"
+                  y="190"
+                  width="130"
+                  height="38"
+                  rx="8"
+                  fill="#1E293B"
+                  stroke="#F97316"
+                  stroke-width="1.5"
+                  stroke-opacity=".6"
+                />
+                <text
+                  x="165"
+                  y="214"
+                  text-anchor="middle"
+                  font-family="'DM Sans',sans-serif"
+                  font-size="13"
+                  font-weight="600"
+                  fill="#FB923C"
+                >TailorAgent</text>
+                <line
+                  x1="165"
+                  y1="230"
+                  x2="165"
+                  y2="265"
+                  stroke="#334155"
+                  stroke-width="1.5"
+                  stroke-dasharray="4,3"
+                />
+                <polygon points="160,262 165,273 170,262" fill="#334155"/>
+                <rect
+                  x="100"
+                  y="275"
+                  width="130"
+                  height="38"
+                  rx="8"
+                  fill="#1E293B"
+                  stroke="#334155"
+                  stroke-width="1"
+                />
+                <text
+                  x="165"
+                  y="299"
+                  text-anchor="middle"
+                  font-family="'DM Sans',sans-serif"
+                  font-size="13"
+                  font-weight="600"
+                  fill="#94A3B8"
+                >ApplierAgent</text>
+                <line
+                  x1="165"
+                  y1="315"
+                  x2="165"
+                  y2="350"
+                  stroke="#334155"
+                  stroke-width="1.5"
+                  stroke-dasharray="4,3"
+                />
+                <polygon points="160,347 165,358 170,347" fill="#334155"/>
+                <rect
+                  x="100"
+                  y="360"
+                  width="130"
+                  height="38"
+                  rx="8"
+                  fill="#1E293B"
+                  stroke="#334155"
+                  stroke-width="1"
+                />
+                <text
+                  x="165"
+                  y="384"
+                  text-anchor="middle"
+                  font-family="'DM Sans',sans-serif"
+                  font-size="13"
+                  font-weight="600"
+                  fill="#94A3B8"
+                >InboxAgent</text>
+                <rect
+                  x="240"
+                  y="193"
+                  width="110"
+                  height="28"
+                  rx="14"
+                  fill="#431407"
+                />
+                <text
+                  x="295"
+                  y="212"
+                  text-anchor="middle"
+                  font-family="'DM Sans',sans-serif"
+                  font-size="11"
+                  font-weight="600"
+                  fill="#F97316"
+                >Approval Gate</text>
+                <line
+                  x1="230"
+                  y1="207"
+                  x2="240"
+                  y2="207"
+                  stroke="#F97316"
+                  stroke-width="1"
+                  stroke-opacity=".5"
+                />
+              </g>
+              <text
+                x="640"
+                y="610"
+                text-anchor="middle"
+                font-family="'DM Sans',system-ui,sans-serif"
+                font-size="13"
+                fill="#1E3A5F"
+                letter-spacing=".1"
+              >pitchfire.dev · MIT License ·
+                Jawad Ul Hadi</text>
+            </g>
+          </svg>
+        </div>
+        <p style="margin-top:14px;font-size:13px;color:var(--text-2);">
+          Saved to <code
+            style="font-family:var(--font-mono);background:var(--deep);padding:2px 7px;border-radius:4px;font-size:12px;"
+          >brand/banner-github.svg</code>
+          — 1280 × 640 px, recommended for GitHub repository social preview.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════ USAGE ════════════ -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Guidelines</p>
+        <h2>Usage Rules</h2>
+        <div class="usage-grid">
+          <div class="usage-card usage-card--do">
+            <div class="usage-tag usage-tag--do">✓ Do</div>
+            <ul>
+              <li>Use the full-colour flame on dark backgrounds (Slate #0F172A
+                or Night #060B18)</li>
+              <li>Keep "Pitch" and "Fire" as a single unbroken word in wordmark
+                contexts</li>
+              <li>Pair Syne 800 for headlines with DM Sans for body copy</li>
+              <li>Maintain the flame's aspect ratio — never stretch or
+                squish</li>
+              <li>Use the monochrome version on constrained surfaces (print,
+                emboss)</li>
+              <li>Use Ember (#F97316) as the primary CTA color</li>
+            </ul>
+          </div>
+          <div class="usage-card usage-card--dont">
+            <div class="usage-tag usage-tag--dont">✗ Don't</div>
+            <ul>
+              <li>Place the full-colour logo on competing bright backgrounds
+                without the dark badge</li>
+              <li>Separate "Pitch" from "Fire" with a space, dash, or line
+                break</li>
+              <li>Recolour the flame gradients — the orange-to-gold gradient is
+                the mark</li>
+              <li>Add drop shadows or outer strokes to the logo mark</li>
+              <li>Scale the icon below 24 × 24 px without switching to the
+                simplified favicon variant</li>
+              <li>Use Violet (#7C3AED) as a primary action color — it is
+                accent-only</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ FILES ════════════ -->
+    <section class="section section--alt">
+      <div class="container">
+        <p class="eyebrow">Assets</p>
+        <h2>Brand Files</h2>
+        <p style="color:var(--text-2);margin-bottom:28px;max-width:560px;">All
+          brand assets live in the <code
+            style="font-family:var(--font-mono);background:var(--deep);padding:2px 7px;border-radius:4px;font-size:13px;"
+          >brand/</code>
+          directory at the repository root.</p>
+        <div class="download-row">
+          <span class="dl-btn">
+            <svg
+              class="dl-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            ><path
+                d="M4 4h5l3 3v5H4V4z"
+                stroke="currentColor"
+                stroke-width="1.2"
+                fill="none"
+              /><path
+                d="M9 4v3h3"
+                stroke="currentColor"
+                stroke-width="1.2"
+              /></svg>
+            brand/logo-icon.svg
+          </span>
+          <span class="dl-btn">
+            <svg
+              class="dl-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            ><path
+                d="M4 4h5l3 3v5H4V4z"
+                stroke="currentColor"
+                stroke-width="1.2"
+                fill="none"
+              /><path
+                d="M9 4v3h3"
+                stroke="currentColor"
+                stroke-width="1.2"
+              /></svg>
+            brand/logo-horizontal.svg
+          </span>
+          <span class="dl-btn">
+            <svg
+              class="dl-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+            ><path
+                d="M4 4h5l3 3v5H4V4z"
+                stroke="currentColor"
+                stroke-width="1.2"
+                fill="none"
+              /><path
+                d="M9 4v3h3"
+                stroke="currentColor"
+                stroke-width="1.2"
+              /></svg>
+            brand/banner-github.svg
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ FOOTER ════════════ -->
+    <footer class="footer">
+      <div>
+        PitchFire Brand Guide — MIT License ·
+        <a
+          href="https://github.com/JawadulHadi/pitchfire"
+          target="_blank"
+          rel="noopener"
+          style="color:var(--ember);text-decoration:none;"
+        >github.com/JawadulHadi/pitchfire</a>
+      </div>
+    </footer>
+
+  </body></html>
