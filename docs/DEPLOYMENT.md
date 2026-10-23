@@ -34,28 +34,28 @@ pnpm dev
 
 | Service | Hosts | Free Limits |
 | --- | --- | --- |
-| **netlify** | `apps/web` | 100GB bandwidth, hobby projects |
+| **Vercel** | `apps/web` | 100GB bandwidth, hobby projects |
 | **Railway** | `apps/api` + `apps/agent` worker | 500h compute/mo |
 | **Supabase** | PostgreSQL + pgvector + Auth | 500MB DB, 1GB storage, 50k auth users |
 | **Upstash** | Redis (BullMQ) | 10k commands/day |
 
 **Total cost: $0/mo** until meaningful traffic.
 
-### Deploy Web (netlify)
+### Deploy Web (Vercel)
 
 ```bash
-# Install netlify CLI
-npm i -g netlify
+# Install Vercel CLI
+npm i -g vercel
 
 # Deploy from apps/web
 cd apps/web
-netlify --prod
+vercel --prod
 
-# Set environment variables in netlify dashboard:
+# Set environment variables in Vercel dashboard:
 # NEXT_PUBLIC_API_URL=https://your-api.railway.app
 ```
 
-Or connect GitHub repo to netlify for automatic deploys on push to `main`.
+Or connect GitHub repo to Vercel for automatic deploys on push to `main`.
 
 ### Deploy API + Agent (Railway)
 
@@ -103,7 +103,7 @@ REDIS_URL=redis://default:...@your-upstash-url:6379
 | --- | --- | --- |
 | Railway Starter | 5 GB RAM, always-on | $5/mo |
 | Supabase Pro | 8 GB DB, daily backups | $25/mo |
-| netlify Pro | 1 TB bandwidth, faster builds | $20/mo |
+| Vercel Pro | 1 TB bandwidth, faster builds | $20/mo |
 | Upstash | still free (200k cmd/day) | $0/mo |
 | **Total** | | **$50/mo** |
 
@@ -118,14 +118,14 @@ REDIS_URL=redis://default:...@your-upstash-url:6379
 | Database | Supabase → AWS RDS Aurora PostgreSQL (pgvector supported) |
 | API | Railway → AWS ECS Fargate (containerized NestJS) |
 | Agent Worker | Railway → multiple worker pods (parallel apply jobs) |
-| Web | netlify → stays on netlify (already scales) |
+| Web | Vercel → stays on Vercel (already scales) |
 | Redis | Upstash → Upstash Pro or Redis Cloud |
 
 ---
 
 ## Environment Variables Reference
 
-### `apps/web` (Next.js — netlify)
+### `apps/web` (Next.js — Vercel)
 
 ```bash
 NEXT_PUBLIC_API_URL=https://api.pitchfire.com

@@ -7,7 +7,7 @@
 [![Stack](<https://img.shields.io/badge/Stack-NestJS%20%7C%20Next.js%20%7C%20Claude%20SDK%20%7C%20BullMQ-blueviolet>)](#tech-stack)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![Security](https://img.shields.io/badge/Security-Policy-red)](SECURITY.md)
-[![Changelog](https://img.shields.io/badge/Changelog-v0.7.0-orange)](CHANGELOG.md)
+[![Changelog](https://img.shields.io/badge/Changelog-v0.8.0-orange)](CHANGELOG.md)
 
 ---
 
@@ -120,7 +120,7 @@ Open [http://localhost:3000](http://localhost:3000) — Swagger UI at [http://lo
 
 | Layer       | Technology                                   | Why                                                                           |
 | ----------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
-| Frontend    | Next.js 14 App Router + Tailwind + shadcn/ui | SSR, free on netlify                                                           |
+| Frontend    | Next.js 14 App Router + Tailwind + shadcn/ui | SSR, free on netlify                                                          |
 | Backend API | NestJS + TypeScript                          | Decorators, modules, DI                                                       |
 | AI Engine   | Claude Sonnet 4.6 / Haiku 5.5                | Model-per-task: Haiku for cheap classification, Sonnet for quality generation |
 | Embeddings  | Voyage AI `voyage-3-lite` (1024-dim)         | $0.02/M tokens; semantically valid pgvector similarity                        |
@@ -170,7 +170,7 @@ Break-even: **2 Pro subscribers ($58/mo) > $50/mo infra**. Profitable from user 
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Agent data flow, DB schema, system design                     |
 | [docs/API.md](docs/API.md)                   | REST API endpoint reference                                   |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)   | Local setup, env vars, workspace scripts, testing             |
-| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)     | Cloud deployment: netlify + Railway + Supabase + Upstash       |
+| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)     | Cloud deployment: netlify + Railway + Supabase + Upstash      |
 | [docs/ROADMAP.md](docs/ROADMAP.md)           | Phase-by-phase feature plan with deliverables                 |
 
 ---
@@ -178,9 +178,21 @@ Break-even: **2 Pro subscribers ($58/mo) > $50/mo infra**. Profitable from user 
 ## Contributing
 
 Built by [Jawad Ul Hadi](https://github.com/JawadulHadi) — Backend Lead / AI Systems Architect.
+ Find me
 
-The "Designing for AI Failure" approach (confidence gates, approval gates, DLQ recovery) and the multi-agent Claude orchestration patterns documented here are available as a case study. See [docs/RND.md](docs/RND.md) for full reasoning and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the system design.
-
+<p>
+  <a href="https://juh-bukhari.vercel.app"><img alt="Portfolio" src="https://img.shields.io/badge/Portfolio-0A0A0A?style=flat-square&logo=vercel&logoColor=white" /></a>
+  <a href="https://juh-bukhari.vercel.app/resume.pdf"><img alt="Résumé" src="https://img.shields.io/badge/R%C3%A9sum%C3%A9-4B5563?style=flat-square&logo=adobeacrobatreader&logoColor=white" /></a>
+  <a href="https://juh-bukhari.vercel.app/case-study"><img alt="Case Study" src="https://img.shields.io/badge/Case%20Study-7C3AED?style=flat-square&logo=readthedocs&logoColor=white" /></a>
+  <a href="https://linkedin.com/in/jawad-ul-hadi"><img alt="LinkedIn" src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" /></a>
+  <a href="https://gitlab.com/JawadulHadi"><img alt="GitLab" src="https://img.shields.io/badge/GitLab-FC6D26?style=flat-square&logo=gitlab&logoColor=white" /></a>
+  <a href="https://stackoverflow.com/users/19086162/jawad-ul-hadi"><img alt="Stack Overflow" src="https://img.shields.io/badge/Stack%20Overflow-F58025?style=flat-square&logo=stackoverflow&logoColor=white" /></a>
+  <a href="https://orcid.org/0009-0007-1317-4615"><img alt="ORCID" src="https://img.shields.io/badge/ORCID-A6CE39?style=flat-square&logo=orcid&logoColor=white" /></a>
+  <a href="https://calendly.com/jawadulhadicc"><img alt="Book a call" src="https://img.shields.io/badge/Book%20a%20call-006BFF?style=flat-square&logo=calendly&logoColor=white" /></a>
+  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=jawadulhadicc@gmail.com&su=Hello%20Jawad&body=Hi%20Jawad%2C%0A%0AI%20came%20across%20your%20profile." target="_blank">
+  <img alt="Email" src="https://img.shields.io/badge/Email-EA4335?style=flat-square&logo=gmail&logoColor=white" />
+</a>
+</p>
 ---
 
 ## License

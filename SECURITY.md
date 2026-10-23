@@ -37,6 +37,7 @@ We aim to acknowledge reports within **48 hours** and provide a fix timeline wit
 ### Credentials & API Keys
 
 - **Never commit secrets.** `.env.example` shows the required keys; actual values live in `.env.local` (gitignored).
+- **`.env.example` placeholder policy**: Use neutral placeholder values (`your-...-here`). Do NOT use pattern-matching prefixes such as `sk-ant-`, `sk_test_`, `whsec_`, or `pk_test_` — these trigger Netlify's (and GitHub's) secret scanning even though the values are fake.
 - `ANTHROPIC_API_KEY`, `VOYAGE_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `STRIPE_SECRET_KEY` are server-only — never expose to the client.
 - `SUPABASE_ANON_KEY` is safe to expose client-side (Supabase RLS enforces data isolation).
 

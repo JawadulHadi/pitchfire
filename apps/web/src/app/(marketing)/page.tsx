@@ -1,41 +1,39 @@
 'use client';
 
+import { LogoIcon } from '@/components/Logo';
+
 export default function LandingPage() {
   return (
-    <div className="bg-gray-950 text-gray-100 min-h-screen">
-      {/* Nav */}
-      <nav className="border-b border-gray-800 px-6 py-4 flex items-center justify-between max-w-7xl mx-auto">
-        <div className="flex items-center gap-2">
-          <span className="text-blue-400 font-bold text-xl">PitchFire</span>
-          <span className="text-gray-500 text-xs bg-gray-800 px-2 py-0.5 rounded-full">AI</span>
-        </div>
-        <div className="flex items-center gap-6 text-sm text-gray-400">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-          <a href="/dashboard" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-1.5 rounded-lg transition-colors">
-            Launch App
-          </a>
-        </div>
-      </nav>
-
+    <div>
       {/* Hero */}
       <section className="max-w-5xl mx-auto px-6 py-24 text-center">
-        <div className="inline-block bg-blue-950 border border-blue-800 text-blue-300 text-xs px-3 py-1 rounded-full mb-6">
+        <div className="flex justify-center mb-8">
+          <LogoIcon size={72} />
+        </div>
+        <div className="inline-block accent-bg text-xs px-3 py-1 rounded-full mb-6 font-medium" style={{ color: 'var(--accent)' }}>
           Designing for AI Failure — confidence gates · approval gates · DLQ recovery
         </div>
-        <h1 className="text-5xl font-bold text-white leading-tight mb-6">
+        <h1 className="text-5xl font-bold leading-tight mb-6" style={{ color: 'var(--text-1)' }}>
           Your job search,<br />
-          <span className="text-blue-400">fully automated.</span>
+          <span style={{ color: 'var(--accent)' }}>fully automated.</span>
         </h1>
-        <p className="text-gray-400 text-xl max-w-2xl mx-auto mb-10">
+        <p className="text-xl max-w-2xl mx-auto mb-10" style={{ color: 'var(--text-2)' }}>
           Upload your resume once. PitchFire discovers matched jobs, tailors every application,
           submits autonomously, tracks replies, and books your interviews.
         </p>
         <div className="flex gap-4 justify-center">
-          <a href="/dashboard" className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+          <a
+            href="/dashboard"
+            className="px-8 py-3 rounded-lg font-semibold transition-colors text-white"
+            style={{ background: 'var(--accent)' }}
+          >
             Start for Free
           </a>
-          <a href="#pricing" className="border border-gray-700 hover:border-gray-500 text-gray-300 px-8 py-3 rounded-lg font-semibold transition-colors">
+          <a
+            href="#pricing"
+            className="glass px-8 py-3 rounded-lg font-semibold transition-colors"
+            style={{ color: 'var(--text-2)' }}
+          >
             See Pricing
           </a>
         </div>
@@ -48,28 +46,28 @@ export default function LandingPage() {
             { value: '10+', label: 'Job boards scraped continuously' },
           ].map(m => (
             <div key={m.label} className="text-center">
-              <div className="text-3xl font-bold text-blue-400">{m.value}</div>
-              <div className="text-gray-500 text-xs mt-1">{m.label}</div>
+              <div className="text-3xl font-bold" style={{ color: 'var(--accent)' }}>{m.value}</div>
+              <div className="text-xs mt-1" style={{ color: 'var(--text-3)' }}>{m.label}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Features */}
-      <section id="features" className="bg-gray-900 py-20">
+      <section id="features" className="glass-section py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-white text-center mb-4">
+          <h2 className="text-3xl font-bold text-center mb-4" style={{ color: 'var(--text-1)' }}>
             A platform, not a wrapper
           </h2>
-          <p className="text-gray-400 text-center mb-14 max-w-2xl mx-auto">
+          <p className="text-center mb-14 max-w-2xl mx-auto" style={{ color: 'var(--text-2)' }}>
             Each agent owns a domain, communicates via BullMQ, and plugs into your stack.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {FEATURES.map(f => (
-              <div key={f.title} className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+              <div key={f.title} className="glass p-6">
                 <div className="text-2xl mb-3">{f.icon}</div>
-                <h3 className="text-white font-semibold mb-2">{f.title}</h3>
-                <p className="text-gray-400 text-sm">{f.desc}</p>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--text-1)' }}>{f.title}</h3>
+                <p className="text-sm" style={{ color: 'var(--text-2)' }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -78,36 +76,33 @@ export default function LandingPage() {
 
       {/* Pricing */}
       <section id="pricing" className="py-20 max-w-5xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-white text-center mb-4">
+        <h2 className="text-3xl font-bold text-center mb-4" style={{ color: 'var(--text-1)' }}>
           Profitable from user #2
         </h2>
-        <p className="text-gray-400 text-center mb-14">
+        <p className="text-center mb-14" style={{ color: 'var(--text-2)' }}>
           Break-even: 2 Pro subscribers ($58/mo) &gt; $50/mo infra.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PLANS.map(p => (
             <div
               key={p.name}
-              className={`rounded-xl p-6 border ${
-                p.highlighted
-                  ? 'border-blue-500 bg-blue-950/40'
-                  : 'border-gray-700 bg-gray-900'
-              }`}
+              className={`glass p-6 ${p.highlighted ? 'border-[var(--accent)]' : ''}`}
+              style={p.highlighted ? { borderColor: 'var(--accent)' } : {}}
             >
               {p.highlighted && (
-                <div className="text-xs text-blue-400 font-semibold mb-2 uppercase tracking-wide">
+                <div className="text-xs font-semibold mb-2 uppercase tracking-wide" style={{ color: 'var(--accent)' }}>
                   Most Popular
                 </div>
               )}
-              <h3 className="text-white font-bold text-lg mb-1">{p.name}</h3>
-              <div className="text-3xl font-bold text-white mb-1">
+              <h3 className="font-bold text-lg mb-1" style={{ color: 'var(--text-1)' }}>{p.name}</h3>
+              <div className="text-3xl font-bold mb-1" style={{ color: 'var(--text-1)' }}>
                 {p.price}
-                <span className="text-gray-500 text-base font-normal">/mo</span>
+                <span className="text-base font-normal" style={{ color: 'var(--text-3)' }}>/mo</span>
               </div>
-              <p className="text-gray-400 text-sm mb-6">{p.tagline}</p>
+              <p className="text-sm mb-6" style={{ color: 'var(--text-2)' }}>{p.tagline}</p>
               <ul className="space-y-2 mb-8">
                 {p.features.map(f => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-gray-300">
+                  <li key={f} className="flex items-start gap-2 text-sm" style={{ color: 'var(--text-2)' }}>
                     <span className="text-green-400 mt-0.5">✓</span>
                     {f}
                   </li>
@@ -116,10 +111,9 @@ export default function LandingPage() {
               <a
                 href={p.cta.href}
                 className={`block text-center py-2.5 rounded-lg font-semibold text-sm transition-colors ${
-                  p.highlighted
-                    ? 'bg-blue-600 hover:bg-blue-500 text-white'
-                    : 'border border-gray-600 hover:border-gray-400 text-gray-300'
+                  p.highlighted ? 'text-white' : 'glass'
                 }`}
+                style={p.highlighted ? { background: 'var(--accent)' } : { color: 'var(--text-2)' }}
               >
                 {p.cta.label}
               </a>
@@ -129,25 +123,25 @@ export default function LandingPage() {
       </section>
 
       {/* Case Study CTA */}
-      <section className="bg-gray-900 border-t border-gray-800 py-16">
+      <section className="glass-section py-16">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">
+          <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-1)' }}>
             Designing for AI Failure
           </h2>
-          <p className="text-gray-400 mb-6">
+          <p className="mb-6" style={{ color: 'var(--text-2)' }}>
             Every autonomous action has a fallback. Confidence &lt; 0.8 → user flag.
             Every application reviewed before submit. DLQ replay on 3rd failure.
             Read the full reasoning behind the architecture.
           </p>
-          <a href="/docs/rnd" className="text-blue-400 hover:text-blue-300 font-semibold transition-colors">
+          <a href="/docs/rnd" style={{ color: 'var(--accent)' }} className="font-semibold transition-colors hover:opacity-80">
             Read the R&amp;D case study →
           </a>
         </div>
       </section>
 
-      <footer className="border-t border-gray-800 py-8 text-center text-gray-600 text-sm">
+      <footer className="py-8 text-center text-sm" style={{ color: 'var(--text-3)', borderTop: '1px solid var(--border)' }}>
         Built by{' '}
-        <a href="https://github.com/JawadulHadi" className="text-gray-400 hover:text-white transition-colors">
+        <a href="https://github.com/JawadulHadi" style={{ color: 'var(--text-2)' }} className="hover:text-[var(--text-1)] transition-colors">
           Jawad Ul Hadi
         </a>{' '}
         · Backend Lead / AI Systems Architect · MIT License

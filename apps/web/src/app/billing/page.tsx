@@ -54,7 +54,7 @@ export default function BillingPage() {
       </div>
 
       {/* Current plan card */}
-      <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
+      <div className="glass rounded-xl p-6">
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-3">
@@ -163,7 +163,7 @@ function UpgradeCard({
   plan: string; price: string; features: string[]; onUpgrade: () => void;
 }) {
   return (
-    <div className="bg-gray-900 rounded-xl border border-gray-700 p-5">
+    <div className="glass rounded-xl p-5">
       <div className="flex justify-between items-center mb-3">
         <span className="text-white font-semibold capitalize">{plan}</span>
         <span className="text-blue-400 font-bold">{price}</span>
@@ -188,8 +188,8 @@ function UpgradeCard({
 function LoadingState() {
   return (
     <div className="space-y-4 animate-pulse">
-      <div className="h-8 bg-gray-800 rounded w-48" />
-      <div className="h-40 bg-gray-900 rounded-xl border border-gray-800" />
+      <div className="h-8 glass rounded w-48" />
+      <div className="h-40 glass rounded-xl" />
     </div>
   );
 }

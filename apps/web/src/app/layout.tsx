@@ -1,28 +1,75 @@
-import type { Metadata } from 'next';
-import './globals.css';
+import type { Metadata } from "next";
+import { LogoHorizontal } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const metadata: Metadata = {
-  title: 'PitchFire — Autonomous Job Search',
-  description: 'AI-powered job search orchestrator. Find, match, apply, and manage your entire job search pipeline.',
+  title: "PitchFire — Autonomous AI Job Search",
+  description:
+    "Upload your resume once. PitchFire discovers matched jobs, tailors every application, submits autonomously, tracks replies, and books your interviews.",
+  openGraph: {
+    title: "PitchFire — Autonomous AI Job Search Orchestrator",
+    description: "7 agents. 0 excuses. Your job search, fully automated.",
+    images: [{ url: "/brand/banner-github.svg", width: 1280, height: 640 }],
+  },
+  icons: { icon: "/brand/logo-icon.svg" },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const NAV_LINKS = [
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "Jobs", href: "/jobs" },
+  { label: "Review", href: "/review" },
+  { label: "Applications", href: "/applications" },
+  { label: "Sessions", href: "/sessions" },
+  { label: "Analytics", href: "/analytics" },
+  { label: "Billing", href: "/billing" },
+];
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <body className="bg-gray-950 text-gray-100 min-h-screen antialiased">
-        <nav className="border-b border-gray-800 px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-blue-400 font-bold text-xl">PitchFire</span>
-            <span className="text-gray-500 text-xs bg-gray-800 px-2 py-0.5 rounded-full">AI</span>
-          </div>
-          <div className="flex gap-6 text-sm text-gray-400">
-            <a href="/dashboard" className="hover:text-white transition-colors">Dashboard</a>
-            <a href="/jobs" className="hover:text-white transition-colors">Jobs</a>
-            <a href="/review" className="hover:text-white transition-colors">Review</a>
-            <a href="/applications" className="hover:text-white transition-colors">Applications</a>
-            <a href="/sessions" className="hover:text-white transition-colors">Sessions</a>
-            <a href="/analytics" className="hover:text-white transition-colors">Analytics</a>
-            <a href="/billing" className="hover:text-white transition-colors">Billing</a>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap"
+          rel="stylesheet"
+        />
+        {/* FOUC prevention — runs before paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var t=localStorage.getItem('pf-theme');var d=t?t==='dark':!window.matchMedia('(prefers-color-scheme: light)').matches;if(!d)document.documentElement.classList.add('light');})();`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen antialiased">
+        <nav className="glass-nav px-6 py-3 flex items-center justify-between">
+          <a href="/" aria-label="PitchFire home">
+            <LogoHorizontal height={36} />
+          </a>
+          <div className="flex items-center gap-5">
+            <div
+              className="hidden md:flex gap-5 text-sm"
+              style={{ color: "var(--text-2)" }}
+            >
+              {NAV_LINKS.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="hover:text-[var(--text-1)] transition-colors"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </div>
+            <ThemeToggle />
           </div>
         </nav>
         <main className="max-w-6xl mx-auto px-6 py-8">{children}</main>

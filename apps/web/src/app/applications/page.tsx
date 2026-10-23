@@ -67,7 +67,7 @@ export default function ApplicationsPage() {
           { key: 'offer', label: 'Offer' },
           { key: 'rejected', label: 'Rejected' },
         ].map((stage) => (
-          <div key={stage.key} className="bg-gray-900 border border-gray-800 rounded-xl p-4 text-center">
+          <div key={stage.key} className="glass rounded-xl p-4 text-center">
             <div className="text-2xl font-bold text-white">{statusCounts[stage.key] ?? 0}</div>
             <div className="text-gray-400 text-sm mt-1">{stage.label}</div>
           </div>
@@ -77,7 +77,7 @@ export default function ApplicationsPage() {
       {loading ? (
         <div className="text-gray-400">Loading applications...</div>
       ) : applications.length === 0 ? (
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-8 text-center">
+        <div className="glass rounded-xl p-8 text-center">
           <div className="text-gray-400 mb-2">No applications yet.</div>
           <div className="text-gray-500 text-sm">
             Upload your resume on the Dashboard to start the pipeline.
@@ -88,7 +88,7 @@ export default function ApplicationsPage() {
           {applications.map((app) => (
             <div
               key={app.id}
-              className="bg-gray-900 border border-gray-800 hover:border-gray-600 rounded-xl p-5 transition-colors"
+              className="glass rounded-xl p-5 transition-colors"
             >
               <div className="flex items-center justify-between gap-4">
                 <div>

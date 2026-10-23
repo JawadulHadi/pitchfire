@@ -3,12 +3,32 @@
     {
       "name": "Default",
       "files": [
-        ".env.example",
         "SECURITY.md",
         "brand/banner-github.svg",
         "brand/logo-horizontal.svg",
         "brand/logo-icon.svg",
         "brand/banner-repo.svg",
+        "CHANGELOG.md",
+        "LICENSE",
+        "README.md",
+        "apps/web/src/app/(marketing)/page.tsx",
+        "apps/web/src/app/agency/page.tsx",
+        "apps/web/src/app/analytics/page.tsx",
+        "apps/web/src/app/applications/page.tsx",
+        "apps/web/src/app/billing/page.tsx",
+        "apps/web/src/app/dashboard/page.tsx",
+        "apps/web/src/app/globals.css",
+        "apps/web/src/app/jobs/page.tsx",
+        "apps/web/src/app/layout.tsx",
+        "apps/web/src/app/review/page.tsx",
+        "apps/web/src/app/sessions/page.tsx",
+        "docs/DEPLOYMENT.md",
+        "apps/web/public/brand/banner-github.svg",
+        "apps/web/public/brand/banner-repo.svg",
+        "apps/web/public/brand/logo-horizontal.svg",
+        "apps/web/public/brand/logo-icon.svg",
+        "apps/web/src/components/Logo.tsx",
+        "apps/web/src/components/ThemeToggle.tsx",
         ".vscode/changelists.json"
       ]
     }

@@ -42,7 +42,7 @@ export default function Dashboard() {
       </div>
 
       {/* Resume Upload */}
-      <div className="bg-gray-900 border border-gray-800 rounded-xl p-6 space-y-4">
+      <div className="glass rounded-xl p-6 space-y-4">
         <h2 className="font-semibold text-lg">Resume Upload</h2>
         <label className="block border-2 border-dashed border-gray-700 hover:border-blue-500 rounded-lg p-8 text-center cursor-pointer transition-colors">
           <input
@@ -82,7 +82,7 @@ export default function Dashboard() {
           <a
             key={stat.label}
             href={stat.action}
-            className="bg-gray-900 border border-gray-800 hover:border-gray-600 rounded-xl p-4 transition-colors"
+            className="glass rounded-xl p-4 transition-colors"
           >
             <div className="text-2xl font-bold text-white">{stat.value}</div>
             <div className="text-gray-400 text-sm mt-1">{stat.label}</div>
