@@ -3,17 +3,13 @@
     {
       "name": "Default",
       "files": [
-        "README.md",
-        "netlify.toml",
         ".env.example",
-        ".vscode/changelists.json",
-        "docs/PLAN.md",
-        "docs/PROGRESS.md",
-        "docs/DEPLOYMENT.md",
-        "\"PitchFire Dashboard 2.html\"",
-        "\"PitchFire Dashboard.html\"",
-        "\"PitchFire Brand.html\"",
-        "env"
+        "SECURITY.md",
+        "brand/banner-github.svg",
+        "brand/logo-horizontal.svg",
+        "brand/logo-icon.svg",
+        "brand/banner-repo.svg",
+        ".vscode/changelists.json"
       ]
     }
   ],
