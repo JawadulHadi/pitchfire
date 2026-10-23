@@ -3,11 +3,9 @@
     {
       "name": "Default",
       "files": [
-        "\"PitchFire Dashboard.html\"",
-        "UI",
-        "\"PitchFire Brand.html\"",
-        "\"PitchFire Dashboard 2.html\"",
-        ".vscode/changelists.json"
+        "README.md",
+        ".vscode/changelists.json",
+        "\"PitchFire Dashboard.html\""
       ]
     }
   ],

@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Instrument+Sans:wght@400..700&family=Martian+Mono:wght@400..600&display=swap">
     <style>
       /* Layout: glass sidebar + topbar over the JUH backdrop (washes + 44px line grid); content in auto-fit glass panels.
-               Tokens from the Jawad Ul Hadi Design System (glass layer), dark-first. PitchFire Ember kept for the mark and primary CTA only. */
+                     Tokens from the Jawad Ul Hadi Design System (glass layer), dark-first. PitchFire Ember kept for the mark and primary CTA only. */
       :root {
         --bg: #0a0f1e;
         --surface: #111930;
@@ -225,6 +225,9 @@
             transparent 65%
           )
           0 0/300% 100%;
+        mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
         -webkit-mask:
           linear-gradient(#000 0 0) content-box,
           linear-gradient(#000 0 0);

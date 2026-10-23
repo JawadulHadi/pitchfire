@@ -2,7 +2,10 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   output: 'export',
-  typedRoutes: true,
+  images: { unoptimized: true },
+  experimental: {
+    typedRoutes: true,
+  },
   env: {
     NEXT_PUBLIC_API_URL: process.env.API_URL || 'http://localhost:3001',
     NEXT_PUBLIC_SUPABASE_URL: process.env.SUPABASE_URL || '',
