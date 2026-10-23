@@ -2,7 +2,7 @@
 
 > Upload your resume once. PitchFire discovers matched jobs, tailors every application, submits autonomously, tracks replies, and books your interviews — all while you focus on the work that matters.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b290786d-d28a-4b10-af9e-6d8a4a50481e/deploy-status)](https://app.netlify.com/projects/7aants/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b290786d-d28a-4b10-af9e-6d8a4a50481e/deploy-status)](https://app.netlify.com/projects/pitchfire/deploys)
 [![Agents](https://img.shields.io/badge/Agents-7-blueviolet)](#the-7-agents)
 [![Stack](<https://img.shields.io/badge/Stack-NestJS%20%7C%20Next.js%20%7C%20Claude%20SDK%20%7C%20BullMQ-blueviolet>)](#tech-stack)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
@@ -120,7 +120,7 @@ Open [http://localhost:3000](http://localhost:3000) — Swagger UI at [http://lo
 
 | Layer       | Technology                                   | Why                                                                           |
 | ----------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
-| Frontend    | Next.js 14 App Router + Tailwind + shadcn/ui | SSR, free on Vercel                                                           |
+| Frontend    | Next.js 14 App Router + Tailwind + shadcn/ui | SSR, free on netlify                                                           |
 | Backend API | NestJS + TypeScript                          | Decorators, modules, DI                                                       |
 | AI Engine   | Claude Sonnet 4.6 / Haiku 5.5                | Model-per-task: Haiku for cheap classification, Sonnet for quality generation |
 | Embeddings  | Voyage AI `voyage-3-lite` (1024-dim)         | $0.02/M tokens; semantically valid pgvector similarity                        |
@@ -170,7 +170,7 @@ Break-even: **2 Pro subscribers ($58/mo) > $50/mo infra**. Profitable from user 
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Agent data flow, DB schema, system design                     |
 | [docs/API.md](docs/API.md)                   | REST API endpoint reference                                   |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)   | Local setup, env vars, workspace scripts, testing             |
-| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)     | Cloud deployment: Vercel + Railway + Supabase + Upstash       |
+| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)     | Cloud deployment: netlify + Railway + Supabase + Upstash       |
 | [docs/ROADMAP.md](docs/ROADMAP.md)           | Phase-by-phase feature plan with deliverables                 |
 
 ---

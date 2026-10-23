@@ -4,7 +4,16 @@
       "name": "Default",
       "files": [
         "README.md",
-        ".vscode/changelists.json"
+        "netlify.toml",
+        ".env.example",
+        ".vscode/changelists.json",
+        "docs/PLAN.md",
+        "docs/PROGRESS.md",
+        "docs/DEPLOYMENT.md",
+        "\"PitchFire Dashboard 2.html\"",
+        "\"PitchFire Dashboard.html\"",
+        "\"PitchFire Brand.html\"",
+        "env"
       ]
     }
   ],

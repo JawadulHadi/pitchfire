@@ -17,7 +17,7 @@
 ## Phase Status
 
 | Phase | Name | Status | PR | Branch |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 0 | Repo + Name | ✅ Done | [#4][pr4] | `ccr-a0e32090-nssuxe` |
 | 1 | Foundation — Scout + Score + Dashboard | ✅ Done | [#1][pr1] | `ccr-a0e32090-nssuxe` |
 | 2 | Apply Automation | ✅ Done | [#3][pr3] | `ccr-a0e32090-nssuxe` |
@@ -38,7 +38,7 @@
 ### What Was Built
 
 | Area | Files |
-|---|---|
+| --- | --- |
 | Monorepo root | `package.json`, `pnpm-workspace.yaml`, `turbo.json`, `.env.example` |
 | NestJS API | `apps/api/src/` — `app.module.ts`, `main.ts` (Swagger), modules: `resume`, `jobs`, `agents`, `pipeline` |
 | Next.js web | `apps/web/src/app/` — layout, home, `/jobs`, `/applications`, `/sessions` |
@@ -51,6 +51,7 @@
 | Infra | `docker-compose.yml` — Supabase local + Redis |
 
 ### Key Patterns Applied
+
 - **Conveyor belt parallelism** (from kedster/jobautopilot-claude) — scout + score + inbox run concurrently via `Promise.allSettled`
 - **LoopAgent critique/revise** (from sreekarrs/JobSearch-Agent) — up to 2 revision rounds on resume variants
 - **Faithfulness self-eval** (from kyosek/RAG-job-search) — retry up to 3× on resume scoring if parse fails
@@ -58,6 +59,7 @@
 - **Complexity router** — Haiku for filter/score (cheap), Sonnet for tailor/apply (quality-critical)
 
 ### Deliverable
+
 Upload a PDF resume → see ranked job feed with match scores (0–1 cosine similarity via pgvector).
 
 ---
@@ -69,7 +71,7 @@ Upload a PDF resume → see ranked job feed with match scores (0–1 cosine simi
 ### What Was Built
 
 | Area | Files |
-|---|---|
+| --- | --- |
 | ApplierAgent | `apps/agent/src/agents/applier.agent.ts` — Playwright form-filler; Claude-guided DOM analysis; persistent browser profiles at `~/.pitchfire/browser_profiles/` |
 | ATS playbooks | `apps/agent/knowledge/skills/ats_playbooks/` — `workday.md`, `greenhouse.md`, `lever.md` |
 | Apply module | `apps/api/src/modules/apply/` — `apply.service.ts` (GET pending, POST approve/withdraw); enqueues BullMQ `apply` job on approval |
@@ -77,12 +79,14 @@ Upload a PDF resume → see ranked job feed with match scores (0–1 cosine simi
 | pipeline-tracker | `packages/pipeline-tracker/src/supabase.ts` (status transitions) + `notion.ts` (stub sync) |
 
 ### Key Patterns Applied
+
 - **ATS knowledge base** (kedster) — per-company quirks + per-ATS playbooks for Workday/Greenhouse/Lever
 - **Persistent browser profiles** — accumulates authenticated sessions across runs to skip re-auth
 - **User approval gate** — every application requires explicit user sign-off before Playwright submits
 - **Pipeline status machine** — `pending → tailoring → awaiting_approval → applying → applied / failed`
 
 ### Deliverable
+
 One-click "Auto Apply" with resume tailoring and user approval gate. Full pipeline: scout → score → tailor → review → apply → track.
 
 ---
@@ -92,6 +96,7 @@ One-click "Auto Apply" with resume tailoring and user approval gate. Full pipeli
 **Commit:** `5f8416d` · **Date:** 2025-10-13
 
 ### What Changed
+
 - All `jobpilot-ai` / `@jobpilot/*` / `JobPilot` references replaced with `pitchfire` / `@pitchfire/*` / `PitchFire` (39 files)
 - All `Applymatic` docs references replaced with `PitchFire` (7 docs files)
 - `pnpm-lock.yaml` regenerated with new `@pitchfire/*` scope
@@ -109,7 +114,7 @@ One-click "Auto Apply" with resume tailoring and user approval gate. Full pipeli
 ### Files to Create
 
 | File | Description |
-|---|---|
+| --- | --- |
 | `apps/agent/src/agents/inbox.agent.ts` | Gmail MCP polling loop + Claude Haiku reply classifier (interview / reject / ghosted / other) |
 | `apps/agent/src/agents/scheduler.agent.ts` | Google Calendar MCP: create event + generate prep notes via Sonnet |
 | `apps/api/src/modules/sessions/sessions.module.ts` | NestJS module: `GET /sessions/:userId`, `PATCH /sessions/:id` |
@@ -117,6 +122,7 @@ One-click "Auto Apply" with resume tailoring and user approval gate. Full pipeli
 | New BullMQ job types | `inbox` (poll Gmail) + `schedule` (create calendar event) |
 
 ### Deliverable
+
 Auto-detect interview invites → create Google Calendar events with AI-generated prep notes → update Notion pipeline board.
 
 ---
@@ -124,7 +130,7 @@ Auto-detect interview invites → create Google Calendar events with AI-generate
 ## Phase 4 — Intelligence & Polish (🔲 Queued)
 
 | File | Description |
-|---|---|
+| --- | --- |
 | `apps/web/src/app/analytics/page.tsx` | Funnel: applied → reply → interview → offer |
 | `apps/agent/src/agents/coach.agent.ts` | Interview Q&A generator per company + role (Sonnet) |
 | `apps/api/src/modules/notifications/` | Slack MCP push for key events |
@@ -134,7 +140,7 @@ Auto-detect interview invites → create Google Calendar events with AI-generate
 ## Phase 5 — SaaS Layer (🔲 Queued)
 
 | File | Description |
-|---|---|
+| --- | --- |
 | `apps/api/src/modules/billing/` | Stripe webhooks, plan enforcement (free / pro / agency) |
 | `apps/web/src/app/(marketing)/` | Landing page with pricing table |
 | `apps/api/src/modules/tenants/` | Agency mode: manage multiple user profiles |
@@ -171,7 +177,7 @@ Orchestrator (Sonnet 4.6)
 ### Top 5 Implementation Priorities
 
 | Priority | Change | Impact | Phase |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | Replace deterministic embedder with `voyage-3-lite` | Makes pgvector scores semantically valid | Phase 3 prep |
 | 2 | Implement InboxAgent Gmail MCP tool-use loop | Unlocks Phase 3 core feature | Phase 3 |
 | 3 | Split single queue into 3 typed queues | Prevents scout jobs blocking apply jobs | Phase 3 |
@@ -195,6 +201,7 @@ Orchestrator (Sonnet 4.6)
 **Finding:** Current `navigator.plugins` override sets integer array `[1,2,3,4,5]` — a known bot signature. Real browsers return Plugin objects. LinkedIn uses TLS JA3 fingerprinting + CDP detection; raw Playwright sessions are fingerprinted since mid-2024. Indeed switched to Cloudflare Turnstile in late 2024 — scraping is now unreliable.
 
 **Actions:**
+
 1. Fix plugins override: `Object.defineProperty(navigator, 'plugins', { get: () => [{ name: 'Chrome PDF Plugin', filename: 'internal-pdf-viewer', ... }] })`
 2. **LinkedIn** → use LinkedIn Jobs API (free, 500 req/day) instead of Playwright
 3. **Indeed** → use Indeed `publisher` API (`api.indeed.com/ads/apisearch`, free non-commercial) instead of scraping
@@ -220,6 +227,7 @@ Orchestrator (Sonnet 4.6)
 **Finding:** Single `agent-jobs` queue means slow `scout` jobs block queue inspection for `tailor` jobs. BullMQ v5 supports per-job `priority` (1 = highest) and multiple queues.
 
 **Actions for Phase 3:**
+
 1. Split into 3 queues: `discovery-queue` (scout + score, concurrency 6), `apply-queue` (tailor + apply, concurrency 2), `comms-queue` (inbox + schedule, concurrency 4)
 2. Add `@bull-board/express` at `/admin/queues` behind `ADMIN_TOKEN` header check
 3. DLQ: on 3rd failure, push to `pitchfire:dlq` Redis key with full job payload
@@ -233,6 +241,7 @@ Orchestrator (Sonnet 4.6)
 ### Area 5 — Gmail + Google Calendar MCP (Phase 3)
 
 **InboxAgent implementation pattern:**
+
 ```typescript
 // Tool-use loop: search → get thread → classify → update status
 tools: [gmail_search_threads, gmail_get_thread]
@@ -254,6 +263,7 @@ query: 'from:careers OR from:recruiting label:INBOX after:YYYY/MM/DD'
 ---
 
 ### Confirmed patterns already in use
+
 - **Provider-agnostic model routing** — Haiku for cheap/fast (scoring, classification), Sonnet for quality (tailor, apply)
 - **ATS knowledge base** — `knowledge/skills/ats_playbooks/` + `knowledge/skills/dropdowns/` structure
 - **User approval gate** — every application requires explicit user sign-off before Playwright submits
@@ -286,10 +296,10 @@ docs/PROGRESS.md updated — see Phase N section.
 ## Deployment Path
 
 | Stage | Cost | When |
-|---|---|---|
+| --- | --- | --- |
 | Local Docker Compose | $0 | Now |
-| Vercel + Railway + Supabase + Upstash free tiers | $0 | After Phase 3 |
-| Vercel Pro + Railway Starter + Supabase Pro | $50/mo | First 2 paying users |
+| netlify + Railway + Supabase + Upstash free tiers | $0 | After Phase 3 |
+| netlify Pro + Railway Starter + Supabase Pro | $50/mo | First 2 paying users |
 
 ---
 
