@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 const API = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001';
 const USER_ID = 'demo-user-id'; // replaced by Supabase auth context in production
@@ -131,9 +132,9 @@ export default function BillingPage() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-white">Team Profiles</h2>
-            <a href="/agency" className="text-blue-400 hover:text-blue-300 text-sm transition-colors">
+            <Link href="/agency" className="text-blue-400 hover:text-blue-300 text-sm transition-colors">
               Manage profiles →
-            </a>
+            </Link>
           </div>
           <p className="text-gray-400 text-sm">
             Manage up to 10 candidate profiles from the Agency dashboard.

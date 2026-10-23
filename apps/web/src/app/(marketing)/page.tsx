@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { LogoIcon } from '@/components/Logo';
 
 export default function LandingPage() {
@@ -22,13 +23,13 @@ export default function LandingPage() {
           submits autonomously, tracks replies, and books your interviews.
         </p>
         <div className="flex gap-4 justify-center">
-          <a
+          <Link
             href="/dashboard"
             className="px-8 py-3 rounded-lg font-semibold transition-colors text-white"
             style={{ background: 'var(--accent)' }}
           >
             Start for Free
-          </a>
+          </Link>
           <a
             href="#pricing"
             className="glass px-8 py-3 rounded-lg font-semibold transition-colors"
@@ -133,9 +134,9 @@ export default function LandingPage() {
             Every application reviewed before submit. DLQ replay on 3rd failure.
             Read the full reasoning behind the architecture.
           </p>
-          <a href="/docs/rnd" style={{ color: 'var(--accent)' }} className="font-semibold transition-colors hover:opacity-80">
+          <Link href="/docs/rnd" style={{ color: 'var(--accent)' }} className="font-semibold transition-colors hover:opacity-80">
             Read the R&amp;D case study →
-          </a>
+          </Link>
         </div>
       </section>
 

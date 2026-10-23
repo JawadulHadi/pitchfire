@@ -1,6 +1,16 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { Syne } from "next/font/google";
+import "./globals.css";
 import { LogoHorizontal } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+
+const syne = Syne({
+  weight: "800",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-syne",
+});
 
 export const metadata: Metadata = {
   title: "PitchFire — Autonomous AI Job Search",
@@ -30,18 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={syne.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Syne:wght@800&display=swap"
-          rel="stylesheet"
-        />
         {/* FOUC prevention — runs before paint */}
         <script
           dangerouslySetInnerHTML={{
@@ -51,22 +51,22 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen antialiased">
         <nav className="glass-nav px-6 py-3 flex items-center justify-between">
-          <a href="/" aria-label="PitchFire home">
+          <Link href="/" aria-label="PitchFire home">
             <LogoHorizontal height={36} />
-          </a>
+          </Link>
           <div className="flex items-center gap-5">
             <div
               className="hidden md:flex gap-5 text-sm"
               style={{ color: "var(--text-2)" }}
             >
               {NAV_LINKS.map((l) => (
-                <a
+                <Link
                   key={l.href}
                   href={l.href}
                   className="hover:text-[var(--text-1)] transition-colors"
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
             </div>
             <ThemeToggle />
