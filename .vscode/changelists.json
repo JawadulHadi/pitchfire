@@ -3,9 +3,8 @@
     {
       "name": "Default",
       "files": [
-        "README.md",
-        ".vscode/changelists.json",
-        "\"PitchFire Dashboard.html\""
+        "apps/web/next.config.ts",
+        "vercel.json"
       ]
     }
   ],

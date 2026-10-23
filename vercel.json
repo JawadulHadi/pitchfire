@@ -1,6 +1,6 @@
 {
-  "framework": null,
+  "framework": "nextjs",
   "buildCommand": "pnpm --filter @pitchfire/shared build && pnpm --filter @pitchfire/web build",
-  "outputDirectory": "apps/web/out",
+  "outputDirectory": "apps/web/.next",
   "installCommand": "pnpm install"
 }
