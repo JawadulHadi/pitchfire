@@ -1,6 +1,0 @@
-{
-  "framework": null,
-  "buildCommand": "pnpm --filter @pitchfire/shared build && pnpm --filter @pitchfire/web build",
-  "outputDirectory": "apps/web/out",
-  "installCommand": "pnpm install"
-}
