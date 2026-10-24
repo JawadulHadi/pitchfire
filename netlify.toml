@@ -6,9 +6,13 @@
   NODE_VERSION            = "22"
   NEXT_TELEMETRY_DISABLED = "1"
   API_URL                 = "https://pitchfire-api.up.railway.app"
+SECRETS_SCAN_OMIT_PATHS = "docs/**,apps/web/out/**,apps/web/src/app/**/page.tsx,apps/api/src/modules/auth/auth.service.ts,apps/mcp-server/src/index.ts,README.md"
 
 [[headers]]
   for = "/_next/static/*"
 
   [headers.values]
   Cache-Control = "public, max-age=31536000, immutable"
+
+
+  
