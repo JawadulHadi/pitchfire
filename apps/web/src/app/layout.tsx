@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Route } from "next";
 import Link from "next/link";
 import { Syne } from "next/font/google";
 import "./globals.css";
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   icons: { icon: "/brand/logo-icon.svg" },
 };
 
-const NAV_LINKS = [
+const NAV_LINKS: { label: string; href: Route }[] = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Jobs", href: "/jobs" },
   { label: "Review", href: "/review" },
