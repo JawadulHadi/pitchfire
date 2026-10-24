@@ -9,6 +9,11 @@
 [![Security](https://img.shields.io/badge/Security-Policy-red)](SECURITY.md)
 [![Changelog](https://img.shields.io/badge/Changelog-v0.8.0-orange)](CHANGELOG.md)
 
+<p align="center">
+  <a href="https://trendshift.io/repositories/43622?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-43622" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/43622/daily" alt="MadsLorentzen%2Fai-job-search | Trendshift" width="250" height="55"/></a>
+</p>
+
+[![CI](https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml/badge.svg)](https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml)
 ---
 
 ## What Makes PitchFire Different
