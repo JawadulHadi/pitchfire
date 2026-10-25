@@ -1,0 +1,17 @@
+[mcp_servers.postgres]
+command = "npx"
+args = [
+    "-y",
+    "@modelcontextprotocol/server-postgres",
+    "postgresql://localhost:5432/postgres",
+]
+
+[mcp_servers.redis]
+command = "uvx"
+args = [
+    "--from",
+    "git+https://github.com/redis/mcp-redis.git",
+    "redis-mcp-server",
+    "--url",
+    "redis://localhost:6379",
+]
