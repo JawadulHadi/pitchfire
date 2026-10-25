@@ -1,4 +1,4 @@
-import type { Metadata, Route } from "next";
+import type { Metadata, Route, Viewport } from "next";
 import Link from "next/link";
 import { Syne, Archivo, Instrument_Sans, Martian_Mono } from "next/font/google";
 import "./globals.css";
@@ -40,7 +40,15 @@ export const metadata: Metadata = {
     description: "7 agents. 0 excuses. Your job search, fully automated.",
     images: [{ url: "/brand/banner-github.svg", width: 1280, height: 640 }],
   },
-  icons: { icon: "/brand/logo-icon.svg" },
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/brand/logo-icon.svg",
+    apple: "/brand/apple-touch-icon.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#060b18",
 };
 
 const NAV_LINKS: { label: string; href: Route }[] = [
@@ -69,6 +77,12 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){var t=localStorage.getItem('pf-theme');var d=t?t==='dark':!window.matchMedia('(prefers-color-scheme: light)').matches;if(!d)document.documentElement.classList.add('light');})();`,
+          }}
+        />
+        {/* Registers the PWA service worker (public/sw.js) once the page has loaded */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js');});}`,
           }}
         />
       </head>

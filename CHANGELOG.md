@@ -8,6 +8,9 @@ Versions correspond to completed phases.
 
 ## [Unreleased]
 
+### Added
+- **PWA installability** — Added `apps/web/public/manifest.webmanifest` (name, `start_url: /dashboard`, standalone display, dark theme colour) plus 192/512px standard icons and a 512px maskable icon rendered from `brand/logo-icon.svg`, and `apps/web/public/apple-touch-icon.png` (180px, non-transparent) for iOS home-screen icons. Registered a minimal `apps/web/public/sw.js` (install/activate/fetch passthrough, no caching) from `layout.tsx` so the browser can detect a controlling service worker on `start_url`. This was flagged by a Lighthouse PWA audit ("Does not register a service worker that controls page and start_url").
+
 ### Fixed
 - **`apps/api/package.json`** — `@nestjs/common` had drifted to `^12.2.0` while `@nestjs/core` (`^11.1.18`) and `@nestjs/platform-express` (`^10.4.7`) were still pinned to older, incompatible majors (likely from independent dependabot bumps). `@nestjs/common@12` ships as an ESM package with a restrictive `exports` map (`"./*": "./*.js"`), which doesn't resolve subdirectory imports like `@nestjs/common/interfaces` the way `@nestjs/core@11` expects — so the API built successfully but crashed on boot with `Cannot find module '.../@nestjs/common/interfaces.js'`. Bumped `@nestjs/core`, `@nestjs/platform-express`, `@nestjs/cli`, `@nestjs/schematics`, and `@nestjs/testing` to `^12.x` to match `@nestjs/common`/`@nestjs/config`/`@nestjs/swagger`, which were already on 12. Verified by actually running `node apps/api/dist/main.js` locally (not just the build) — it now boots and maps every route.
 
