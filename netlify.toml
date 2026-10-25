@@ -6,8 +6,9 @@
   NODE_VERSION              = "22"
   NEXT_TELEMETRY_DISABLED   = "1"
   API_URL                   = "https://pitchfire-api.up.railway.app"
-  SUPABASE_URL              = "https://utsgtujqdljagnkokydg.supabase.co"
-  SUPABASE_ANON_KEY         = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV0c2d0dWpxZGxqYWdua29reWRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0MzA0NTcsImV4cCI6MjEwODAwNjQ1N30.TIxbUuUSmkJWEp5XaiXS510MaQpYM8wIlnDtbb4KqnI"
+  SUPABASE_URL              = "https://xanvigcjdcrskkrvbmoa.supabase.co"
+  SUPABASE_ANON_KEY         = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhbnZpZ2NqZGNyc2trcnZibW9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI4NjkxMjIsImV4cCI6MjEwODQ0NTEyMn0.pU9u-xhCZrXFfsMagxjbpTerID6hkkG4NoOZK8gB-2g"
+  SECRETS_SCAN_OMIT_KEYS    = "API_URL,SUPABASE_URL,SUPABASE_ANON_KEY"
   SECRETS_SCAN_OMIT_PATHS   = "docs/**,apps/web/out/**"
 
 [[headers]]
