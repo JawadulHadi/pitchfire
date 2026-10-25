@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "moduleResolution": "Node",
-    "ignoreDeprecations": "5.0",
+    "moduleResolution": "node",
     "target": "ES2022",
     "lib": [
       "ES2022"
