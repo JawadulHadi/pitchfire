@@ -8,14 +8,15 @@
 
 <p align="center"><em>Upload your resume once. PitchFire discovers matched jobs, tailors every application, submits autonomously, tracks replies, and books your interviews — all while you focus on the work that matters.</em></p>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b290786d-d28a-4b10-af9e-6d8a4a50481e/deploy-status)](https://app.netlify.com/projects/pitchfire/deploys)
-[![Agents](https://img.shields.io/badge/Agents-7-blueviolet)](#the-7-agents)
-[![Stack](<https://img.shields.io/badge/Stack-NestJS%20%7C%20Next.js%20%7C%20Claude%20SDK%20%7C%20BullMQ-blueviolet>)](#tech-stack)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Security](https://img.shields.io/badge/Security-Policy-red)](SECURITY.md)
-[![Changelog](https://img.shields.io/badge/Changelog-v0.8.0-orange)](CHANGELOG.md) 
-
-[![CI](https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml/badge.svg)](https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml)
+<p align="center">
+  <a href="https://app.netlify.com/projects/pitchfire/deploys"><img src="https://api.netlify.com/api/v1/badges/b290786d-d28a-4b10-af9e-6d8a4a50481e/deploy-status" alt="Netlify Status" /></a>
+  <a href="https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml"><img src="https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="#the-7-agents"><img src="https://img.shields.io/badge/Agents-7-blueviolet" alt="Agents" /></a>
+  <a href="#tech-stack"><img src="https://img.shields.io/badge/Stack-NestJS%20%7C%20Next.js%20%7C%20Claude%20SDK%20%7C%20BullMQ-blueviolet" alt="Stack" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="License" /></a>
+  <a href="SECURITY.md"><img src="https://img.shields.io/badge/Security-Policy-red" alt="Security" /></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/Changelog-v0.8.0-orange" alt="Changelog" /></a>
+</p>
 ---
 
 ## What Makes PitchFire Different
