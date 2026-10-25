@@ -3,8 +3,8 @@
     {
       "name": "Default",
       "files": [
-        ".vscode/changelists.json",
-        "README.md"
+        "README.md",
+        ".vscode/changelists.json"
       ]
     }
   ],
