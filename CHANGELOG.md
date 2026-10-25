@@ -8,6 +8,11 @@ Versions correspond to completed phases.
 
 ## [Unreleased]
 
+### Fixed
+- **`package.json`** — Added `devEngines.packageManager` (npm `^10.0.0`) so Turborepo can resolve the npm workspace. Without it, `turbo run build --filter=@pitchfire/api` (the Render build command) failed with `Could not resolve workspace. Missing devEngines.packageManager or legacy packageManager field`. Used `devEngines` rather than the legacy `packageManager` field because the latter makes Netlify's build image auto-enable Corepack, which broke the Netlify deploy preview.
+- **`apps/api/tsconfig.json`** — `ignoreDeprecations` was set to `"6.0"`, an unreleased TypeScript version; the installed compiler (5.9.3) rejects it with `TS5103: Invalid value for '--ignoreDeprecations'`. Changed to the valid `"5.0"`.
+- **`apps/web/postcss.config.js` / `apps/web/package.json`** — Tailwind CSS v4 (bumped by dependabot in #19) moved its PostCSS plugin out of the `tailwindcss` package into `@tailwindcss/postcss`, so the config's `tailwindcss: {}` plugin entry broke every clean build with `It looks like you're trying to use tailwindcss directly as a PostCSS plugin`. This was pre-existing on `main` (masked only by stale `.next` build caches) and surfaced on this PR's Netlify preview. Added the `@tailwindcss/postcss` dependency and pointed the PostCSS config at it.
+
 ### Security
 - **`package.json` / `package-lock.json`** — Added `overrides` for `lodash` (>=4.18.1, CVE-2026-4800), `multer` (>=2.3.0, CVE-2026-2359/3304/3520/5079/77078/82333), and `postcss` (>=8.5.18, CVE-2026-45623/73646). These were pulled in transitively at vulnerable versions (lodash 4.17.21, multer 2.0.2 via `@nestjs/platform-express`, postcss 8.4.31 via `next`) even though the top-level dependencies already resolved to patched versions.
 

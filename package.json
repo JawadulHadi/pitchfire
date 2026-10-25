@@ -3,6 +3,13 @@
   "private": true,
   "description": "Autonomous AI-powered job search orchestrator",
   "version": "0.1.0",
+  "devEngines": {
+    "packageManager": {
+      "name": "npm",
+      "version": "^10.0.0",
+      "onFail": "warn"
+    }
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
