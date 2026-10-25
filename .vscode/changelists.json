@@ -3,8 +3,9 @@
     {
       "name": "Default",
       "files": [
-        "README.md",
-        ".vscode/changelists.json"
+        ".vscode/changelists.json",
+        "apps/api/tsconfig.json",
+        "package-lock.json"
       ]
     }
   ],
