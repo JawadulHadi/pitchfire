@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS public.job_board_integrations (
 
 ALTER TABLE public.job_board_integrations ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "job_board_own_data" ON public.job_board_integrations;
 CREATE POLICY "job_board_own_data" ON public.job_board_integrations
   FOR ALL USING (auth.uid() = user_id);
 
