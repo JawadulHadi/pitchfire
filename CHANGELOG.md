@@ -6,6 +6,13 @@ Versions correspond to completed phases.
 
 ---
 
+## [Unreleased]
+
+### Security
+- **`package.json` / `package-lock.json`** — Added `overrides` for `lodash` (>=4.18.1, CVE-2026-4800), `multer` (>=2.3.0, CVE-2026-2359/3304/3520/5079/77078/82333), and `postcss` (>=8.5.18, CVE-2026-45623/73646). These were pulled in transitively at vulnerable versions (lodash 4.17.21, multer 2.0.2 via `@nestjs/platform-express`, postcss 8.4.31 via `next`) even though the top-level dependencies already resolved to patched versions.
+
+---
+
 ## [0.8.0] — 2026-10-24 — Brand Identity + Glass Theme + Netlify Deployment
 
 ### Added
