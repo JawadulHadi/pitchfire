@@ -40,15 +40,15 @@ export default function SessionsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Interview Sessions</h1>
-        <span className="text-gray-400 text-sm">{sessions.length} total</span>
+        <span className="text-secondary text-sm">{sessions.length} total</span>
       </div>
 
       {loading ? (
-        <div className="text-gray-400">Loading sessions...</div>
+        <div className="text-secondary">Loading sessions...</div>
       ) : sessions.length === 0 ? (
         <div className="glass rounded-xl p-8 text-center">
-          <div className="text-gray-400 mb-2">No interview sessions yet.</div>
-          <div className="text-gray-500 text-sm">
+          <div className="text-secondary mb-2">No interview sessions yet.</div>
+          <div className="text-muted text-sm">
             Sessions appear here once we detect an interview invite in your
             email.
           </div>
@@ -57,7 +57,7 @@ export default function SessionsPage() {
         <>
           {upcoming.length > 0 && (
             <div className="space-y-3">
-              <h2 className="text-sm font-medium text-gray-400 uppercase tracking-wider">
+              <h2 className="text-sm font-medium text-secondary uppercase tracking-wider">
                 Upcoming
               </h2>
               {upcoming.map((session) => (
@@ -67,7 +67,7 @@ export default function SessionsPage() {
           )}
           {past.length > 0 && (
             <div className="space-y-3">
-              <h2 className="text-sm font-medium text-gray-400 uppercase tracking-wider">
+              <h2 className="text-sm font-medium text-secondary uppercase tracking-wider">
                 Past
               </h2>
               {past.map((session) => (
@@ -95,10 +95,10 @@ function SessionCard({ session }: { session: InterviewSession }) {
             <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-blue-950 text-blue-400">
               {TYPE_LABELS[session.type] ?? session.type}
             </span>
-            {isPast && <span className="text-xs text-gray-500">completed</span>}
+            {isPast && <span className="text-xs text-muted">completed</span>}
           </div>
           {scheduledDate && (
-            <div className="text-gray-300 text-sm mt-1.5">
+            <div className="text-secondary text-sm mt-1.5">
               {scheduledDate.toLocaleDateString("en-US", {
                 weekday: "short",
                 month: "short",
@@ -109,7 +109,7 @@ function SessionCard({ session }: { session: InterviewSession }) {
             </div>
           )}
           {session.prep_notes && (
-            <div className="text-gray-500 text-xs mt-1 line-clamp-2">
+            <div className="text-muted text-xs mt-1 line-clamp-2">
               {session.prep_notes}
             </div>
           )}

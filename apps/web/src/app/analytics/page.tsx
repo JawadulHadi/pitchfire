@@ -58,7 +58,7 @@ export default function AnalyticsPage() {
   }, []);
 
   if (loading)
-    return <div className="text-gray-400 p-6">Loading analytics…</div>;
+    return <div className="text-secondary p-6">Loading analytics…</div>;
   if (!data)
     return <div className="text-red-400 p-6">Failed to load analytics.</div>;
 
@@ -98,10 +98,10 @@ export default function AnalyticsPage() {
             const pct = Math.round((val / maxFunnelVal) * 100);
             return (
               <div key={key} className="flex items-center gap-3">
-                <span className="w-20 text-sm text-gray-400 text-right">
+                <span className="w-20 text-sm text-secondary text-right">
                   {label}
                 </span>
-                <div className="flex-1 bg-gray-800 rounded h-6 overflow-hidden">
+                <div className="flex-1 bg-slate-200 dark:bg-gray-800 rounded h-6 overflow-hidden">
                   <div
                     className="h-full rounded flex items-center px-2 text-xs font-medium text-white transition-all duration-700"
                     style={{
@@ -113,7 +113,7 @@ export default function AnalyticsPage() {
                     {val > 0 ? val : ""}
                   </div>
                 </div>
-                <span className="w-8 text-sm text-right text-gray-300">
+                <span className="w-8 text-sm text-right text-secondary">
                   {val}
                 </span>
               </div>
@@ -141,7 +141,7 @@ export default function AnalyticsPage() {
                 className="glass rounded-lg p-3 flex justify-between items-center"
               >
                 <span className="text-sm font-medium truncate">{company}</span>
-                <span className="text-xs text-gray-400 ml-2">{count}</span>
+                <span className="text-xs text-secondary ml-2">{count}</span>
               </div>
             ))}
           </div>
@@ -164,9 +164,9 @@ function KpiCard({
     <div
       className={`glass rounded-xl p-4 ${highlight ? "border-emerald-500/40" : ""}`}
     >
-      <p className="text-xs text-gray-400 mb-1">{label}</p>
+      <p className="text-xs text-secondary mb-1">{label}</p>
       <p
-        className={`text-2xl font-bold ${highlight ? "text-emerald-400" : "text-white"}`}
+        className={`text-2xl font-bold ${highlight ? "text-emerald-400" : "text-primary"}`}
       >
         {value}
       </p>
@@ -217,14 +217,14 @@ function WeeklyChart({ data }: { data: WeeklyActivity[] }) {
                   title={`Interviews: ${week.interviews}`}
                 />
               </div>
-              <span className="text-xs text-gray-500 rotate-45 origin-left">
+              <span className="text-xs text-muted rotate-45 origin-left">
                 {label}
               </span>
             </div>
           );
         })}
       </div>
-      <div className="flex gap-4 mt-2 text-xs text-gray-400">
+      <div className="flex gap-4 mt-2 text-xs text-secondary">
         <span>
           <span
             className="inline-block w-2 h-2 rounded-sm mr-1"

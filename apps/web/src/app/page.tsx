@@ -7,7 +7,7 @@ export default function Home() {
         <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent mb-4">
           PitchFire
         </h1>
-        <p className="text-gray-400 text-xl max-w-xl">
+        <p className="text-secondary text-xl max-w-xl">
           Autonomous job search orchestrator. Upload your resume, get matched jobs,
           apply automatically, and track your entire pipeline.
         </p>
@@ -19,10 +19,10 @@ export default function Home() {
           { label: 'Match Score', value: '>72%', desc: 'Only strong fits' },
           { label: 'Auto-Apply', value: '∞', desc: 'Pro plan' },
         ].map((stat) => (
-          <div key={stat.label} className="bg-gray-900 border border-gray-800 rounded-xl p-4">
+          <div key={stat.label} className="glass rounded-xl p-4">
             <div className="text-2xl font-bold text-blue-400">{stat.value}</div>
-            <div className="text-gray-300 font-medium">{stat.label}</div>
-            <div className="text-gray-500 text-xs">{stat.desc}</div>
+            <div className="text-secondary font-medium">{stat.label}</div>
+            <div className="text-muted text-xs">{stat.desc}</div>
           </div>
         ))}
       </div>
@@ -36,7 +36,7 @@ export default function Home() {
         </Link>
         <Link
           href="/jobs"
-          className="border border-gray-700 hover:border-gray-500 text-gray-300 px-6 py-3 rounded-lg font-medium transition-colors"
+          className="border border-[var(--border)] hover:border-[var(--border-hover)] text-secondary px-6 py-3 rounded-lg font-medium transition-colors"
         >
           Browse Matches
         </Link>

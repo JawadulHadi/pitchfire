@@ -22,17 +22,17 @@ export default function JobsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Matched Jobs</h1>
-        <span className="text-gray-400 text-sm">
+        <span className="text-secondary text-sm">
           {jobs.length} matches found
         </span>
       </div>
 
       {loading ? (
-        <div className="text-gray-400">Loading jobs...</div>
+        <div className="text-secondary">Loading jobs...</div>
       ) : jobs.length === 0 ? (
         <div className="glass rounded-xl p-8 text-center">
-          <div className="text-gray-400 mb-2">No jobs matched yet.</div>
-          <div className="text-gray-500 text-sm">
+          <div className="text-secondary mb-2">No jobs matched yet.</div>
+          <div className="text-muted text-sm">
             Upload your resume on the Dashboard to start the pipeline.
           </div>
         </div>
@@ -45,8 +45,8 @@ export default function JobsPage() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="font-semibold text-white">{job.title}</h3>
-                  <div className="text-gray-400 text-sm mt-0.5">
+                  <h3 className="font-semibold text-primary">{job.title}</h3>
+                  <div className="text-secondary text-sm mt-0.5">
                     {job.company} · {job.location || "Remote"} · {job.board}
                   </div>
                 </div>
@@ -57,7 +57,7 @@ export default function JobsPage() {
                         ? "bg-green-950 text-green-400"
                         : job.similarity >= 0.72
                           ? "bg-blue-950 text-blue-400"
-                          : "bg-gray-800 text-gray-400"
+                          : "bg-[var(--bg-surface)] text-secondary"
                     }`}
                   >
                     {Math.round(job.similarity * 100)}% match

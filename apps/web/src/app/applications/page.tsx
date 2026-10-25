@@ -24,8 +24,8 @@ const STATUS_STYLES: Record<string, string> = {
   interview: 'bg-green-950 text-green-400',
   offer: 'bg-emerald-950 text-emerald-400',
   rejected: 'bg-red-950 text-red-400',
-  ghosted: 'bg-gray-800 text-gray-500',
-  withdrawn: 'bg-gray-800 text-gray-500',
+  ghosted: 'bg-[var(--bg-surface)] text-muted',
+  withdrawn: 'bg-[var(--bg-surface)] text-muted',
   bounced: 'bg-orange-950 text-orange-400',
 };
 
@@ -56,7 +56,7 @@ export default function ApplicationsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Applications</h1>
-        <span className="text-gray-400 text-sm">{applications.length} total</span>
+        <span className="text-secondary text-sm">{applications.length} total</span>
       </div>
 
       {/* Pipeline funnel */}
@@ -68,18 +68,18 @@ export default function ApplicationsPage() {
           { key: 'rejected', label: 'Rejected' },
         ].map((stage) => (
           <div key={stage.key} className="glass rounded-xl p-4 text-center">
-            <div className="text-2xl font-bold text-white">{statusCounts[stage.key] ?? 0}</div>
-            <div className="text-gray-400 text-sm mt-1">{stage.label}</div>
+            <div className="text-2xl font-bold text-primary">{statusCounts[stage.key] ?? 0}</div>
+            <div className="text-secondary text-sm mt-1">{stage.label}</div>
           </div>
         ))}
       </div>
 
       {loading ? (
-        <div className="text-gray-400">Loading applications...</div>
+        <div className="text-secondary">Loading applications...</div>
       ) : applications.length === 0 ? (
         <div className="glass rounded-xl p-8 text-center">
-          <div className="text-gray-400 mb-2">No applications yet.</div>
-          <div className="text-gray-500 text-sm">
+          <div className="text-secondary mb-2">No applications yet.</div>
+          <div className="text-muted text-sm">
             Upload your resume on the Dashboard to start the pipeline.
           </div>
         </div>
@@ -92,17 +92,17 @@ export default function ApplicationsPage() {
             >
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <div className="font-semibold text-white text-sm">
+                  <div className="font-semibold text-primary text-sm">
                     {app.job_listings?.title ?? 'Job Application'}
                   </div>
-                  <div className="text-gray-400 text-xs mt-0.5">
+                  <div className="text-secondary text-xs mt-0.5">
                     {app.job_listings?.company ?? '—'}
                     {app.job_listings?.location ? ` · ${app.job_listings.location}` : ''}
                     {app.match_score ? ` · ${Math.round(app.match_score * 100)}% match` : ''}
                   </div>
                 </div>
                 <span
-                  className={`text-xs font-bold px-2 py-1 rounded-full shrink-0 ${STATUS_STYLES[app.status] ?? 'bg-gray-800 text-gray-400'}`}
+                  className={`text-xs font-bold px-2 py-1 rounded-full shrink-0 ${STATUS_STYLES[app.status] ?? 'bg-[var(--bg-surface)] text-secondary'}`}
                 >
                   {app.status.replaceAll('_', ' ')}
                 </span>

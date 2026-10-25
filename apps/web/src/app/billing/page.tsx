@@ -50,8 +50,8 @@ export default function BillingPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-white">Billing & Plan</h1>
-        <p className="text-gray-400 mt-1">Manage your subscription and usage</p>
+        <h1 className="text-2xl font-bold text-primary">Billing &amp; Plan</h1>
+        <p className="text-secondary mt-1">Manage your subscription and usage</p>
       </div>
 
       {/* Current plan card */}
@@ -59,11 +59,11 @@ export default function BillingPage() {
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-3">
-              <span className="text-white font-bold text-lg capitalize">{info.plan} Plan</span>
+              <span className="text-primary font-bold text-lg capitalize">{info.plan} Plan</span>
               <PlanBadge plan={info.plan} />
             </div>
             {info.period_end && (
-              <p className="text-gray-500 text-sm mt-1">
+              <p className="text-muted text-sm mt-1">
                 Renews {new Date(info.period_end).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </p>
             )}
@@ -82,12 +82,12 @@ export default function BillingPage() {
         {info.applications_limit !== null && (
           <div className="mt-6">
             <div className="flex justify-between text-sm mb-2">
-              <span className="text-gray-400">Applications this month</span>
-              <span className="text-white">
+              <span className="text-secondary">Applications this month</span>
+              <span className="text-primary">
                 {info.applications_used} / {info.applications_limit}
               </span>
             </div>
-            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div className="h-2 bg-slate-200 dark:bg-gray-800 rounded-full overflow-hidden">
               <div
                 className={`h-full rounded-full transition-all ${
                   usagePct > 80 ? 'bg-red-500' : usagePct > 50 ? 'bg-amber-500' : 'bg-blue-500'
@@ -107,7 +107,7 @@ export default function BillingPage() {
       {/* Upgrade cards — only shown on free/pro */}
       {info.plan !== 'agency' && (
         <div>
-          <h2 className="text-lg font-semibold text-white mb-4">Upgrade Your Plan</h2>
+          <h2 className="text-lg font-semibold text-primary mb-4">Upgrade Your Plan</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {info.plan === 'free' && (
               <UpgradeCard
@@ -131,12 +131,12 @@ export default function BillingPage() {
       {info.plan === 'agency' && (
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-white">Team Profiles</h2>
+            <h2 className="text-lg font-semibold text-primary">Team Profiles</h2>
             <Link href="/agency" className="text-blue-400 hover:text-blue-300 text-sm transition-colors">
               Manage profiles →
             </Link>
           </div>
-          <p className="text-gray-400 text-sm">
+          <p className="text-secondary text-sm">
             Manage up to 10 candidate profiles from the Agency dashboard.
           </p>
         </div>
@@ -147,7 +147,7 @@ export default function BillingPage() {
 
 function PlanBadge({ plan }: { plan: string }) {
   const styles: Record<string, string> = {
-    free:   'bg-gray-800 text-gray-400',
+    free:   'bg-[var(--bg-surface)] text-secondary',
     pro:    'bg-blue-900 text-blue-300',
     agency: 'bg-purple-900 text-purple-300',
   };
@@ -166,12 +166,12 @@ function UpgradeCard({
   return (
     <div className="glass rounded-xl p-5">
       <div className="flex justify-between items-center mb-3">
-        <span className="text-white font-semibold capitalize">{plan}</span>
+        <span className="text-primary font-semibold capitalize">{plan}</span>
         <span className="text-blue-400 font-bold">{price}</span>
       </div>
       <ul className="space-y-1 mb-5">
         {features.map(f => (
-          <li key={f} className="flex items-center gap-2 text-sm text-gray-300">
+          <li key={f} className="flex items-center gap-2 text-sm text-secondary">
             <span className="text-green-400">✓</span>{f}
           </li>
         ))}

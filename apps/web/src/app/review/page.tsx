@@ -59,22 +59,22 @@ export default function ReviewPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Review Queue</h1>
-        <span className="text-gray-400 text-sm">
+        <span className="text-secondary text-sm">
           {apps.length} pending approval
         </span>
       </div>
 
-      <p className="text-gray-400 text-sm">
+      <p className="text-secondary text-sm">
         These applications have been tailored and are ready to submit. Review the
         generated resume and cover letter, then approve or withdraw each one.
       </p>
 
       {loading ? (
-        <div className="text-gray-400">Loading...</div>
+        <div className="text-secondary">Loading...</div>
       ) : apps.length === 0 ? (
         <div className="glass rounded-xl p-8 text-center">
-          <div className="text-gray-400 mb-2">No applications pending review.</div>
-          <div className="text-gray-500 text-sm">
+          <div className="text-secondary mb-2">No applications pending review.</div>
+          <div className="text-muted text-sm">
             The TailorAgent will queue applications here once jobs are scored.
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function ReviewPage() {
               <div className="flex items-center justify-between gap-4 p-5">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <h3 className="font-semibold text-white truncate">
+                    <h3 className="font-semibold text-primary truncate">
                       {app.job_listings?.title ?? 'Untitled Role'}
                     </h3>
                     {app.tailor_output?.score != null && (
@@ -97,7 +97,7 @@ export default function ReviewPage() {
                       </span>
                     )}
                   </div>
-                  <div className="text-gray-400 text-sm mt-0.5">
+                  <div className="text-secondary text-sm mt-0.5">
                     {app.job_listings?.company} · {app.job_listings?.location ?? 'Remote'} ·{' '}
                     {app.job_listings?.board}
                   </div>
@@ -106,7 +106,7 @@ export default function ReviewPage() {
                 <div className="flex items-center gap-2 shrink-0">
                   <button
                     onClick={() => setExpanded(expanded === app.id ? null : app.id)}
-                    className="text-xs text-gray-400 hover:text-white px-3 py-1.5 border border-gray-700 rounded-lg transition-colors"
+                    className="text-xs text-secondary hover:text-primary px-3 py-1.5 border border-[var(--border)] rounded-lg transition-colors"
                   >
                     {expanded === app.id ? 'Hide' : 'Preview'}
                   </button>
@@ -128,20 +128,20 @@ export default function ReviewPage() {
               </div>
 
               {expanded === app.id && app.tailor_output && (
-                <div className="border-t border-gray-800 p-5 space-y-4">
+                <div className="border-t border-[var(--border)] p-5 space-y-4">
                   <div>
-                    <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                    <div className="text-xs font-semibold text-muted uppercase tracking-wider mb-2">
                       Cover Letter
                     </div>
-                    <div className="bg-gray-950 rounded-lg p-4 text-sm text-gray-300 whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto">
+                    <div className="bg-[var(--bg-base)] rounded-lg p-4 text-sm text-secondary whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto">
                       {app.tailor_output.cover_letter || 'No cover letter generated.'}
                     </div>
                   </div>
                   <div>
-                    <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+                    <div className="text-xs font-semibold text-muted uppercase tracking-wider mb-2">
                       Tailored Resume
                     </div>
-                    <div className="bg-gray-950 rounded-lg p-4 text-sm text-gray-300 whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto font-mono">
+                    <div className="bg-[var(--bg-base)] rounded-lg p-4 text-sm text-secondary whitespace-pre-wrap leading-relaxed max-h-64 overflow-y-auto font-mono">
                       {app.tailor_output.tailored_resume || 'No resume variant generated.'}
                     </div>
                   </div>

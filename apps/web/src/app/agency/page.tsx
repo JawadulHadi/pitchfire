@@ -85,13 +85,13 @@ export default function AgencyPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-white">Agency Dashboard</h1>
-        <p className="text-gray-400 mt-1">Manage up to 10 candidate profiles</p>
+        <h1 className="text-2xl font-bold text-primary">Agency Dashboard</h1>
+        <p className="text-secondary mt-1">Manage up to 10 candidate profiles</p>
       </div>
 
       {/* Add member */}
       <div className="glass rounded-xl p-5">
-        <h2 className="text-sm font-semibold text-gray-300 mb-3">
+        <h2 className="text-sm font-semibold text-secondary mb-3">
           Add Candidate Profile
         </h2>
         <div className="flex gap-3 flex-wrap">
@@ -100,14 +100,14 @@ export default function AgencyPage() {
             placeholder="candidate@email.com"
             value={addEmail}
             onChange={(e) => setAddEmail(e.target.value)}
-            className="flex-1 min-w-[200px] bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
+            className="flex-1 min-w-[200px] bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-primary placeholder-[var(--text-3)] focus:outline-none focus:border-blue-500"
           />
           <input
             type="text"
             placeholder="Label (e.g. Client A)"
             value={addLabel}
             onChange={(e) => setAddLabel(e.target.value)}
-            className="w-40 bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
+            className="w-40 bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-primary placeholder-[var(--text-3)] focus:outline-none focus:border-blue-500"
           />
           <button
             onClick={addMember}
@@ -122,23 +122,23 @@ export default function AgencyPage() {
 
       {/* Members table */}
       <div className="glass rounded-xl overflow-hidden">
-        <div className="px-5 py-4 border-b border-gray-800 flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-gray-300">
+        <div className="px-5 py-4 border-b border-[var(--border)] flex items-center justify-between">
+          <h2 className="text-sm font-semibold text-secondary">
             Profiles ({members.filter((m) => m.is_active).length} / 10 active)
           </h2>
-          <span className="text-xs text-gray-500">{members.length} total</span>
+          <span className="text-xs text-muted">{members.length} total</span>
         </div>
 
         {loading ? (
-          <div className="p-8 text-center text-gray-500 text-sm">Loading…</div>
+          <div className="p-8 text-center text-muted text-sm">Loading…</div>
         ) : members.length === 0 ? (
-          <div className="p-8 text-center text-gray-500 text-sm">
+          <div className="p-8 text-center text-muted text-sm">
             No profiles yet. Add a candidate above.
           </div>
         ) : (
           <table className="w-full text-sm">
-            <thead className="text-gray-500 text-xs uppercase">
-              <tr className="border-b border-gray-800">
+            <thead className="text-muted text-xs uppercase">
+              <tr className="border-b border-[var(--border)]">
                 <th className="px-5 py-3 text-left">Profile</th>
                 <th className="px-5 py-3 text-left">Applied</th>
                 <th className="px-5 py-3 text-left">Replied</th>
@@ -153,21 +153,21 @@ export default function AgencyPage() {
                 return (
                   <tr
                     key={m.id}
-                    className="border-b border-gray-800 last:border-0 hover:bg-gray-800/50 transition-colors"
+                    className="border-b border-[var(--border)] last:border-0 hover:bg-[var(--bg-surface-hover)] transition-colors"
                   >
                     <td className="px-5 py-3">
-                      <div className="font-medium text-white">
+                      <div className="font-medium text-primary">
                         {m.label ?? m.full_name ?? "Profile"}
                       </div>
-                      <div className="text-gray-500 text-xs">{m.email}</div>
+                      <div className="text-muted text-xs">{m.email}</div>
                     </td>
-                    <td className="px-5 py-3 text-gray-300">
+                    <td className="px-5 py-3 text-secondary">
                       {s.applied ?? 0}
                     </td>
-                    <td className="px-5 py-3 text-gray-300">
+                    <td className="px-5 py-3 text-secondary">
                       {s.replied ?? 0}
                     </td>
-                    <td className="px-5 py-3 text-gray-300">
+                    <td className="px-5 py-3 text-secondary">
                       {s.interview ?? 0}
                     </td>
                     <td className="px-5 py-3">
@@ -175,7 +175,7 @@ export default function AgencyPage() {
                         className={`text-xs px-2 py-0.5 rounded-full ${
                           m.is_active
                             ? "bg-green-900 text-green-300"
-                            : "bg-gray-800 text-gray-500"
+                            : "bg-[var(--bg-surface)] text-muted"
                         }`}
                       >
                         {m.is_active ? "Active" : "Inactive"}
@@ -185,7 +185,7 @@ export default function AgencyPage() {
                       {m.is_active && (
                         <button
                           onClick={() => deactivate(m.id)}
-                          className="text-xs text-gray-500 hover:text-red-400 transition-colors"
+                          className="text-xs text-muted hover:text-red-400 transition-colors"
                         >
                           Remove
                         </button>
