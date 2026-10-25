@@ -15,8 +15,8 @@
     "@bull-board/express": "^6.7.0",
     "@nestjs/common": "^12.2.0",
     "@nestjs/config": "^12.0.1",
-    "@nestjs/core": "^11.1.18",
-    "@nestjs/platform-express": "^10.4.7",
+    "@nestjs/core": "^12.2.0",
+    "@nestjs/platform-express": "^12.2.0",
     "@nestjs/swagger": "^12.0.4",
     "@pitchfire/job-scraper": "*",
     "@pitchfire/resume-engine": "*",
@@ -32,9 +32,9 @@
     "zod": "^4.6.6"
   },
   "devDependencies": {
-    "@nestjs/cli": "^10.4.8",
-    "@nestjs/schematics": "^10.2.3",
-    "@nestjs/testing": "^10.4.7",
+    "@nestjs/cli": "^12.0.10",
+    "@nestjs/schematics": "^12.0.10",
+    "@nestjs/testing": "^12.2.0",
     "@types/express": "^5.0.6",
     "@types/jest": "^29.5.14",
     "@types/multer": "^1.4.12",

@@ -8,6 +8,9 @@ Versions correspond to completed phases.
 
 ## [Unreleased]
 
+### Fixed
+- **`apps/api/package.json`** — `@nestjs/common` had drifted to `^12.2.0` while `@nestjs/core` (`^11.1.18`) and `@nestjs/platform-express` (`^10.4.7`) were still pinned to older, incompatible majors (likely from independent dependabot bumps). `@nestjs/common@12` ships as an ESM package with a restrictive `exports` map (`"./*": "./*.js"`), which doesn't resolve subdirectory imports like `@nestjs/common/interfaces` the way `@nestjs/core@11` expects — so the API built successfully but crashed on boot with `Cannot find module '.../@nestjs/common/interfaces.js'`. Bumped `@nestjs/core`, `@nestjs/platform-express`, `@nestjs/cli`, `@nestjs/schematics`, and `@nestjs/testing` to `^12.x` to match `@nestjs/common`/`@nestjs/config`/`@nestjs/swagger`, which were already on 12. Verified by actually running `node apps/api/dist/main.js` locally (not just the build) — it now boots and maps every route.
+
 ### Added
 - **Dashboard + shared UI tokens** — Loaded Archivo, Instrument Sans and Martian Mono (matching the Jawad Ul Hadi Design System glass theme) and added glass-sweep, KPI tile, chip and grid-backdrop utility classes to `globals.css`. Restyled the dashboard's resume upload panel and quick-stat tiles to use them, and added a small version badge to the nav. Existing `.glass`/`text-primary`/`text-secondary`/`text-muted` classes used by other pages are unchanged.
 
