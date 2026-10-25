@@ -4,7 +4,7 @@
       "name": "Default",
       "files": [
         ".vscode/changelists.json",
-        "apps/api/tsconfig.json"
+        "README.md"
       ]
     }
   ],

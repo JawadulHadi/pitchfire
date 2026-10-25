@@ -113,15 +113,15 @@ pitchfire/
 
 Each agent owns exactly one domain and outputs a typed BullMQ message consumed by the next in the chain.
 
-| Agent              | Model                | Trigger                  | Output                                 | Downstream                          |
-| ------------------ | -------------------- | ------------------------ | -------------------------------------- | ----------------------------------- |
-| **ScoutAgent**     | Haiku 5.5            | cron / API               | Job listings stored in Supabase        | → ScorerAgent                       |
-| **ScorerAgent**    | Haiku 5.5 + pgvector | ScoutAgent               | Application rows with match score      | → TailorAgent (score ≥ 0.72)        |
-| **TailorAgent**    | Sonnet 4.6           | ScorerAgent              | Tailored resume variant + cover letter | ⏸ approval gate                     |
-| **ApplierAgent**   | Sonnet 4.6           | User approves in /review | ATS form filled + submitted            | → InboxAgent (5-min delay)          |
-| **InboxAgent**     | Haiku 5.5            | ApplierAgent             | Email threads classified               | → SchedulerAgent (interview_invite) |
-| **SchedulerAgent** | Haiku 5.5 + Sonnet 4.6 | InboxAgent             | Calendar event booked + prep notes     | → CoachAgent                        |
-| **CoachAgent**     | Sonnet 4.6           | SchedulerAgent           | Role Q&A + company research            | — (final node)                      |
+| Agent                    | Model                  | Trigger                  | Output                                 | Downstream                           |
+| ------------------------ | ---------------------- | ------------------------ | -------------------------------------- | ------------------------------------ |
+| **ScoutAgent**     | Haiku 5.5              | cron / API               | Job listings stored in Supabase        | → ScorerAgent                       |
+| **ScorerAgent**    | Haiku 5.5 + pgvector   | ScoutAgent               | Application rows with match score      | → TailorAgent (score ≥ 0.72)       |
+| **TailorAgent**    | Sonnet 4.6             | ScorerAgent              | Tailored resume variant + cover letter | ⏸ approval gate                     |
+| **ApplierAgent**   | Sonnet 4.6             | User approves in /review | ATS form filled + submitted            | → InboxAgent (5-min delay)          |
+| **InboxAgent**     | Haiku 5.5              | ApplierAgent             | Email threads classified               | → SchedulerAgent (interview_invite) |
+| **SchedulerAgent** | Haiku 5.5 + Sonnet 4.6 | InboxAgent               | Calendar event booked + prep notes     | → CoachAgent                        |
+| **CoachAgent**     | Sonnet 4.6             | SchedulerAgent           | Role Q&A + company research            | — (final node)                      |
 
 > **Approval gate**: TailorAgent deliberately stops the chain. Every application is reviewed by the user before it's submitted — `/review` is the human-in-the-loop checkpoint.
 
@@ -132,9 +132,9 @@ Each agent owns exactly one domain and outputs a typed BullMQ message consumed b
 | Layer       | Technology                                   | Why                                                                           |
 | ----------- | -------------------------------------------- | ----------------------------------------------------------------------------- |
 | Frontend    | Next.js 14 App Router + Tailwind + shadcn/ui | SSR, free Netlify hosting                                                     |
-| Backend API | NestJS + TypeScript                          | Decorators, modules, DI — structured for scale                                |
+| Backend API | NestJS + TypeScript                          | Decorators, modules, DI — structured for scale                               |
 | AI Engine   | Claude Sonnet 4.6 / Haiku 5.5                | Model-per-task: Haiku for cheap classification, Sonnet for quality generation |
-| Embeddings  | Voyage AI `voyage-3-lite` (1024-dim)         | $0.02/M tokens; semantically valid pgvector similarity                        |
+| Embeddings  | Voyage AI `voyage-3-lite` (1024-dim)       | $0.02/M tokens; semantically valid pgvector similarity                        |
 | Database    | Supabase (PostgreSQL + pgvector)             | Vector similarity built-in, generous free tier                                |
 | Queue       | BullMQ + Redis (Upstash)                     | 3 typed queues, DLQ, SIGTERM drain                                            |
 | Browser     | Playwright                                   | Stealth headless ATS form-fill                                                |
@@ -178,24 +178,24 @@ Open [http://localhost:3000](http://localhost:3000) — Swagger UI at [http://lo
 
 ## Roadmap
 
-| Phase | Goal                                                         | Status      | PR                                                    |
-| ----- | ------------------------------------------------------------ | ----------- | ----------------------------------------------------- |
-| **1** | Foundation — Scout + Score + Dashboard                       | ✅ Complete | [#1](https://github.com/JawadulHadi/pitchfire/pull/1) |
-| **2** | Apply Automation — Tailor + Playwright + Approval Gate       | ✅ Complete | [#3](https://github.com/JawadulHadi/pitchfire/pull/3) |
+| Phase | Goal | Status | PR |
+| ----------- | ------------------------------------------------------------- | ----------- | ---------------------------------------------------- |
+| **1** | Foundation — Scout + Score + Dashboard | ✅ Complete | [#1](https://github.com/JawadulHadi/pitchfire/pull/1) |
+| **2** | Apply Automation — Tailor + Playwright + Approval Gate | ✅ Complete | [#3](https://github.com/JawadulHadi/pitchfire/pull/3) |
 | **3** | Communication Layer — InboxAgent + SchedulerAgent + 3 Queues | ✅ Complete | [#6](https://github.com/JawadulHadi/pitchfire/pull/6) |
-| **4** | Intelligence & Polish — Analytics + CoachAgent + Bull Board  | ✅ Complete | —                                                     |
-| **5** | SaaS Layer — Stripe + Multi-tenant + Agency Mode             | ✅ Complete | —                                                     |
-| **6** | Agent Bus + Polish — Inter-agent comms + structured logging  | ✅ Complete | —                                                     |
+| **4** | Intelligence & Polish — Analytics + CoachAgent + Bull Board | ✅ Complete | — |
+| **5** | SaaS Layer — Stripe + Multi-tenant + Agency Mode | ✅ Complete | — |
+| **6** | Agent Bus + Polish — Inter-agent comms + structured logging | ✅ Complete | — |
 
 ---
 
 ## Pricing
 
-| Plan       | Price      | Limits                                                           |
-| ---------- | ---------- | ---------------------------------------------------------------- |
-| Free       | $0/mo      | 10 applications/mo, 3 boards                                     |
-| **Pro**    | **$29/mo** | Unlimited applications, 15+ boards, AI tailoring, interview prep |
-| Agency     | $99/mo     | 10 user profiles, white-label, bulk apply                        |
+| Plan          | Price            | Limits                                                           |
+| ------------- | ---------------- | ---------------------------------------------------------------- |
+| Free          | $0/mo            | 10 applications/mo, 3 boards                                     |
+| **Pro** | **$29/mo** | Unlimited applications, 15+ boards, AI tailoring, interview prep |
+| Agency        | $99/mo           | 10 user profiles, white-label, bulk apply                        |
 
 Break-even: **2 Pro subscribers ($58/mo) > $50/mo infra**. Profitable from user #2.
 
@@ -203,17 +203,17 @@ Break-even: **2 Pro subscribers ($58/mo) > $50/mo infra**. Profitable from user 
 
 ## Documentation
 
-| Document                                     | Description                                                   |
-| -------------------------------------------- | ------------------------------------------------------------- |
-| [CHANGELOG.md](CHANGELOG.md)                 | Release notes — every change per version                      |
-| [SECURITY.md](SECURITY.md)                   | Security policy, vulnerability reporting, credential guidance |
-| [docs/RND.md](docs/RND.md)                   | **R&D findings** — what we researched, what we changed, why   |
-| [docs/PROGRESS.md](docs/PROGRESS.md)         | Phase-by-phase implementation report with commit SHAs         |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Agent data flow, DB schema, system design                     |
-| [docs/API.md](docs/API.md)                   | REST API endpoint reference                                   |
-| [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)   | Local setup, env vars, workspace scripts, testing             |
-| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)     | Cloud deployment: Netlify + Render + Supabase + Upstash       |
-| [docs/ROADMAP.md](docs/ROADMAP.md)           | Phase-by-phase feature plan with deliverables                 |
+| Document                                    | Description                                                        |
+| ------------------------------------------- | ------------------------------------------------------------------ |
+| [CHANGELOG.md](CHANGELOG.md)                 | Release notes — every change per version                          |
+| [SECURITY.md](SECURITY.md)                   | Security policy, vulnerability reporting, credential guidance      |
+| [docs/RND.md](docs/RND.md)                   | **R&D findings** — what we researched, what we changed, why |
+| [docs/PROGRESS.md](docs/PROGRESS.md)         | Phase-by-phase implementation report with commit SHAs              |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Agent data flow, DB schema, system design                          |
+| [docs/API.md](docs/API.md)                   | REST API endpoint reference                                        |
+| [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)   | Local setup, env vars, workspace scripts, testing                  |
+| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)     | Cloud deployment: Netlify + Render + Supabase + Upstash            |
+| [docs/ROADMAP.md](docs/ROADMAP.md)           | Phase-by-phase feature plan with deliverables                      |
 
 ---
 
