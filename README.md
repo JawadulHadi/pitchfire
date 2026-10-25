@@ -1,6 +1,12 @@
-# PitchFire — Autonomous AI Job Search Orchestrator
+<p align="center">
+  <img src="apps/web/public/brand/banner-github.svg" width="100%" alt="PitchFire — Autonomous AI Job Search Orchestrator" />
+</p>
 
-> Upload your resume once. PitchFire discovers matched jobs, tailors every application, submits autonomously, tracks replies, and books your interviews — all while you focus on the work that matters.
+<p align="center">
+  <img src="brand/logo-horizontal.svg" height="48" alt="PitchFire" />
+</p>
+
+<p align="center"><em>Upload your resume once. PitchFire discovers matched jobs, tailors every application, submits autonomously, tracks replies, and books your interviews — all while you focus on the work that matters.</em></p>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b290786d-d28a-4b10-af9e-6d8a4a50481e/deploy-status)](https://app.netlify.com/projects/pitchfire/deploys)
 [![Agents](https://img.shields.io/badge/Agents-7-blueviolet)](#the-7-agents)

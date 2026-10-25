@@ -1,4 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-label="PitchFire GitHub banner">
+  <style>
+    @keyframes float   { 0%,100%{transform:translateY(0)}   50%{transform:translateY(-10px)} }
+    @keyframes glow-p  { 0%,100%{opacity:.6}                50%{opacity:1} }
+    @keyframes fire-g  { 0%,100%{opacity:1}                 45%{opacity:.93} 52%{opacity:.85} 58%{opacity:.93} }
+    @keyframes text-g  { 0%,100%{filter:url(#tg) opacity(1)} 50%{filter:url(#tg) opacity(.75)} }
+    .fl  { animation:float  5s ease-in-out infinite; transform-box:fill-box; transform-origin:50% 90% }
+    .gl  { animation:glow-p 3s ease-in-out infinite }
+    .f1  { animation:fire-g 6s ease-in-out infinite }
+    .tg  { animation:glow-p 4s ease-in-out infinite 1.2s }
+  </style>
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#060B18"/>
@@ -61,15 +71,17 @@
     <g transform="translate(70,120)">
       <rect width="260" height="260" rx="52" fill="#0F172A" opacity=".8"/>
       <rect width="260" height="260" rx="52" fill="none" stroke="#1E3A5F" stroke-width="1"/>
-      <ellipse cx="130" cy="230" rx="80" ry="36" fill="url(#vg)"/>
-      <path d="M130,237 C74,237 32,190 32,142 C32,86 65,43 113,26 Q121.5,18 130,15 Q138.5,18 147,26 C195,43 228,86 228,142 C228,190 186,237 130,237Z" fill="url(#fo)" filter="url(#fg)"/>
-      <path d="M130,218 C90,216 64,182 64,150 C64,110 88,74 120,56 Q125,52 130,50 Q135,52 140,56 C172,74 196,110 196,150 C196,182 170,216 130,218Z" fill="url(#fm)" opacity=".8"/>
-      <path d="M130,186 C111,184 97,168 97,152 C97,130 111,112 128,104 L130,102 L132,104 C149,112 163,130 163,152 C163,168 149,184 130,186Z" fill="url(#fc)" opacity=".65"/>
-      <circle cx="130" cy="18" r="9" fill="#FEF9C3" opacity=".95"/>
-      <circle cx="130" cy="18" r="5" fill="#FFF" opacity=".8"/>
+      <ellipse cx="130" cy="230" rx="80" ry="36" fill="url(#vg)" class="gl"/>
+      <g class="fl">
+        <path d="M130,237 C74,237 32,190 32,142 C32,86 65,43 113,26 Q121.5,18 130,15 Q138.5,18 147,26 C195,43 228,86 228,142 C228,190 186,237 130,237Z" fill="url(#fo)" filter="url(#fg)" class="f1"/>
+        <path d="M130,218 C90,216 64,182 64,150 C64,110 88,74 120,56 Q125,52 130,50 Q135,52 140,56 C172,74 196,110 196,150 C196,182 170,216 130,218Z" fill="url(#fm)" opacity=".8"/>
+        <path d="M130,186 C111,184 97,168 97,152 C97,130 111,112 128,104 L130,102 L132,104 C149,112 163,130 163,152 C163,168 149,184 130,186Z" fill="url(#fc)" opacity=".65"/>
+        <circle cx="130" cy="18" r="9" fill="#FEF9C3" opacity=".95"/>
+        <circle cx="130" cy="18" r="5" fill="#FFF" opacity=".8"/>
+      </g>
     </g>
     <text x="390" y="284" font-family="'Syne','Inter','Helvetica Neue',sans-serif" font-size="120" font-weight="800" letter-spacing="-4" fill="#F8FAFC">Pitch</text>
-    <text x="740" y="284" font-family="'Syne','Inter','Helvetica Neue',sans-serif" font-size="120" font-weight="800" letter-spacing="-4" fill="#F97316" filter="url(#tg)">Fire</text>
+    <text x="740" y="284" font-family="'Syne','Inter','Helvetica Neue',sans-serif" font-size="120" font-weight="800" letter-spacing="-4" fill="#F97316" filter="url(#tg)" class="tg">Fire</text>
     <text x="391" y="338" font-family="'DM Sans','Inter',system-ui,sans-serif" font-size="22" font-weight="500" fill="#94A3B8" letter-spacing=".2">Autonomous AI Job Search Orchestrator</text>
     <line x1="391" y1="370" x2="880" y2="370" stroke="#1E3A5F" stroke-width="1"/>
     <g transform="translate(391,400)">

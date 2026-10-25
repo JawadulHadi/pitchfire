@@ -1,4 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="256" height="256" role="img" aria-label="PitchFire icon mark">
+  <style>
+    @keyframes float  { 0%,100%{transform:translateY(0)}  50%{transform:translateY(-3px)} }
+    @keyframes glow-p { 0%,100%{opacity:.55}              50%{opacity:.9} }
+    .fl { animation:float  4s ease-in-out infinite; transform-box:fill-box; transform-origin:50% 90% }
+    .gl { animation:glow-p 3s ease-in-out infinite }
+  </style>
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0F172A"/>
@@ -32,9 +38,11 @@
     </filter>
   </defs>
   <rect width="48" height="48" rx="11" fill="url(#bg)"/>
-  <ellipse cx="24" cy="44" rx="16" ry="7" fill="url(#glow)"/>
-  <path d="M24,43 C13,43 6,35 6,26 C6,16 12,8 21,5 Q22.5,3.5 24,3 Q25.5,3.5 27,5 C36,8 42,16 42,26 C42,35 35,43 24,43Z" fill="url(#fo)" filter="url(#sg)"/>
-  <path d="M24,38 C17,37 12,31 12,25 C12,18 17,12 22.5,9.5 Q23.3,9 24,8.5 Q24.7,9 25.5,9.5 C31,12 36,18 36,25 C36,31 31,37 24,38Z" fill="url(#fm)" opacity=".75"/>
-  <path d="M24,32 C20,31 17,28 17,25 C17,21 20,17.5 23.5,16 L24,15.5 L24.5,16 C28,17.5 31,21 31,25 C31,28 28,31 24,32Z" fill="url(#fc)" opacity=".6"/>
-  <circle cx="24" cy="4.5" r="1.8" fill="#FEF9C3" opacity=".95"/>
+  <ellipse cx="24" cy="44" rx="16" ry="7" fill="url(#glow)" class="gl"/>
+  <g class="fl">
+    <path d="M24,43 C13,43 6,35 6,26 C6,16 12,8 21,5 Q22.5,3.5 24,3 Q25.5,3.5 27,5 C36,8 42,16 42,26 C42,35 35,43 24,43Z" fill="url(#fo)" filter="url(#sg)"/>
+    <path d="M24,38 C17,37 12,31 12,25 C12,18 17,12 22.5,9.5 Q23.3,9 24,8.5 Q24.7,9 25.5,9.5 C31,12 36,18 36,25 C36,31 31,37 24,38Z" fill="url(#fm)" opacity=".75"/>
+    <path d="M24,32 C20,31 17,28 17,25 C17,21 20,17.5 23.5,16 L24,15.5 L24.5,16 C28,17.5 31,21 31,25 C31,28 28,31 24,32Z" fill="url(#fc)" opacity=".6"/>
+    <circle cx="24" cy="4.5" r="1.8" fill="#FEF9C3" opacity=".95"/>
+  </g>
 </svg>
