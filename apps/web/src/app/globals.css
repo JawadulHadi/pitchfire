@@ -182,7 +182,7 @@ body::before {
   .font-display {
     font-family: var(--font-display);
   }
-  .font-mono {
+  .mono {
     font-family: var(--font-mono);
   }
 
