@@ -4,7 +4,7 @@
       "name": "Default",
       "files": [
         ".vscode/changelists.json",
-        "apps/web/next.config.ts"
+        "apps/api/tsconfig.json"
       ]
     }
   ],
