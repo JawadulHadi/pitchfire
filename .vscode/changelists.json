@@ -3,8 +3,8 @@
     {
       "name": "Default",
       "files": [
-        ".codex/config.toml",
-        ".vscode/changelists.json"
+        ".vscode/changelists.json",
+        "apps/web/next.config.ts"
       ]
     }
   ],
