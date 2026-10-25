@@ -1,6 +1,6 @@
 import type { Metadata, Route } from "next";
 import Link from "next/link";
-import { Syne } from "next/font/google";
+import { Syne, Archivo, Instrument_Sans, Martian_Mono } from "next/font/google";
 import "./globals.css";
 import { LogoHorizontal } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -10,6 +10,25 @@ const syne = Syne({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-syne",
+});
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-archivo",
+});
+
+const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-instrument-sans",
+});
+
+const martianMono = Martian_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-martian-mono",
 });
 
 export const metadata: Metadata = {
@@ -40,7 +59,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={syne.variable}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${syne.variable} ${archivo.variable} ${instrumentSans.variable} ${martianMono.variable}`}
+    >
       <head>
         {/* FOUC prevention — runs before paint */}
         <script
@@ -51,12 +74,19 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen antialiased">
         <nav className="glass-nav px-6 py-3 flex items-center justify-between">
-          <Link href="/" aria-label="PitchFire home">
+          <Link
+            href="/"
+            aria-label="PitchFire home"
+            className="flex items-center gap-2.5"
+          >
             <LogoHorizontal height={36} />
+            <span className="eyebrow hidden sm:inline-block rounded-full border border-[var(--border)] px-2 py-0.5">
+              v0.4
+            </span>
           </Link>
           <div className="flex items-center gap-5">
             <div
-              className="hidden md:flex gap-5 text-sm"
+              className="hidden md:flex gap-5 text-sm font-medium"
               style={{ color: "var(--text-2)" }}
             >
               {NAV_LINKS.map((l) => (

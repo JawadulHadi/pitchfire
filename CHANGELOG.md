@@ -8,6 +8,9 @@ Versions correspond to completed phases.
 
 ## [Unreleased]
 
+### Added
+- **Dashboard + shared UI tokens** — Loaded Archivo, Instrument Sans and Martian Mono (matching the Jawad Ul Hadi Design System glass theme) and added glass-sweep, KPI tile, chip and grid-backdrop utility classes to `globals.css`. Restyled the dashboard's resume upload panel and quick-stat tiles to use them, and added a small version badge to the nav. Existing `.glass`/`text-primary`/`text-secondary`/`text-muted` classes used by other pages are unchanged.
+
 ### Fixed
 - **`package.json`** — Added `devEngines.packageManager` (npm `^10.0.0`) so Turborepo can resolve the npm workspace. Without it, `turbo run build --filter=@pitchfire/api` (the Render build command) failed with `Could not resolve workspace. Missing devEngines.packageManager or legacy packageManager field`. Used `devEngines` rather than the legacy `packageManager` field because the latter makes Netlify's build image auto-enable Corepack, which broke the Netlify deploy preview.
 - **`apps/api/tsconfig.json`** — `ignoreDeprecations` was set to `"6.0"`, an unreleased TypeScript version; the installed compiler (5.9.3) rejects it with `TS5103: Invalid value for '--ignoreDeprecations'`. Changed to the valid `"5.0"`.
