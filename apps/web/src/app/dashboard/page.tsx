@@ -72,7 +72,7 @@ export default function Dashboard() {
             >
               Resume uploaded
             </div>
-            <div className="text-secondary mt-2 font-mono text-xs">
+            <div className="text-secondary mt-2 mono text-xs">
               ID: {result.id} · {result.pages} page(s) · {result.enqueued} agent queued
             </div>
           </div>

@@ -81,7 +81,7 @@ export default function RootLayout({
           >
             <LogoHorizontal height={36} />
             <span className="eyebrow hidden sm:inline-block rounded-full border border-[var(--border)] px-2 py-0.5">
-              v0.4
+              v0.8
             </span>
           </Link>
           <div className="flex items-center gap-5">
