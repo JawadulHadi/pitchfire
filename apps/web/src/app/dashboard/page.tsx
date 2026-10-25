@@ -37,14 +37,16 @@ export default function Dashboard() {
   return (
     <div className="max-w-2xl mx-auto space-y-8">
       <div>
-        <h1 className="text-2xl font-bold mb-1">Dashboard</h1>
+        <h1 className="font-display font-extrabold text-2xl mb-1 tracking-tight">
+          Dashboard
+        </h1>
         <p className="text-secondary">Upload your resume to start the pipeline</p>
       </div>
 
       {/* Resume Upload */}
-      <div className="glass rounded-xl p-6 space-y-4">
-        <h2 className="font-semibold text-lg">Resume Upload</h2>
-        <label className="block border-2 border-dashed border-[var(--border)] hover:border-blue-500 rounded-lg p-8 text-center cursor-pointer transition-colors">
+      <div className="glass sweep rounded-xl p-6 space-y-4">
+        <h2 className="eyebrow">Resume upload</h2>
+        <label className="block border-2 border-dashed border-[var(--border)] hover:border-[var(--accent)] rounded-lg p-8 text-center cursor-pointer transition-colors">
           <input
             type="file"
             accept=".pdf,.txt,.md"
@@ -53,18 +55,24 @@ export default function Dashboard() {
             disabled={uploading}
           />
           {uploading ? (
-            <span className="text-blue-400">Uploading and parsing...</span>
+            <span className="accent font-medium">Uploading and parsing...</span>
           ) : (
             <span className="text-secondary">
-              Drop your resume PDF here or <span className="text-blue-400">click to browse</span>
+              Drop your resume PDF here or{' '}
+              <span className="accent font-medium">click to browse</span>
             </span>
           )}
         </label>
 
         {result && (
-          <div className="bg-green-950 border border-green-800 rounded-lg p-4 text-sm">
-            <div className="text-green-400 font-medium">Resume uploaded</div>
-            <div className="text-secondary mt-1">
+          <div className="accent-bg rounded-lg p-4 text-sm">
+            <div
+              className="chip"
+              style={{ '--tone': 'var(--tone-ok)' } as React.CSSProperties}
+            >
+              Resume uploaded
+            </div>
+            <div className="text-secondary mt-2 font-mono text-xs">
               ID: {result.id} · {result.pages} page(s) · {result.enqueued} agent queued
             </div>
           </div>
@@ -74,18 +82,20 @@ export default function Dashboard() {
       {/* Quick Stats */}
       <div className="grid grid-cols-2 gap-4">
         {[
-          { label: 'Jobs Matched', value: '—', action: '/jobs' },
-          { label: 'Applications', value: '—', action: '/applications' },
-          { label: 'Interviews', value: '—', action: '/sessions' },
-          { label: 'Offers', value: '—', action: '/sessions' },
+          { label: 'Jobs Matched', value: '—', action: '/jobs', tone: 'var(--tone-blue)' },
+          { label: 'Applications', value: '—', action: '/applications', tone: 'var(--tone-teal)' },
+          { label: 'Interviews', value: '—', action: '/sessions', tone: 'var(--tone-violet)' },
+          { label: 'Offers', value: '—', action: '/sessions', tone: 'var(--accent)' },
         ].map((stat) => (
           <a
             key={stat.label}
             href={stat.action}
-            className="glass rounded-xl p-4 transition-colors"
+            className="glass kpi sweep rounded-xl"
+            style={{ '--tone': stat.tone } as React.CSSProperties}
           >
-            <div className="text-2xl font-bold text-primary">{stat.value}</div>
-            <div className="text-secondary text-sm mt-1">{stat.label}</div>
+            <span className="kpi-bar" />
+            <span className="eyebrow">{stat.label}</span>
+            <span className="kpi-fig">{stat.value}</span>
           </a>
         ))}
       </div>
