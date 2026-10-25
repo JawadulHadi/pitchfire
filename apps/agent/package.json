@@ -11,10 +11,10 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.54.0",
-    "@pitchfire/job-scraper": "workspace:*",
-    "@pitchfire/pipeline-tracker": "workspace:*",
-    "@pitchfire/resume-engine": "workspace:*",
-    "@pitchfire/shared": "workspace:*",
+    "@pitchfire/job-scraper": "*",
+    "@pitchfire/pipeline-tracker": "*",
+    "@pitchfire/resume-engine": "*",
+    "@pitchfire/shared": "*",
     "@supabase/supabase-js": "^2.46.2",
     "bullmq": "^5.36.0",
     "dotenv": "^16.4.7",
@@ -26,3 +26,4 @@
     "typescript": "^5.7.2"
   }
 }
+

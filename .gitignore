@@ -2,6 +2,7 @@ node_modules/
 .next/
 package-lock.json
 dist/
+apps/web/out/
 *.tsbuildinfo
 .env
 .env.local
@@ -20,3 +21,6 @@ playwright-report/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local Netlify folder
+.netlify

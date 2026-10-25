@@ -1,145 +1,122 @@
 import { Injectable, BadRequestException, ForbiddenException } from '@nestjs/common';
-import Stripe from 'stripe';
+import * as crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 import { PLAN_LIMITS } from '@pitchfire/shared';
 import type { Plan } from '@pitchfire/shared';
 
-const PRICE_IDS: Record<string, Plan> = {
-  [process.env.STRIPE_PRICE_PRO    ?? 'price_pro']:    'pro',
-  [process.env.STRIPE_PRICE_AGENCY ?? 'price_agency']: 'agency',
+const PLAN_PRICES: Record<'pro' | 'agency', number> = {
+  pro:    1499,   // PKR per month
+  agency: 4999,
 };
 
 @Injectable()
 export class BillingService {
-  private readonly stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
-    apiVersion: '2025-02-24.acacia',
-  });
-
   private readonly db = createClient(
     process.env.SUPABASE_URL ?? '',
     process.env.SUPABASE_SERVICE_ROLE_KEY ?? '',
   );
 
-  async getPortalUrl(userId: string): Promise<{ url: string }> {
-    const { data: user } = await this.db
-      .from('users')
-      .select('stripe_customer_id, plan, applications_this_month, plan_period_end')
-      .eq('id', userId)
-      .single();
-
-    if (!user?.stripe_customer_id) {
-      throw new BadRequestException('No billing account found — upgrade first.');
-    }
-
-    const session = await this.stripe.billingPortal.sessions.create({
-      customer: user.stripe_customer_id,
-      return_url: `${process.env.WEB_URL}/billing`,
-    });
-
-    return { url: session.url };
+  private buildHash(fields: string[]): string {
+    const salt = process.env.JAZZCASH_INTEGRITY_SALT ?? '';
+    const message = [salt, ...fields].join('&');
+    return crypto.createHmac('sha256', salt).update(message).digest('hex').toUpperCase();
   }
 
-  async createCheckoutSession(userId: string, plan: 'pro' | 'agency'): Promise<{ url: string }> {
-    const priceId = plan === 'pro'
-      ? (process.env.STRIPE_PRICE_PRO ?? '')
-      : (process.env.STRIPE_PRICE_AGENCY ?? '');
-
-    if (!priceId) {
-      throw new BadRequestException(`Stripe price ID for "${plan}" plan not configured.`);
-    }
-
+  async createPaymentRequest(
+    userId: string,
+    plan: 'pro' | 'agency',
+  ): Promise<{ formUrl: string; formData: Record<string, string> }> {
     const { data: user } = await this.db
       .from('users')
-      .select('email, stripe_customer_id')
+      .select('email')
       .eq('id', userId)
       .single();
 
-    const sessionParams: Stripe.Checkout.SessionCreateParams = {
-      mode: 'subscription',
-      line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${process.env.WEB_URL}/billing?upgraded=1`,
-      cancel_url:  `${process.env.WEB_URL}/billing?cancelled=1`,
-      metadata: { user_id: userId },
-      subscription_data: { metadata: { user_id: userId } },
+    if (!user) throw new BadRequestException('User not found.');
+
+    const merchantId = process.env.JAZZCASH_MERCHANT_ID ?? '';
+    const password   = process.env.JAZZCASH_PASSWORD ?? '';
+    const apiUrl     = process.env.JAZZCASH_API_URL
+      ?? 'https://sandbox.jazzcash.com.pk/CustomerPortal/transactionmanagement/merchantform';
+
+    const amount     = PLAN_PRICES[plan];
+    const txnRefNo   = `PF-${userId.slice(0, 8)}-${Date.now()}`;
+    const txnDate    = new Date().toISOString().replace(/[-T:.Z]/g, '').slice(0, 14);
+    const returnUrl  = `${process.env.API_URL}/billing/callback`;
+
+    const hashFields = [
+      merchantId,
+      password,
+      amount.toString(),
+      txnRefNo,
+      txnDate,
+      'PKR',
+      returnUrl,
+    ];
+
+    const formData: Record<string, string> = {
+      pp_Version:        '1.1',
+      pp_TxnType:        'MWALLET',
+      pp_Language:       'EN',
+      pp_MerchantID:     merchantId,
+      pp_Password:       password,
+      pp_TxnRefNo:       txnRefNo,
+      pp_Amount:         (amount * 100).toString(), // JazzCash expects paisa
+      pp_TxnCurrency:    'PKR',
+      pp_TxnDateTime:    txnDate,
+      pp_BillReference:  `plan_${plan}_user_${userId}`,
+      pp_Description:    `PitchFire ${plan} plan — monthly`,
+      pp_TxnExpiryDateTime: new Date(Date.now() + 30 * 60 * 1000)
+        .toISOString().replace(/[-T:.Z]/g, '').slice(0, 14),
+      pp_ReturnURL:      returnUrl,
+      ppmpf_1:           userId,
+      ppmpf_2:           plan,
+      pp_SecureHash:     this.buildHash(hashFields),
     };
 
-    if (user?.stripe_customer_id) {
-      sessionParams.customer = user.stripe_customer_id;
-    } else if (user?.email) {
-      sessionParams.customer_email = user.email;
-    }
-
-    const session = await this.stripe.checkout.sessions.create(sessionParams);
-    return { url: session.url! };
+    return { formUrl: apiUrl, formData };
   }
 
-  async handleWebhook(rawBody: Buffer, signature: string): Promise<void> {
-    let event: Stripe.Event;
-    try {
-      event = this.stripe.webhooks.constructEvent(
-        rawBody,
-        signature,
-        process.env.STRIPE_WEBHOOK_SECRET ?? '',
-      );
-    } catch {
-      throw new BadRequestException('Invalid Stripe webhook signature.');
-    }
+  async handleCallback(params: Record<string, string>): Promise<void> {
+    const responseCode = params['pp_ResponseCode'];
+    if (responseCode !== '000') return; // payment failed
 
-    switch (event.type) {
-      case 'checkout.session.completed':
-        await this.handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
-        break;
-      case 'customer.subscription.updated':
-      case 'customer.subscription.deleted':
-        await this.handleSubscriptionChange(event.data.object as Stripe.Subscription);
-        break;
-      case 'invoice.payment_failed':
-        await this.handlePaymentFailed(event.data.object as Stripe.Invoice);
-        break;
-    }
-  }
+    const userId = params['ppmpf_1'];
+    const plan   = params['ppmpf_2'] as Plan;
 
-  private async handleCheckoutCompleted(session: Stripe.Checkout.Session): Promise<void> {
-    const userId = session.metadata?.user_id;
-    if (!userId || !session.subscription) return;
+    if (!userId || !plan || !['pro', 'agency'].includes(plan)) return;
 
-    const sub = await this.stripe.subscriptions.retrieve(session.subscription as string);
-    const priceId = sub.items.data[0]?.price.id ?? '';
-    const plan: Plan = PRICE_IDS[priceId] ?? 'free';
+    const periodStart = new Date();
+    const periodEnd   = new Date(periodStart);
+    periodEnd.setMonth(periodEnd.getMonth() + 1);
 
     await this.db.from('users').update({
       plan,
-      stripe_customer_id:      session.customer as string,
-      stripe_subscription_id:  sub.id,
-      plan_period_start:       new Date(sub.current_period_start * 1000).toISOString(),
-      plan_period_end:         new Date(sub.current_period_end   * 1000).toISOString(),
+      plan_period_start:       periodStart.toISOString(),
+      plan_period_end:         periodEnd.toISOString(),
       applications_this_month: 0,
     }).eq('id', userId);
   }
 
-  private async handleSubscriptionChange(sub: Stripe.Subscription): Promise<void> {
-    const userId = sub.metadata?.user_id;
-    if (!userId) return;
+  async getUserBilling(userId: string) {
+    const { data: user } = await this.db
+      .from('users')
+      .select('plan, applications_this_month, plan_period_end')
+      .eq('id', userId)
+      .single();
 
-    const priceId = sub.items.data[0]?.price.id ?? '';
-    const plan: Plan = sub.status === 'active' ? (PRICE_IDS[priceId] ?? 'free') : 'free';
+    if (!user) return null;
 
-    await this.db.from('users').update({
+    const plan  = user.plan as Plan;
+    const limit = PLAN_LIMITS[plan].applications_per_month;
+
+    return {
       plan,
-      stripe_subscription_id:  sub.id,
-      plan_period_start:       new Date(sub.current_period_start * 1000).toISOString(),
-      plan_period_end:         new Date(sub.current_period_end   * 1000).toISOString(),
-      applications_this_month: 0,
-    }).eq('id', userId);
-  }
-
-  private async handlePaymentFailed(invoice: Stripe.Invoice): Promise<void> {
-    // Downgrade to free on failed payment — Stripe will retry, but we enforce limits
-    const customerId = invoice.customer as string;
-    if (!customerId) return;
-
-    await this.db.from('users').update({ plan: 'free' })
-      .eq('stripe_customer_id', customerId);
+      applications_used:  user.applications_this_month,
+      applications_limit: limit === 9999 ? null : limit,
+      period_end:         user.plan_period_end,
+      prices:             PLAN_PRICES,
+    };
   }
 
   async enforceLimit(userId: string): Promise<void> {
@@ -153,33 +130,12 @@ export class BillingService {
     const limit = PLAN_LIMITS[user.plan as Plan].applications_per_month;
     if (user.applications_this_month >= limit) {
       throw new ForbiddenException(
-        `Monthly application limit reached (${limit}). Upgrade to Pro for unlimited applications.`,
+        `Monthly limit reached (${limit}). Upgrade to Pro for unlimited applications.`,
       );
     }
   }
 
   async incrementUsage(userId: string): Promise<void> {
     await this.db.rpc('increment_applications_count', { uid: userId });
-  }
-
-  async getUserBilling(userId: string) {
-    const { data: user } = await this.db
-      .from('users')
-      .select('plan, applications_this_month, plan_period_end, stripe_customer_id')
-      .eq('id', userId)
-      .single();
-
-    if (!user) return null;
-
-    const plan = user.plan as Plan;
-    const limit = PLAN_LIMITS[plan].applications_per_month;
-
-    return {
-      plan,
-      applications_used:  user.applications_this_month,
-      applications_limit: limit === 9999 ? null : limit,
-      period_end:         user.plan_period_end,
-      has_billing:        !!user.stripe_customer_id,
-    };
   }
 }

@@ -1,7 +1,6 @@
 import {
-  Controller, Get, Post, Param, Body, RawBodyRequest, Req, Headers,
+  Controller, Get, Post, Param, Body, Query,
 } from '@nestjs/common';
-import type { Request } from 'express';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { BillingService } from './billing.service.js';
 
@@ -16,27 +15,18 @@ export class BillingController {
     return this.billing.getUserBilling(userId);
   }
 
-  @Post(':userId/checkout/:plan')
-  @ApiOperation({ summary: 'Create Stripe Checkout session (pro | agency)' })
-  checkout(
+  @Post(':userId/pay/:plan')
+  @ApiOperation({ summary: 'Initiate JazzCash payment for plan upgrade' })
+  pay(
     @Param('userId') userId: string,
     @Param('plan') plan: 'pro' | 'agency',
   ) {
-    return this.billing.createCheckoutSession(userId, plan);
+    return this.billing.createPaymentRequest(userId, plan);
   }
 
-  @Post(':userId/portal')
-  @ApiOperation({ summary: 'Create Stripe Customer Portal session' })
-  portal(@Param('userId') userId: string) {
-    return this.billing.getPortalUrl(userId);
-  }
-
-  @Post('webhook')
-  @ApiOperation({ summary: 'Stripe webhook receiver (raw body required)' })
-  webhook(
-    @Req() req: RawBodyRequest<Request>,
-    @Headers('stripe-signature') sig: string,
-  ) {
-    return this.billing.handleWebhook(req.rawBody!, sig);
+  @Post('callback')
+  @ApiOperation({ summary: 'JazzCash payment callback' })
+  callback(@Body() params: Record<string, string>) {
+    return this.billing.handleCallback(params);
   }
 }
