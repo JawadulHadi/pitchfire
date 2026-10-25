@@ -8,6 +8,10 @@ Versions correspond to completed phases.
 
 ## [Unreleased]
 
+### Fixed
+- **`package.json`** — Added `packageManager: "npm@10.9.4"` so Turborepo can resolve the npm workspace. Without it, `turbo run build --filter=@pitchfire/api` (the Render build command) failed with `Could not resolve workspace. Missing devEngines.packageManager or legacy packageManager field`.
+- **`apps/api/tsconfig.json`** — `ignoreDeprecations` was set to `"6.0"`, an unreleased TypeScript version; the installed compiler (5.9.3) rejects it with `TS5103: Invalid value for '--ignoreDeprecations'`. Changed to the valid `"5.0"`.
+
 ### Security
 - **`package.json` / `package-lock.json`** — Added `overrides` for `lodash` (>=4.18.1, CVE-2026-4800), `multer` (>=2.3.0, CVE-2026-2359/3304/3520/5079/77078/82333), and `postcss` (>=8.5.18, CVE-2026-45623/73646). These were pulled in transitively at vulnerable versions (lodash 4.17.21, multer 2.0.2 via `@nestjs/platform-express`, postcss 8.4.31 via `next`) even though the top-level dependencies already resolved to patched versions.
 
