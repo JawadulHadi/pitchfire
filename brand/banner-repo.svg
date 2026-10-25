@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" width="800" height="300" role="img" aria-label="PitchFire typography specimen">
+  <defs>
+    <style>
+      .display { font-family: 'Syne', sans-serif; font-weight: 800; fill: #e2e8f0; }
+      .body { font-family: 'DM Sans', sans-serif; fill: #94a3b8; }
+      .mono { font-family: 'JetBrains Mono', monospace; fill: #f97316; }
+      .meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #94a3b8; }
+    </style>
+  </defs>
+  <rect width="800" height="300" fill="#060b18" rx="12"/>
+  <text x="40" y="70" class="display" font-size="48" letter-spacing="-2">PitchFire
+  </text>
+  <text x="40" y="110" class="display" font-size="28" letter-spacing="-1">Autonomous Job Search
+  </text>
+  <text x="40" y="145" class="display" font-size="18" letter-spacing="-.3">7 Agents, 0 Excuses
+  </text>
+  <text x="40" y="180" class="body" font-size="15" font-weight="500">Upload your resume once. PitchFire discovers matched jobs, tailors every application, submits autonomously.
+  </text>
+  <text x="40" y="215" class="mono" font-size="13" font-weight="500">score ≥ 0.72 → TailorAgent → ApplierAgent
+  </text>
+  <text x="40" y="255" class="body" font-size="11" font-weight="700" letter-spacing=".12em" text-transform="uppercase" fill="#f97316">EYEBROW LABEL
+  </text>
+  <text x="40" y="280" class="meta">Syne 800 · DM Sans 500 · JetBrains Mono 500
+  </text>
+</svg>

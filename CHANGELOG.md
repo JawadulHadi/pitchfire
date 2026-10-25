@@ -6,6 +6,27 @@ Versions correspond to completed phases.
 
 ---
 
+## [0.8.0] — 2026-10-24 — Brand Identity + Glass Theme + Netlify Deployment
+
+### Added
+- **Brand assets** — `brand/logo-icon.svg`, `brand/logo-horizontal.svg`, `brand/banner-github.svg`, `brand/banner-repo.svg` now copied to `apps/web/public/brand/` and consumed by the app.
+- **`apps/web/src/components/Logo.tsx`** — Inline SVG React components `LogoIcon` (48×48 flame) and `LogoHorizontal` (380×64 lockup) with unique gradient IDs (`li-*` / `lh-*`) to avoid cross-component conflicts.
+- **`apps/web/src/components/ThemeToggle.tsx`** — Sun/moon toggle button. Reads `pf-theme` from localStorage; defaults to system preference. Writes `light` class on `<html>`.
+- **`LICENSE`** — Explicit MIT license file (was referenced in README/badges but missing from the tree).
+
+### Changed
+- **`apps/web/src/app/globals.css`** — Full CSS custom property theme system. `:root` dark defaults + `:root.light` overrides. `.glass`, `.glass-nav`, `.glass-section` glassmorphism utilities. `backdrop-filter: blur(16px)` + rgba surface backgrounds. Animated `body` mesh gradient.
+- **`apps/web/src/app/layout.tsx`** — Sticky `glass-nav` with `LogoHorizontal` and `ThemeToggle`. Inline FOUC-prevention script in `<head>`. Google Fonts preconnect for Syne 800. Updated OG/favicon metadata to use brand SVGs.
+- **`apps/web/src/app/(marketing)/page.tsx`** — Removed duplicate nav (now in layout). Replaced all `bg-gray-*` classes with CSS-var-driven glass cards and accent colors. Uses `LogoIcon` in hero.
+- **All dashboard pages** (`dashboard`, `jobs`, `review`, `applications`, `sessions`, `analytics`, `billing`, `agency`) — Replaced `bg-gray-900 border border-gray-800 rounded-xl` hardcoded dark classes with `.glass rounded-xl` utility.
+- **`netlify.toml`** — Production `API_URL` baked into build environment; static export publishing from `apps/web/out`.
+- **`.env.example`** — Replaced pattern-matching placeholder values (`sk-ant-…`, `sk_test_…`, `whsec_…`, `pk_test_…`) with neutral `your-...-here` strings to prevent Netlify secrets scanning failures.
+
+### Removed
+- **`vercel.json`** — Deleted; deployment platform is now Netlify exclusively.
+
+---
+
 ## [0.7.0] — 2026-10-14 — Agent Communication + Market-Standard Polish
 
 ### Added

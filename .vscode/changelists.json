@@ -3,8 +3,8 @@
     {
       "name": "Default",
       "files": [
-        "apps/web/next.config.ts",
-        "vercel.json"
+        ".vscode/changelists.json",
+        "apps/web/next.config.ts"
       ]
     }
   ],

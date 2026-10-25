@@ -1,4 +1,5 @@
 # PitchFire — Original Product Plan
+
 ## Complete Build, Test, Deploy & Monetize Strategy
 
 > This document is the original engineering plan that guided the PitchFire build. It captures the context, architectural decisions, reference patterns borrowed from existing open-source projects, and the phase-by-phase delivery roadmap. Preserved verbatim as a decision log.
@@ -8,6 +9,7 @@
 ## Context
 
 Jawad Ul Hadi (Backend Lead/Architect) wants an end-to-end AI-powered job search platform that:
+
 - Discovers matching jobs across all major job boards
 - Scores JD against resume (RAG + vector similarity)
 - Auto-tailors resume variants and cover letters per job
@@ -24,6 +26,7 @@ The repo `jawadulhadi/claude_plans-` was a blank slate (just LICENSE + README). 
 Most job tools are search wrappers. **PitchFire** is a **multi-agent Claude orchestrator** where each agent owns a domain, communicates via a job pipeline queue, and plugs into the user's existing stack (Gmail, Calendar, Notion, Slack) via MCP connectors — not third-party integrations bolted on later.
 
 The differentiators:
+
 1. **Resume Variant Engine** — one base resume → tailored variant per application (user's own career strategy, applied systematically for every applicant)
 2. **Latency-aware agent routing** — fast Haiku for scoring/routing, Sonnet for tailoring/cover letters
 3. **Earned-income pipeline** — apply on behalf of others (agency mode) at the same infra cost
@@ -33,6 +36,7 @@ The differentiators:
 ## Architecture
 
 ### Monorepo Structure
+
 ```
 pitchfire/
 ├── apps/
@@ -52,6 +56,7 @@ pitchfire/
 ```
 
 ### Agent Architecture (7 Agents)
+
 ```
 Orchestrator (Claude Sonnet 4.6)
 │
@@ -67,6 +72,7 @@ Orchestrator (Claude Sonnet 4.6)
 Each agent is a Claude tool-use loop that publishes events to a **BullMQ queue** (Redis). The Orchestrator subscribes and routes.
 
 ### Data Flow
+
 ```
 1. Resume uploaded → Supabase Storage → embeddings generated (pgvector)
 2. ScoutAgent → raw job listings → ScorerAgent → score > 0.72 → queue
@@ -77,9 +83,10 @@ Each agent is a Claude tool-use loop that publishes events to a **BullMQ queue**
 ```
 
 ### Tech Stack
+
 | Layer | Choice | Why |
-|---|---|---|
-| Frontend | Next.js 14 (App Router) + Tailwind + shadcn/ui | SSR, fast, free on Vercel |
+| --- | --- | --- |
+| Frontend | Next.js 14 (App Router) + Tailwind + shadcn/ui | SSR, fast, free on netlify |
 | Backend API | NestJS + TypeScript | Matches user's existing expertise |
 | AI Engine | Claude Sonnet 4.6 / Haiku 5.5 / Opus 5.5 | Model-per-task routing |
 | Database | Supabase (PostgreSQL + pgvector) | Vector search built-in, generous free tier |
@@ -98,6 +105,7 @@ Each agent is a Claude tool-use loop that publishes events to a **BullMQ queue**
 ## Database Schema (Supabase)
 
 ### Key Tables
+
 ```sql
 users            — id, email, plan (free/pro/agency), stripe_customer_id
 resumes          — id, user_id, content_text, embedding vector(1536), variants jsonb
@@ -112,19 +120,23 @@ sessions         — id, user_id, app_id, type (interview/followup), scheduled_a
 ## Build Phases
 
 ### Phase 1 — Foundation ✅ Complete
+
 **Goal**: Scout + Score + Dashboard (core loop, no apply yet)
 
 Deliverable: User uploads resume → sees ranked job feed with match scores.
 
 ### Phase 2 — Apply Automation ✅ Complete
+
 **Goal**: TailorAgent + ApplierAgent + TrackerAgent
 
 Deliverable: One-click "Auto Apply" with resume tailoring and user approval gate.
 
 ### Phase 3 — Communication Layer 🔜 Next
+
 **Goal**: InboxAgent + SchedulerAgent
 
 Files to create:
+
 - `apps/agent/src/agents/inbox.agent.ts` — Gmail MCP polling loop + reply classifier
 - `apps/agent/src/agents/scheduler.agent.ts` — Calendar event creation via Google Calendar MCP
 - `apps/web/src/app/sessions/` — Interview calendar view + prep notes
@@ -132,17 +144,21 @@ Files to create:
 Deliverable: Auto-detect interview invites → create calendar events → generate prep notes.
 
 ### Phase 4 — Intelligence & Polish 🔜 Planned
+
 **Goal**: Analytics, salary negotiation coach, bulk apply
 
 Files to create:
+
 - `apps/web/src/app/analytics/` — funnel: applied → reply → interview → offer
 - `apps/agent/src/agents/coach.agent.ts` — interview Q&A generator per company + role
 - `apps/api/src/modules/notifications/` — Slack MCP push for key events
 
 ### Phase 5 — SaaS Layer 🔜 Planned
+
 **Goal**: Multi-tenant, Stripe billing, agency mode
 
 Files to create:
+
 - `apps/api/src/modules/billing/` — Stripe webhooks, plan enforcement
 - `apps/web/src/app/(marketing)/` — Landing page with pricing
 - `apps/api/src/modules/tenants/` — Agency: manage multiple user profiles
@@ -153,6 +169,7 @@ Files to create:
 ## Reference Patterns Adopted
 
 ### From kedster/jobautopilot-claude (Most Relevant)
+
 - **Model-per-task routing**: `haiku` → job discovery/filtering; `sonnet` → form-filling; `opus` → resume tailoring
 - **Conveyor belt parallelism**: scout + score + inbox enqueued concurrently
 - **Self-updating ATS knowledge base**: `knowledge/skills/ats_playbooks/` (Workday/Ashby/Greenhouse/Lever recipes)
@@ -161,20 +178,23 @@ Files to create:
 - **Integrity check pattern**: Haiku verifies no fabricated employers after tailoring
 
 ### From sreekarrs/JobSearch-Agent
+
 - **LoopAgent for document quality**: critique → revise → fact-check loop (max iterations) → final draft
 - **LinkedIn anonymized scraper**: random user agents, timezone/WebGL masking
 - **Dual sync/async pipeline**: same agent logic serves both CLI and web API
 
 ### From kyosek/RAG-based-job-search-assistant
+
 - **CV-as-RAG-context pattern**: parse user PDF → inject full text alongside JD chunks
 - **Self-evaluation loop**: score for `faithfulness` + `relevancy`, retry up to 3x
 - **`similarity_top_k=10`**: retrieve 10 nearest jobs, re-rank with Claude
 
-### From vercel-labs/knowledge-agent-template
+### From netlify-labs/knowledge-agent-template
+
 - **Complexity router**: classify task → route to cheap (haiku) vs. powerful (opus)
 - **Multi-platform adapter pattern**: one agent codebase → web, Slack bot, Discord bot
 - **Admin agent**: `query_stats`, `query_errors`, `run_sql` for operational observability
-- **Vercel-native deployment**: one-click deploy with env var config
+- **netlify-native deployment**: one-click deploy with env var config
 
 ---
 
@@ -203,14 +223,16 @@ pnpm dev   # runs web + api + agent concurrently (turbo)
 ## Deployment: Local → Cloud (Economical Path)
 
 ### Stage 2: Cloud Free Tier (~$0/mo)
-Stack: **Vercel (web) + Railway (api + agent) + Supabase + Upstash**
+
+Stack: **netlify (web) + Railway (api + agent) + Supabase + Upstash**
 
 ### Stage 3: First Revenue (~$50/mo infra)
+
 | Service | Cost |
-|---|---|
+| --- | --- |
 | Railway Starter | $5/mo |
 | Supabase Pro | $25/mo |
-| Vercel Pro | $20/mo |
+| netlify Pro | $20/mo |
 | **Total** | **$50/mo** |
 
 Break-even: **2 Pro users at $29/mo** → profitable from user #2.
@@ -220,7 +242,7 @@ Break-even: **2 Pro users at $29/mo** → profitable from user #2.
 ## Monetization
 
 | Plan | Price | Target |
-|---|---|---|
+| --- | --- | --- |
 | Free | $0/mo | Trial / hobby |
 | Pro | $29/mo | Active job seekers |
 | Agency | $99/mo | Recruiters / career coaches |

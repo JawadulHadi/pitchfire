@@ -1,84 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" width="280" height="64" role="img" aria-label="PitchFire logo">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 64" width="760" height="128" role="img" aria-label="PitchFire horizontal lockup">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#0F172A"/>
       <stop offset="100%" stop-color="#2D1B69"/>
     </linearGradient>
-    <linearGradient id="flameOuter" x1="50%" y1="100%" x2="50%" y2="0%">
-      <stop offset="0%"   stop-color="#C2410C"/>
-      <stop offset="35%"  stop-color="#EA580C"/>
-      <stop offset="70%"  stop-color="#F97316"/>
+    <linearGradient id="fo" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#C2410C"/>
+      <stop offset="35%" stop-color="#EA580C"/>
+      <stop offset="70%" stop-color="#F97316"/>
       <stop offset="100%" stop-color="#FCD34D"/>
     </linearGradient>
-    <linearGradient id="flameMid" x1="50%" y1="100%" x2="50%" y2="0%">
-      <stop offset="0%"   stop-color="#EA580C"/>
-      <stop offset="60%"  stop-color="#F97316"/>
+    <linearGradient id="fm" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="60%" stop-color="#F97316"/>
       <stop offset="100%" stop-color="#FACC15"/>
     </linearGradient>
-    <linearGradient id="flameCore" x1="50%" y1="100%" x2="50%" y2="0%">
-      <stop offset="0%"   stop-color="#FACC15"/>
+    <linearGradient id="fc" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#FACC15"/>
       <stop offset="100%" stop-color="#FEF9C3"/>
     </linearGradient>
-    <radialGradient id="baseGlow" cx="50%" cy="95%" r="55%">
-      <stop offset="0%"   stop-color="#7C3AED" stop-opacity="0.5"/>
+    <radialGradient id="glow" cx="50%" cy="95%" r="55%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity=".5"/>
       <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
     </radialGradient>
-    <filter id="softGlow">
-      <feGaussianBlur stdDeviation="1" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-
-  <!-- Icon background -->
-  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
-  <!-- Violet base glow -->
-  <ellipse cx="32" cy="57" rx="21" ry="9" fill="url(#baseGlow)"/>
-  <!-- Outer flame -->
-  <path d="
-    M32,57
-    C18,57 8,46 8,34
-    C8,21 16,10 28,6.5
-    Q30,4.5 32,4
-    Q34,4.5 36,6.5
-    C48,10 56,21 56,34
-    C56,46 46,57 32,57Z
-  " fill="url(#flameOuter)" filter="url(#softGlow)"/>
-  <!-- Mid flame -->
-  <path d="
-    M32,51
-    C22,50 16,42 16,34
-    C16,24 22,16 30,12.5
-    Q31,12 32,11.5
-    Q33,12 34,12.5
-    C42,16 48,24 48,34
-    C48,42 42,50 32,51Z
-  " fill="url(#flameMid)" opacity="0.75"/>
-  <!-- Core -->
-  <path d="
-    M32,43
-    C27,42 23,38 23,34
-    C23,28 27,23 31.5,21
-    L32,20.5
-    L32.5,21
-    C37,23 41,28 41,34
-    C41,38 37,42 32,43Z
-  " fill="url(#flameCore)" opacity="0.6"/>
-  <!-- Tip spark -->
-  <circle cx="32" cy="5.5" r="2.5" fill="#FEF9C3" opacity="0.95"/>
-
-  <!-- Wordmark: "Pitch" white + "Fire" orange -->
-  <!-- Using embedded path data for the wordmark to keep SVG self-contained -->
-  <!-- "Pitch" in white bold Syne-style geometric sans -->
-  <text x="80" y="40"
-        font-family="'Syne', 'Inter', system-ui, sans-serif"
-        font-size="30"
-        font-weight="800"
-        letter-spacing="-0.5"
-        fill="#F8FAFC">Pitch</text>
-  <text x="175" y="40"
-        font-family="'Syne', 'Inter', system-ui, sans-serif"
-        font-size="30"
-        font-weight="800"
-        letter-spacing="-0.5"
-        fill="#F97316">Fire</text>
+  <g transform="translate(0,8)">
+    <rect width="48" height="48" rx="11" fill="url(#bg)"/>
+    <ellipse cx="24" cy="44" rx="16" ry="7" fill="url(#glow)"/>
+    <path d="M24,43 C13,43 6,35 6,26 C6,16 12,8 21,5 Q22.5,3.5 24,3 Q25.5,3.5 27,5 C36,8 42,16 42,26 C42,35 35,43 24,43Z" fill="url(#fo)"/>
+    <path d="M24,38 C17,37 12,31 12,25 C12,18 17,12 22.5,9.5 Q23.3,9 24,8.5 Q24.7,9 25.5,9.5 C31,12 36,18 36,25 C36,31 31,37 24,38Z" fill="url(#fm)" opacity=".75"/>
+    <path d="M24,32 C20,31 17,28 17,25 C17,21 20,17.5 23.5,16 L24,15.5 L24.5,16 C28,17.5 31,21 31,25 C31,28 28,31 24,32Z" fill="url(#fc)" opacity=".6"/>
+    <circle cx="24" cy="4.5" r="1.8" fill="#FEF9C3" opacity=".95"/>
+  </g>
+  <text x="64" y="38" font-family="'Syne', sans-serif" font-size="36" font-weight="800" letter-spacing="-1" fill="#F8FAFC">Pitch<tspan fill="#F97316">Fire</tspan></text>
 </svg>

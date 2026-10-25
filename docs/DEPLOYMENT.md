@@ -33,7 +33,7 @@ pnpm dev
 ## Stage 2: Cloud Free Tier
 
 | Service | Hosts | Free Limits |
-|---|---|---|
+| --- | --- | --- |
 | **Vercel** | `apps/web` | 100GB bandwidth, hobby projects |
 | **Railway** | `apps/api` + `apps/agent` worker | 500h compute/mo |
 | **Supabase** | PostgreSQL + pgvector + Auth | 500MB DB, 1GB storage, 50k auth users |
@@ -74,6 +74,7 @@ railway up --service agent-worker
 ```
 
 Railway environment variables to set:
+
 ```
 ANTHROPIC_API_KEY=...
 SUPABASE_URL=https://xxx.supabase.co
@@ -99,7 +100,7 @@ REDIS_URL=redis://default:...@your-upstash-url:6379
 ## Stage 3: First Revenue (~$50/mo)
 
 | Service | Plan | Cost |
-|---|---|---|
+| --- | --- | --- |
 | Railway Starter | 5 GB RAM, always-on | $5/mo |
 | Supabase Pro | 8 GB DB, daily backups | $25/mo |
 | Vercel Pro | 1 TB bandwidth, faster builds | $20/mo |
@@ -113,7 +114,7 @@ REDIS_URL=redis://default:...@your-upstash-url:6379
 ## Stage 4: Scale
 
 | Component | Upgrade path |
-|---|---|
+| --- | --- |
 | Database | Supabase → AWS RDS Aurora PostgreSQL (pgvector supported) |
 | API | Railway → AWS ECS Fargate (containerized NestJS) |
 | Agent Worker | Railway → multiple worker pods (parallel apply jobs) |
@@ -215,7 +216,7 @@ jobs:
 ## Health Checks
 
 | Endpoint | Expected |
-|---|---|
+| --- | --- |
 | `GET /` (api) | `{ status: "ok" }` |
 | `GET /api` (Swagger) | Swagger UI HTML |
 | `GET /pipeline/summary/demo-user-123` | `{ discovered: N, ... }` |

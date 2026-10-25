@@ -2,9 +2,132 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme tokens ─────────────────────────────────────────────── */
 :root {
-  --bg-primary: #030712;
-  --bg-card: #111827;
-  --border: #1f2937;
-  --accent: #3b82f6;
+  /* dark (default) */
+  --bg-base: #060b18;
+  --bg-mesh:
+    radial-gradient(
+      ellipse 80% 55% at 50% -5%,
+      rgba(124, 58, 237, 0.22) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 55% 40% at 85% 85%,
+      rgba(234, 88, 12, 0.14) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 45% 35% at 10% 70%,
+      rgba(56, 189, 248, 0.08) 0%,
+      transparent 65%
+    );
+  --bg-surface: rgba(255, 255, 255, 0.045);
+  --bg-surface-hover: rgba(255, 255, 255, 0.075);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-hover: rgba(255, 255, 255, 0.18);
+  --text-1: #f8fafc;
+  --text-2: #94a3b8;
+  --text-3: #475569;
+  --accent: #f97316;
+  --accent-dim: rgba(249, 115, 22, 0.15);
+  --glass-blur: blur(16px);
+  --nav-bg: rgba(6, 11, 24, 0.72);
+}
+
+:root.light {
+  --bg-base: #f1f5f9;
+  --bg-mesh:
+    radial-gradient(
+      ellipse 80% 55% at 50% -5%,
+      rgba(124, 58, 237, 0.1) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 55% 40% at 85% 85%,
+      rgba(234, 88, 12, 0.07) 0%,
+      transparent 65%
+    );
+  --bg-surface: rgba(255, 255, 255, 0.72);
+  --bg-surface-hover: rgba(255, 255, 255, 0.92);
+  --border: rgba(15, 23, 42, 0.09);
+  --border-hover: rgba(15, 23, 42, 0.2);
+  --text-1: #0f172a;
+  --text-2: #475569;
+  --text-3: #94a3b8;
+  --nav-bg: rgba(241, 245, 249, 0.8);
+}
+
+/* ── Base ─────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.25s,
+    border-color 0.25s,
+    color 0.15s;
+}
+
+body {
+  background-color: var(--bg-base);
+  background-image: var(--bg-mesh);
+  background-attachment: fixed;
+  color: var(--text-1);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Glass components ─────────────────────────────────────────── */
+@layer components {
+  .glass {
+    background: var(--bg-surface);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    transition:
+      background 0.2s,
+      border-color 0.2s;
+  }
+
+  .glass:hover {
+    background: var(--bg-surface-hover);
+    border-color: var(--border-hover);
+  }
+
+  .glass-nav {
+    background: var(--nav-bg);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .glass-section {
+    background: var(--bg-surface);
+    -webkit-backdrop-filter: var(--glass-blur);
+    backdrop-filter: var(--glass-blur);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .text-primary {
+    color: var(--text-1);
+  }
+  .text-secondary {
+    color: var(--text-2);
+  }
+  .text-muted {
+    color: var(--text-3);
+  }
+
+  .accent {
+    color: var(--accent);
+  }
+  .accent-bg {
+    background: var(--accent-dim);
+    border: 1px solid rgba(249, 115, 22, 0.25);
+  }
 }

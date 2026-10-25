@@ -1,234 +1,140 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-label="PitchFire GitHub repository banner">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-label="PitchFire GitHub banner">
   <defs>
-    <!-- Background gradient: deep navy → dark purple -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%"   stop-color="#060B18"/>
-      <stop offset="55%"  stop-color="#0F172A"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060B18"/>
+      <stop offset="55%" stop-color="#0F172A"/>
       <stop offset="100%" stop-color="#1E1040"/>
     </linearGradient>
-    <!-- Flame gradients -->
-    <linearGradient id="flameOuter" x1="50%" y1="100%" x2="50%" y2="0%">
-      <stop offset="0%"   stop-color="#C2410C"/>
-      <stop offset="35%"  stop-color="#EA580C"/>
-      <stop offset="70%"  stop-color="#F97316"/>
+    <linearGradient id="fo" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#C2410C"/>
+      <stop offset="35%" stop-color="#EA580C"/>
+      <stop offset="70%" stop-color="#F97316"/>
       <stop offset="100%" stop-color="#FCD34D"/>
     </linearGradient>
-    <linearGradient id="flameMid" x1="50%" y1="100%" x2="50%" y2="0%">
-      <stop offset="0%"   stop-color="#EA580C"/>
-      <stop offset="60%"  stop-color="#F97316"/>
+    <linearGradient id="fm" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="60%" stop-color="#F97316"/>
       <stop offset="100%" stop-color="#FACC15"/>
     </linearGradient>
-    <linearGradient id="flameCore" x1="50%" y1="100%" x2="50%" y2="0%">
-      <stop offset="0%"   stop-color="#FACC15"/>
+    <linearGradient id="fc" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#FACC15"/>
       <stop offset="100%" stop-color="#FEF9C3"/>
     </linearGradient>
-    <!-- Violet glow behind flame -->
-    <radialGradient id="violetGlow" cx="50%" cy="80%" r="50%">
-      <stop offset="0%"   stop-color="#7C3AED" stop-opacity="0.6"/>
+    <radialGradient id="vg" cx="50%" cy="80%" r="50%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity=".6"/>
       <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
     </radialGradient>
-    <!-- Ambient glow under the entire left area -->
-    <radialGradient id="ambientLeft" cx="30%" cy="60%" r="45%">
-      <stop offset="0%"   stop-color="#EA580C" stop-opacity="0.12"/>
+    <radialGradient id="al" cx="30%" cy="60%" r="45%">
+      <stop offset="0%" stop-color="#EA580C" stop-opacity=".12"/>
       <stop offset="100%" stop-color="#EA580C" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="ambientRight" cx="80%" cy="40%" r="50%">
-      <stop offset="0%"   stop-color="#7C3AED" stop-opacity="0.08"/>
+    <radialGradient id="ar" cx="80%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity=".08"/>
       <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
     </radialGradient>
-    <filter id="flameGlow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="fg">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
-    <filter id="textGlow">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="tg">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
-    <clipPath id="bannerClip">
+    <clipPath id="clip">
       <rect width="1280" height="640"/>
     </clipPath>
-  </defs>
-
-  <g clip-path="url(#bannerClip)">
-    <!-- Background -->
-    <rect width="1280" height="640" fill="url(#bgGrad)"/>
-
-    <!-- Subtle dot grid pattern -->
-    <pattern id="dotGrid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-      <circle cx="20" cy="20" r="1" fill="#1E3A5F" opacity="0.5"/>
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="20" cy="20" r="1" fill="#1E3A5F" opacity=".5"/>
     </pattern>
-    <rect width="1280" height="640" fill="url(#dotGrid)"/>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="1280" height="640" fill="url(#bg)"/>
+    <rect width="1280" height="640" fill="url(#dots)"/>
+    <ellipse cx="380" cy="400" rx="400" ry="300" fill="url(#al)"/>
+    <ellipse cx="1050" cy="250" rx="380" ry="280" fill="url(#ar)"/>
 
-    <!-- Ambient light blooms -->
-    <ellipse cx="380" cy="400" rx="400" ry="300" fill="url(#ambientLeft)"/>
-    <ellipse cx="1050" cy="250" rx="380" ry="280" fill="url(#ambientRight)"/>
-
-    <!-- ── FLAME ICON ── centered at x=200, scaled up to ~320px tall -->
-    <g transform="translate(70, 120)">
-      <!-- Icon background rounded square -->
-      <rect width="260" height="260" rx="52" fill="#0F172A" opacity="0.8"/>
+    <!-- Flame icon -->
+    <g transform="translate(70,120)">
+      <rect width="260" height="260" rx="52" fill="#0F172A" opacity=".8"/>
       <rect width="260" height="260" rx="52" fill="none" stroke="#1E3A5F" stroke-width="1"/>
-
-      <!-- Violet glow -->
-      <ellipse cx="130" cy="230" rx="80" ry="36" fill="url(#violetGlow)"/>
-
-      <!-- Outer flame (scaled ~5.4x from 48px icon) -->
-      <path d="
-        M130,237
-        C74,237 32,190 32,142
-        C32,86 65,43 113,26
-        Q121.5,18 130,15
-        Q138.5,18 147,26
-        C195,43 228,86 228,142
-        C228,190 186,237 130,237Z
-      " fill="url(#flameOuter)" filter="url(#flameGlow)"/>
-
-      <!-- Mid flame -->
-      <path d="
-        M130,218
-        C90,216 64,182 64,150
-        C64,110 88,74 120,56
-        Q125,52 130,50
-        Q135,52 140,56
-        C172,74 196,110 196,150
-        C196,182 170,216 130,218Z
-      " fill="url(#flameMid)" opacity="0.8"/>
-
-      <!-- Core -->
-      <path d="
-        M130,186
-        C111,184 97,168 97,152
-        C97,130 111,112 128,104
-        L130,102
-        L132,104
-        C149,112 163,130 163,152
-        C163,168 149,184 130,186Z
-      " fill="url(#flameCore)" opacity="0.65"/>
-
-      <!-- Tip spark -->
-      <circle cx="130" cy="18" r="9" fill="#FEF9C3" opacity="0.95"/>
-      <circle cx="130" cy="18" r="5" fill="#FFF" opacity="0.8"/>
+      <ellipse cx="130" cy="230" rx="80" ry="36" fill="url(#vg)"/>
+      <path d="M130,237 C74,237 32,190 32,142 C32,86 65,43 113,26 Q121.5,18 130,15 Q138.5,18 147,26 C195,43 228,86 228,142 C228,190 186,237 130,237Z" fill="url(#fo)" filter="url(#fg)"/>
+      <path d="M130,218 C90,216 64,182 64,150 C64,110 88,74 120,56 Q125,52 130,50 Q135,52 140,56 C172,74 196,110 196,150 C196,182 170,216 130,218Z" fill="url(#fm)" opacity=".8"/>
+      <path d="M130,186 C111,184 97,168 97,152 C97,130 111,112 128,104 L130,102 L132,104 C149,112 163,130 163,152 C163,168 149,184 130,186Z" fill="url(#fc)" opacity=".65"/>
+      <circle cx="130" cy="18" r="9" fill="#FEF9C3" opacity=".95"/>
+      <circle cx="130" cy="18" r="5" fill="#FFF" opacity=".8"/>
     </g>
 
-    <!-- ── WORDMARK ── -->
-    <text x="390" y="284"
-          font-family="'Syne', 'Inter', 'Helvetica Neue', sans-serif"
-          font-size="120"
-          font-weight="800"
-          letter-spacing="-4"
-          fill="#F8FAFC">Pitch</text>
-    <text x="740" y="284"
-          font-family="'Syne', 'Inter', 'Helvetica Neue', sans-serif"
-          font-size="120"
-          font-weight="800"
-          letter-spacing="-4"
-          fill="#F97316"
-          filter="url(#textGlow)">Fire</text>
-
-    <!-- Tagline -->
-    <text x="391" y="338"
-          font-family="'DM Sans', 'Inter', system-ui, sans-serif"
-          font-size="22"
-          font-weight="500"
-          fill="#94A3B8"
-          letter-spacing="0.2">Autonomous AI Job Search Orchestrator</text>
-
-    <!-- Divider -->
+    <!-- Wordmark -->
+    <text x="390" y="284" font-family="'Syne','Inter','Helvetica Neue',sans-serif" font-size="120" font-weight="800" letter-spacing="-4" fill="#F8FAFC">Pitch</text>
+    <text x="740" y="284" font-family="'Syne','Inter','Helvetica Neue',sans-serif" font-size="120" font-weight="800" letter-spacing="-4" fill="#F97316" filter="url(#tg)">Fire</text>
+    <text x="391" y="338" font-family="'DM Sans','Inter',system-ui,sans-serif" font-size="22" font-weight="500" fill="#94A3B8" letter-spacing=".2">Autonomous AI Job Search Orchestrator</text>
     <line x1="391" y1="370" x2="880" y2="370" stroke="#1E3A5F" stroke-width="1"/>
 
-    <!-- Agent badges row -->
-    <g transform="translate(391, 400)">
-      <!-- Badge 1: 7 Agents -->
+    <!-- Tech badges -->
+    <g transform="translate(391,400)">
       <rect width="108" height="32" rx="6" fill="#1E293B"/>
       <rect width="108" height="32" rx="6" fill="none" stroke="#334155" stroke-width="1"/>
-      <text x="54" y="21" text-anchor="middle"
-            font-family="'DM Sans', system-ui, sans-serif"
-            font-size="12" font-weight="600" fill="#A78BFA">7 Agents</text>
+      <text x="54" y="21" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#A78BFA">7 Agents</text>
 
-      <!-- Badge 2: NestJS -->
-      <g transform="translate(120, 0)">
+      <g transform="translate(120,0)">
         <rect width="88" height="32" rx="6" fill="#1E293B"/>
         <rect width="88" height="32" rx="6" fill="none" stroke="#334155" stroke-width="1"/>
-        <text x="44" y="21" text-anchor="middle"
-              font-family="'DM Sans', system-ui, sans-serif"
-              font-size="12" font-weight="600" fill="#F97316">NestJS</text>
+        <text x="44" y="21" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#F97316">NestJS</text>
       </g>
-
-      <!-- Badge 3: Claude SDK -->
-      <g transform="translate(220, 0)">
+      <g transform="translate(220,0)">
         <rect width="110" height="32" rx="6" fill="#1E293B"/>
         <rect width="110" height="32" rx="6" fill="none" stroke="#334155" stroke-width="1"/>
-        <text x="55" y="21" text-anchor="middle"
-              font-family="'DM Sans', system-ui, sans-serif"
-              font-size="12" font-weight="600" fill="#38BDF8">Claude SDK</text>
+        <text x="55" y="21" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#38BDF8">Claude SDK</text>
       </g>
-
-      <!-- Badge 4: BullMQ -->
-      <g transform="translate(342, 0)">
+      <g transform="translate(342,0)">
         <rect width="90" height="32" rx="6" fill="#1E293B"/>
         <rect width="90" height="32" rx="6" fill="none" stroke="#334155" stroke-width="1"/>
-        <text x="45" y="21" text-anchor="middle"
-              font-family="'DM Sans', system-ui, sans-serif"
-              font-size="12" font-weight="600" fill="#34D399">BullMQ</text>
+        <text x="45" y="21" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#34D399">BullMQ</text>
       </g>
-
-      <!-- Badge 5: Supabase -->
-      <g transform="translate(444, 0)">
+      <g transform="translate(444,0)">
         <rect width="100" height="32" rx="6" fill="#1E293B"/>
         <rect width="100" height="32" rx="6" fill="none" stroke="#334155" stroke-width="1"/>
-        <text x="50" y="21" text-anchor="middle"
-              font-family="'DM Sans', system-ui, sans-serif"
-              font-size="12" font-weight="600" fill="#2DD4BF">Supabase</text>
+        <text x="50" y="21" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="12" font-weight="600" fill="#2DD4BF">Supabase</text>
       </g>
     </g>
 
-    <!-- Agent flow diagram (right side) -->
-    <g transform="translate(920, 100)" opacity="0.5">
-      <!-- Agent nodes -->
-      <!-- ScoutAgent -->
+    <!-- Agent flow (right side) -->
+    <g transform="translate(920,100)" opacity=".5">
       <rect x="100" y="20" width="130" height="38" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
-      <text x="165" y="44" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="13" font-weight="600" fill="#94A3B8">ScoutAgent</text>
-
-      <!-- Arrow down -->
+      <text x="165" y="44" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="600" fill="#94A3B8">ScoutAgent</text>
       <line x1="165" y1="60" x2="165" y2="95" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,3"/>
       <polygon points="160,92 165,103 170,92" fill="#334155"/>
 
-      <!-- ScorerAgent -->
       <rect x="100" y="105" width="130" height="38" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
-      <text x="165" y="129" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="13" font-weight="600" fill="#94A3B8">ScorerAgent</text>
-
+      <text x="165" y="129" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="600" fill="#94A3B8">ScorerAgent</text>
       <line x1="165" y1="145" x2="165" y2="180" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,3"/>
       <polygon points="160,177 165,188 170,177" fill="#334155"/>
 
-      <!-- TailorAgent -->
-      <rect x="100" y="190" width="130" height="38" rx="8" fill="#1E293B" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.6"/>
-      <text x="165" y="214" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="13" font-weight="600" fill="#FB923C">TailorAgent</text>
-
+      <rect x="100" y="190" width="130" height="38" rx="8" fill="#1E293B" stroke="#F97316" stroke-width="1.5" stroke-opacity=".6"/>
+      <text x="165" y="214" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="600" fill="#FB923C">TailorAgent</text>
       <line x1="165" y1="230" x2="165" y2="265" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,3"/>
       <polygon points="160,262 165,273 170,262" fill="#334155"/>
 
-      <!-- ApplierAgent -->
       <rect x="100" y="275" width="130" height="38" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
-      <text x="165" y="299" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="13" font-weight="600" fill="#94A3B8">ApplierAgent</text>
-
+      <text x="165" y="299" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="600" fill="#94A3B8">ApplierAgent</text>
       <line x1="165" y1="315" x2="165" y2="350" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,3"/>
       <polygon points="160,347 165,358 170,347" fill="#334155"/>
 
-      <!-- InboxAgent -->
       <rect x="100" y="360" width="130" height="38" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
-      <text x="165" y="384" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="13" font-weight="600" fill="#94A3B8">InboxAgent</text>
+      <text x="165" y="384" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="13" font-weight="600" fill="#94A3B8">InboxAgent</text>
 
-      <!-- Approval gate label -->
       <rect x="240" y="193" width="110" height="28" rx="14" fill="#431407"/>
-      <text x="295" y="212" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="11" font-weight="600" fill="#F97316">Approval Gate</text>
-      <line x1="230" y1="207" x2="240" y2="207" stroke="#F97316" stroke-width="1" stroke-opacity="0.5"/>
+      <text x="295" y="212" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="11" font-weight="600" fill="#F97316">Approval Gate</text>
+      <line x1="230" y1="207" x2="240" y2="207" stroke="#F97316" stroke-width="1" stroke-opacity=".5"/>
     </g>
 
-    <!-- Bottom signature line -->
-    <text x="640" y="610" text-anchor="middle"
-          font-family="'DM Sans', system-ui, sans-serif"
-          font-size="13" fill="#1E3A5F" letter-spacing="0.1">
-      pitchfire.dev · MIT License · Jawad Ul Hadi
-    </text>
+    <text x="640" y="610" text-anchor="middle" font-family="'DM Sans',system-ui,sans-serif" font-size="13" fill="#1E3A5F" letter-spacing=".1">pitchfire.dev · MIT License · Jawad Ul Hadi</text>
   </g>
 </svg>

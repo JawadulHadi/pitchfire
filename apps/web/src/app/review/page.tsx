@@ -72,7 +72,7 @@ export default function ReviewPage() {
       {loading ? (
         <div className="text-gray-400">Loading...</div>
       ) : apps.length === 0 ? (
-        <div className="bg-gray-900 border border-gray-800 rounded-xl p-8 text-center">
+        <div className="glass rounded-xl p-8 text-center">
           <div className="text-gray-400 mb-2">No applications pending review.</div>
           <div className="text-gray-500 text-sm">
             The TailorAgent will queue applications here once jobs are scored.
@@ -83,7 +83,7 @@ export default function ReviewPage() {
           {apps.map((app) => (
             <div
               key={app.id}
-              className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden"
+              className="glass rounded-xl overflow-hidden"
             >
               <div className="flex items-center justify-between gap-4 p-5">
                 <div className="min-w-0">
