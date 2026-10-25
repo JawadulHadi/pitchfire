@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://app.netlify.com/projects/pitchfire/deploys"><img src="https://api.netlify.com/api/v1/badges/b290786d-d28a-4b10-af9e-6d8a4a50481e/deploy-status" alt="Netlify Status" /></a>
-  <a href="https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml"><img src="https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml"><img src="https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml/badge.svg" alt="Ci" /></a>
   <a href="#the-7-agents"><img src="https://img.shields.io/badge/Agents-7-blueviolet" alt="Agents" /></a>
   <a href="#tech-stack"><img src="https://img.shields.io/badge/Stack-NestJS%20%7C%20Next.js%20%7C%20Claude%20SDK%20%7C%20BullMQ-blueviolet" alt="Stack" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="License" /></a>
@@ -35,61 +35,57 @@ Most job tools are search wrappers. PitchFire is a **multi-agent Claude orchestr
 | Interview prep    | Manual research  | CoachAgent: role Q&A + company context via Claude Sonnet     |
 | Failure handling  | Silent           | DLQ on 3rd failure, confidence gates, integrity checks       |
 
-**Designing for AI Failure** is the core thesis: every autonomous action has a fallback (confidence < 0.8 → user flag), an approval gate (every application reviewed before submit), and a recovery path (DLQ replay). See [docs/RND.md](docs/RND.md) for the full reasoning.
+**Designing for AI Failure** is the core thesis: every autonomous action has a fallback (confidence < 0.8 → user flag), an approval gate (every application reviewed before submission), and a recovery path (DLQ replay). See [docs/RND.md](docs/RND.md) for the full reasoning.
 
 ---
 
 ## Architecture
 
-The system is three tiers: a Next.js web app, a NestJS REST API that acts as a queue producer, and a long-running agent worker that consumes three typed BullMQ queues. All agents communicate through those queues — never via direct function calls.
+The system has three tiers: a Next.js web app, a NestJS REST API that produces to a queue, and a long-running agent worker that consumes three typed BullMQ queues. All agents communicate through those queues — never via direct function calls.
 
 ```mermaid
-flowchart TD
-    U(["👤 User"])
-
-    subgraph Web["apps/web — Next.js 14"]
+flowchart TB
+ subgraph Web["apps/web — Next.js 14"]
         UI["/dashboard · /jobs · /review · /billing"]
-    end
-
-    subgraph API["apps/api — NestJS"]
+  end
+ subgraph API["apps/api — NestJS"]
         REST["REST Endpoints · Auth · Queue Producer"]
-    end
-
-    subgraph DQ["discovery-queue  ·  concurrency = 6"]
+  end
+ subgraph DQ["discovery-queue  ·  concurrency = 6"]
         Scout["🔍 ScoutAgent\nHaiku 5.5 · scrapes 10+ boards"]
         Scorer["📊 ScorerAgent\nHaiku 5.5 + pgvector · cosine match"]
-    end
-
-    subgraph AQ["apply-queue  ·  concurrency = 2"]
+  end
+ subgraph AQ["apply-queue  ·  concurrency = 2"]
         Tailor["✍️ TailorAgent\nSonnet 4.6 · resume + cover letter"]
         Applier["🤖 ApplierAgent\nSonnet 4.6 · Playwright ATS"]
-    end
-
-    subgraph CQ["comms-queue  ·  concurrency = 4"]
+  end
+ subgraph CQ["comms-queue  ·  concurrency = 4"]
         Inbox["📧 InboxAgent\nHaiku 5.5 · Gmail classifier"]
         Scheduler["📅 SchedulerAgent\nSonnet 4.6 · Google Calendar"]
         Coach["🎯 CoachAgent\nSonnet 4.6 · interview prep"]
-    end
-
-    DB[("Supabase\nPostgreSQL + pgvector 1024-dim")]
-    DLQ(["⚠️ DLQ\nafter 3 failures · replayable"])
-
-    U -- "upload resume" --> Web
-    Web <-- "REST" --> API
+  end
+    U(["👤 User"]) -- upload resume --> Web
+    Web <-- REST --> API
     API --> DQ
-
-    Scout -- "new listing" --> Scorer
+    Scout -- new listing --> Scorer
     Scorer -- "score ≥ 0.72" --> AQ
-
-    Tailor -- "✋ approval gate" --> Web
-    Web -- "user approves" --> Applier
-
-    Applier --> CQ
-    Inbox -- "interview_invite" --> Scheduler
-    Scheduler --> Coach
-
-    Scout & Scorer & Tailor & Applier & Inbox & Scheduler & Coach --> DB
-    Scout & Scorer & Tailor & Applier & Inbox & Scheduler & Coach -. "3rd failure" .-> DLQ
+    Tailor -- ✋ approval gate --> Web
+    Web -- user approves --> Applier
+    Applier --> CQ & DB[("Supabase\nPostgreSQL + pgvector 1024-dim")]
+    Inbox -- interview_invite --> Scheduler
+    Scheduler --> Coach & DB
+    Scout --> DB
+    Scorer --> DB
+    Tailor --> DB
+    Inbox --> DB
+    Coach --> DB
+    Scout -. 3rd failure .-> DLQ(["⚠️ DLQ\nafter 3 failures · replayable"])
+    Scorer -. 3rd failure .-> DLQ
+    Tailor -. 3rd failure .-> DLQ
+    Applier -. 3rd failure .-> DLQ
+    Inbox -. 3rd failure .-> DLQ
+    Scheduler -. 3rd failure .-> DLQ
+    Coach -. 3rd failure .-> DLQ
 ```
 
 **Monorepo layout** — npm workspaces + Turborepo:
