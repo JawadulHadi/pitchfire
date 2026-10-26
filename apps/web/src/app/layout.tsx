@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Syne, Archivo, Instrument_Sans, Martian_Mono } from "next/font/google";
 import "./globals.css";
 import { LogoHorizontal } from "@/components/Logo";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { ServiceWorkerRegistrar } from "@/components/ServiceWorkerRegistrar";
 import { NavAuthSection } from "@/components/NavAuthSection";
 
