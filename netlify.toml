@@ -12,6 +12,11 @@
   SECRETS_SCAN_OMIT_PATHS   = "docs/**,apps/web/out/**"
 
 [[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+
+[[headers]]
   for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"

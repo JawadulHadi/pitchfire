@@ -1,8 +1,9 @@
 {
+  "id": "/",
   "name": "PitchFire — Autonomous AI Job Search",
   "short_name": "PitchFire",
   "description": "7 agents. 0 excuses. Your job search, fully automated.",
-  "start_url": "/dashboard",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#060b18",

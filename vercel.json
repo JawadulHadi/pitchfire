@@ -1,0 +1,20 @@
+{
+  "buildCommand": "npm run build -w @pitchfire/shared && npm run build -w @pitchfire/web",
+  "outputDirectory": "apps/web/out",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "headers": [
+    {
+      "source": "/sw.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store, max-age=0" }
+      ]
+    },
+    {
+      "source": "/_next/static/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}

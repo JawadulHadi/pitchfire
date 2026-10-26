@@ -1,9 +1,11 @@
-import type { Metadata, Route, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Syne, Archivo, Instrument_Sans, Martian_Mono } from "next/font/google";
 import "./globals.css";
 import { LogoHorizontal } from "@/components/Logo";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ServiceWorkerRegistrar } from "@/components/ServiceWorkerRegistrar";
+import { NavAuthSection } from "@/components/NavAuthSection";
 
 const syne = Syne({
   weight: "800",
@@ -51,16 +53,6 @@ export const viewport: Viewport = {
   themeColor: "#060b18",
 };
 
-const NAV_LINKS: { label: string; href: Route }[] = [
-  { label: "Dashboard", href: "/dashboard" },
-  { label: "Jobs", href: "/jobs" },
-  { label: "Review", href: "/review" },
-  { label: "Applications", href: "/applications" },
-  { label: "Sessions", href: "/sessions" },
-  { label: "Analytics", href: "/analytics" },
-  { label: "Billing", href: "/billing" },
-];
-
 export default function RootLayout({
   children,
 }: {
@@ -79,14 +71,9 @@ export default function RootLayout({
             __html: `(function(){var t=localStorage.getItem('pf-theme');var d=t?t==='dark':!window.matchMedia('(prefers-color-scheme: light)').matches;if(!d)document.documentElement.classList.add('light');})();`,
           }}
         />
-        {/* Registers the PWA service worker (public/sw.js) once the page has loaded */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js');});}`,
-          }}
-        />
       </head>
       <body className="min-h-screen antialiased">
+        <ServiceWorkerRegistrar />
         <nav className="glass-nav px-6 py-3 flex items-center justify-between">
           <Link
             href="/"
@@ -98,23 +85,7 @@ export default function RootLayout({
               v0.8
             </span>
           </Link>
-          <div className="flex items-center gap-5">
-            <div
-              className="hidden md:flex gap-5 text-sm font-medium"
-              style={{ color: "var(--text-2)" }}
-            >
-              {NAV_LINKS.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="hover:text-[var(--text-1)] transition-colors"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </div>
-            <ThemeToggle />
-          </div>
+          <NavAuthSection />
         </nav>
         <main className="max-w-6xl mx-auto px-6 py-8">{children}</main>
       </body>

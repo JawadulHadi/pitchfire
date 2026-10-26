@@ -24,7 +24,7 @@ export default function LandingPage() {
         </p>
         <div className="flex gap-4 justify-center">
           <Link
-            href="/dashboard"
+            href="/login"
             className="px-8 py-3 rounded-lg font-semibold transition-colors text-white"
             style={{ background: 'var(--accent)' }}
           >
@@ -196,7 +196,7 @@ const PLANS = [
       'AI resume scoring',
       'Manual apply',
     ],
-    cta: { label: 'Get Started', href: '/dashboard' },
+    cta: { label: 'Get Started', href: '/login' },
   },
   {
     name: 'Pro',
@@ -212,7 +212,7 @@ const PLANS = [
       'Interview prep notes',
       'Analytics dashboard',
     ],
-    cta: { label: 'Upgrade to Pro', href: '/billing?plan=pro' },
+    cta: { label: 'Upgrade to Pro', href: '/login' },
   },
   {
     name: 'Agency',

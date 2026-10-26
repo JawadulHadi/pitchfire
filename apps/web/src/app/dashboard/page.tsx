@@ -1,23 +1,24 @@
 'use client';
 
 import { useState } from 'react';
+import { useRequireAuth } from '@/hooks/useRequireAuth';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 
 export default function Dashboard() {
+  const { user, loading } = useRequireAuth();
   const [uploading, setUploading] = useState(false);
   const [result, setResult] = useState<{ id: string; pages: number; enqueued: string } | null>(null);
-  const [userId] = useState('demo-user-123'); // Phase 5: replace with Supabase auth
 
   async function handleUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file || !user) return;
 
     setUploading(true);
     try {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('user_id', userId);
+      formData.append('user_id', user.id);
 
       const res = await fetch(`${API_URL}/resume/upload`, {
         method: 'POST',
@@ -34,13 +35,23 @@ export default function Dashboard() {
     }
   }
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-sm" style={{ color: 'var(--text-3)' }}>Loading…</div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-2xl mx-auto space-y-8">
       <div>
         <h1 className="font-display font-extrabold text-2xl mb-1 tracking-tight">
           Dashboard
         </h1>
-        <p className="text-secondary">Upload your resume to start the pipeline</p>
+        <p className="text-secondary">
+          Welcome back, {user?.email}
+        </p>
       </div>
 
       {/* Resume Upload */}
@@ -55,7 +66,7 @@ export default function Dashboard() {
             disabled={uploading}
           />
           {uploading ? (
-            <span className="accent font-medium">Uploading and parsing...</span>
+            <span className="accent font-medium">Uploading and parsing…</span>
           ) : (
             <span className="text-secondary">
               Drop your resume PDF here or{' '}

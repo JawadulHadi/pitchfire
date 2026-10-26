@@ -29,13 +29,13 @@ export default function Home() {
 
       <div className="flex gap-4">
         <Link
-          href="/dashboard"
+          href="/login"
           className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-lg font-medium transition-colors"
         >
           Get Started
         </Link>
         <Link
-          href="/jobs"
+          href="/login"
           className="border border-[var(--border)] hover:border-[var(--border-hover)] text-secondary px-6 py-3 rounded-lg font-medium transition-colors"
         >
           Browse Matches
