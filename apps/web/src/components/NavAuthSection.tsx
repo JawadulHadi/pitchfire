@@ -3,16 +3,17 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
+import type { Route } from 'next';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
 import { ThemeToggle } from './ThemeToggle';
 
-const AUTHED_NAV: { label: string; href: string }[] = [
-  { label: 'Dashboard', href: '/dashboard' },
-  { label: 'Jobs', href: '/jobs' },
-  { label: 'Review', href: '/review' },
-  { label: 'Applications', href: '/applications' },
-  { label: 'Billing', href: '/billing' },
+const AUTHED_NAV: { label: string; href: Route }[] = [
+  { label: 'Dashboard', href: '/dashboard' as Route },
+  { label: 'Jobs', href: '/jobs' as Route },
+  { label: 'Review', href: '/review' as Route },
+  { label: 'Applications', href: '/applications' as Route },
+  { label: 'Billing', href: '/billing' as Route },
 ];
 
 export function NavAuthSection() {
@@ -31,7 +32,7 @@ export function NavAuthSection() {
 
   async function handleSignOut() {
     await supabase.auth.signOut();
-    router.push('/');
+    router.push('/' as Route);
   }
 
   return (
@@ -77,7 +78,7 @@ export function NavAuthSection() {
         </>
       ) : (
         <Link
-          href="/login"
+          href={"/login" as Route}
           className="px-4 py-2 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90"
           style={{ background: 'var(--accent)' }}
         >

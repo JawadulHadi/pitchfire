@@ -9,7 +9,6 @@
 <p align="center"><em>Upload your resume once. PitchFire discovers matched jobs, tailors every application, submits autonomously, tracks replies, and books your interviews — all while you focus on the work that matters.</em></p>
 
 <p align="center">
-  <a href="https://app.netlify.com/projects/pitchfire/deploys"><img src="https://api.netlify.com/api/v1/badges/b290786d-d28a-4b10-af9e-6d8a4a50481e/deploy-status" alt="Netlify Status" /></a>
   <a href="https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml"><img src="https://github.com/jawadulhadi/pitchfire/actions/workflows/ci.yml/badge.svg" alt="Ci" /></a>
   <a href="#the-7-agents"><img src="https://img.shields.io/badge/Agents-7-blueviolet" alt="Agents" /></a>
   <a href="#tech-stack"><img src="https://img.shields.io/badge/Stack-NestJS%20%7C%20Next.js%20%7C%20Claude%20SDK%20%7C%20BullMQ-blueviolet" alt="Stack" /></a>
